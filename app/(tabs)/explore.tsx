@@ -9,14 +9,14 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { StatusBar } from 'expo-status-bar';
 import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
-import DropdownComponent from '@/components/navigation/DropDown';
+import DropdownComponent from '@/components/DropDown';
+import RadioComponent from '@/components/Radio';
 
 
-let data  = require('../municipio.json');
+let datas  = require('../assetdata/municipio.json');
 
 
-
-const radioButtons: RadioButtonProps[] = useMemo(() => ([
+const rb: RadioButtonProps[] = useMemo(() => ([
   {
     id: '1', // acts as primary key, should be unique and non-empty string
     label: 'Própria',
@@ -27,15 +27,8 @@ const radioButtons: RadioButtonProps[] = useMemo(() => ([
     label: 'Alugada',
     value: 'alugada'
   },
-  {
-    id: '3',
-    label: 'Cedida',
-    value: 'cedida'
-  }
+  
 ]), []);
-
-const [selectedId, setSelectedId] = useState<string | undefined>();
-
 
 
 
@@ -76,15 +69,10 @@ export default function TabTwoScreen() {
 
 
           <Text style={styles1.label}>6) Marque a situação da residência:</Text>
-          <RadioGroup
-            radioButtons={radioButtons}
-            onPress={setSelectedId}
-            selectedId={selectedId}
-            layout='row'
-          />
+          <RadioComponent radioButtons={rb}/>
 
           <Text style={styles1.title1}>Localização da imóvel</Text>
-        <DropdownComponent data={data}/>
+        <DropdownComponent datas={datas}/>
         </View>
 
         
