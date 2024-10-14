@@ -15,7 +15,6 @@ import LocationComponent from '@/components/Location';
 import ImagePickerScreen from '@/components/Fotos';
 import * as ImagePicker from 'expo-image-picker';
 
-import { Pressable } from 'react-native';
 
 let datas  = require('../assetdata/municipio.json');
 
