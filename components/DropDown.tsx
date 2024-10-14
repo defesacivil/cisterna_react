@@ -14,7 +14,7 @@ import React, { useState } from 'react';
     { label: 'Item 8', value: '8' },
   ];
 
-  const DropdownComponent = ({datas:[],}) => {
+  const DropdownComponent = ({datas}) => {
     const [value, setValue] = useState(null);
 
     const renderItem = item => {

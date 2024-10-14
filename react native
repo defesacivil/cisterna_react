@@ -1,5 +1,9 @@
 https://www.luiztools.com.br/post/tutorial-crud-em-app-android-e-ios-com-react-native/
 
+
+# porta perso
+"start": "expo start --port 19001"
+
 gerar aplicativo pelo site do expo
 
 

@@ -20,7 +20,7 @@ const radioButtons: RadioButtonProps[] = useMemo(() => ([
     }
   ]), []);
 
-const RadioComponent = ({radioButtons:[]}) => {
+const RadioComponent = ({radioButtons}) => {
 
   
   const [selectedId, setSelectedId] = useState<string | undefined>();
