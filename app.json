@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "cisterna",
+    "slug": "cisterna",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff",
+        "package": "com.yourcompany.yourappname",
+        "versionCode": 1
+      },
+      "package": "com.cisterna.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9193ba82-2be6-46c0-8af8-4eee534b71da"
+      }
+    },
+    "owner": "cedecmg"
+  }
+}

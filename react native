@@ -1,0 +1,65 @@
+https://www.luiztools.com.br/post/tutorial-crud-em-app-android-e-ios-com-react-native/
+
+gerar aplicativo pelo site do expo
+
+
+# instalar o expo
+sudo nom install -g expo-cli
+
+# simulador app
+
+expo go ( baixar no celular app)
+
+# criar casca
+npx create-expo-app --template
+
+
+
+# principal apos criar app
+app.js
+
+
+# iniciar aplicativo
+npm start
+
+
+se tiver o simulador no celular, é so ler o qrcode que vai rodar no celular
+
+
+
+#### gerar apk  
+
+
+Depois de criar e desenvolver o seu App com o Expo, abra o arquivo app.json e preencha os campos que tem “ios” e “android”, conforme o exemplo abaixo:
+
+{ 
+"expo": { 
+"name": "Your App Name", 
+"icon": "./path/to/your/app-icon.png", 
+"version": "1.0.0", 
+"slug": "your-app-slug",
+"ios": { 
+"bundleIdentifier": "com.yourcompany.yourappname", 
+"buildNumber": "1.0.0" 
+}, 
+"android": {
+ "package": "com.yourcompany.yourappname",
+    "versionCode": 1
+ }
+}
+ }
+ 
+ # para gerar bundle
+ eas build -p android
+ 
+ 
+ #gerar apk
+ eas build -p android --profile preview
+ 
+ # eas.json
+ "preview": {
+      "android": {
+        "buildType": "apk",
+        "distribution": "internal"
+      }
+    },
