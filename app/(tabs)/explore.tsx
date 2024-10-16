@@ -15,133 +15,138 @@ import LocationComponent from '@/components/Location';
 import ImagePickerScreen from '@/components/Fotos';
 import * as ImagePicker from 'expo-image-picker';
 
+let datas = require('../assetdata/municipio.json');
 
-let datas  = require('../assetdata/municipio.json');
 
-const [nome, setNome] = useState(''); 
-function handleNomeChange(nome){ setNome(nome); } 
+const [nome, setNome] = useState('');
+function handleNomeChange(nome) { setNome(nome); }
 
-// button
-function handleSalvarPress(){ 
-  console.log({id: new Date().getTime(), nome}); 
-  //navigation.navigate("AppList");
+function handleSalvarPress() {
 }
+//   const listItem = { id: new Date().getTime(), nome };
+//   let savedItems = [];
+//   const response = await AsyncStorage.getItem('items');
 
+//   // if (response) savedItems = JSON.parse(response);
+//   // savedItems.push(listItem);
 
-
-const rb: RadioButtonProps[] = useMemo(() => ([
-  {
-    id: '1', // acts as primary key, should be unique and non-empty string
-    label: 'Própria',
-    value: 'propria'
-  },
-  {
-    id: '2',
-    label: 'Alugada',
-    value: 'alugada'
-  },
-  {
-    id: '3',
-    label: 'Cedida',
-    value: 'cedida'
-  },
-  
-]), []);
-
-const simnao: RadioButtonProps[] = useMemo(() => ([
-  {
-    id: '1', // acts as primary key, should be unique and non-empty string
-    label: 'Sim',
-    value: 'sim'
-  },
-  {
-    id: '2',
-    label: 'Não',
-    value: 'nao'
-  },
-    
-]), []);
-
-
-const respfornecimento: RadioButtonProps[] = useMemo(() => ([
-  {
-    id: '1', // acts as primary key, should be unique and non-empty string
-    label: 'Defesa Civil',
-    value: 'defesacivil'
-  },
-  {
-    id: '2',
-    label: 'Exército',
-    value: 'exercito'
-  },
-  {
-    id: '3',
-    label: 'Particular',
-    value: 'particular'
-  },
-  {
-    id: '4',
-    label: 'Prefeitura',
-    value: 'prefeitura'
-  },
-  {
-    id: '5',
-    label: 'Outros',
-    value: 'outros'
-  },
-    
-]), []);
-
-
-const cobertura: RadioButtonProps[] = useMemo(() => ([
-  {
-    id: '1', // acts as primary key, should be unique and non-empty string
-    label: 'PVC',
-    value: 'pvc'
-  },
-  {
-    id: '2',
-    label: 'Amianto',
-    value: 'amianto'
-  },
-  {
-    id: '3',
-    label: 'Concreto',
-    value: 'concreto'
-  },
-  {
-    id: '4',
-    label: 'Outros',
-    value: 'outros'
-  },
-  {
-    id: '5',
-    label: 'Cerâmica',
-    value: 'ceramica'
-  },
-  {
-    id: '6',
-    label: 'Fibrocimento',
-    value: 'fibrocimento'
-  },
-  {
-    id: '7',
-    label: 'Zinco',
-    value: 'zinco'
-  },
-  {
-    id: '8',
-    label: 'Metálica',
-    value: 'metalica'
-  },
-  
-]), []);
-
+//   await AsyncStorage.setItem('items', JSON.stringify(savedItems));
+//   //navigation.navigate("AppList", listItem);
+// }
 
 export default function TabTwoScreen() {
 
+
+  const simnao: RadioButtonProps[] = useMemo(() => ([
+    {
+      id: '1', // acts as primary key, should be unique and non-empty string
+      label: 'Sim',
+      value: 'sim'
+    },
+    {
+      id: '2',
+      label: 'Não',
+      value: 'nao'
+    },
+
+  ]), []);
+
+
+  const respfornecimento: RadioButtonProps[] = useMemo(() => ([
+    {
+      id: '1', // acts as primary key, should be unique and non-empty string
+      label: 'Defesa Civil',
+      value: 'defesacivil'
+    },
+    {
+      id: '2',
+      label: 'Exército',
+      value: 'exercito'
+    },
+    {
+      id: '3',
+      label: 'Particular',
+      value: 'particular'
+    },
+    {
+      id: '4',
+      label: 'Prefeitura',
+      value: 'prefeitura'
+    },
+    {
+      id: '5',
+      label: 'Outros',
+      value: 'outros'
+    },
+
+  ]), []);
+
+
+  const cobertura: RadioButtonProps[] = useMemo(() => ([
+    {
+      id: '1', // acts as primary key, should be unique and non-empty string
+      label: 'PVC',
+      value: 'pvc'
+    },
+    {
+      id: '2',
+      label: 'Amianto',
+      value: 'amianto'
+    },
+    {
+      id: '3',
+      label: 'Concreto',
+      value: 'concreto'
+    },
+    {
+      id: '4',
+      label: 'Outros',
+      value: 'outros'
+    },
+    {
+      id: '5',
+      label: 'Cerâmica',
+      value: 'ceramica'
+    },
+    {
+      id: '6',
+      label: 'Fibrocimento',
+      value: 'fibrocimento'
+    },
+    {
+      id: '7',
+      label: 'Zinco',
+      value: 'zinco'
+    },
+    {
+      id: '8',
+      label: 'Metálica',
+      value: 'metalica'
+    },
+
+  ]), []);
+
+  const rb: RadioButtonProps[] = useMemo(() => ([
+    {
+      id: '1', // acts as primary key, should be unique and non-empty string
+      label: 'Própria',
+      value: 'propria'
+    },
+    {
+      id: '2',
+      label: 'Alugada',
+      value: 'alugada'
+    },
+    {
+      id: '3',
+      label: 'Cedida',
+      value: 'cedida'
+    },
+
+  ]), []);
+
   return (
-    
+
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
@@ -157,16 +162,16 @@ export default function TabTwoScreen() {
 
           <Text style={styles1.title1}>Dados do Responsável pelo Imóvel</Text>
 
-          <Text style={styles1.label}>1) Latitude/Longitude :<b>{<LocationComponent /> } </b></Text>
+          <Text style={styles1.label}>1) Latitude/Longitude :<b>{<LocationComponent />} </b></Text>
 
           <Text style={styles1.label}>2) Nome completo :</Text>
           <TextInput
-          style={styles1.input}
-          placeholder=""
-          keyboardType={'default'}
-          clearButtonMode="always"
-          onChangeText={handleNomeChange} 
-          maxLength={40}
+            style={styles1.input}
+            placeholder=""
+            keyboardType={'default'}
+            clearButtonMode="always"
+            onChangeText={handleNomeChange}
+            maxLength={40}
           />
 
           <Text style={styles1.label}>3) CPF - Insira somente os números :</Text>
@@ -180,17 +185,17 @@ export default function TabTwoScreen() {
 
 
           <Text style={styles1.label}>6) Marque a situação da residência:</Text>
-          <RadioComponent radioButtons={rb}/>
+          <RadioComponent radioButtons={rb} />
 
           {/* seção */}
           <Text style={styles1.title1}>Localização da imóvel</Text>
 
           {/* Municipio */}
-          <DropdownComponent datas={datas}/>
-          
+          <DropdownComponent datas={datas} />
+
           <Text style={styles1.label}>8) Nome da Comunidade :</Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always" />
-          
+
           <Text style={styles1.label}>9) Endereço Completo :</Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always" />
 
@@ -209,13 +214,13 @@ export default function TabTwoScreen() {
 
           <Text style={styles1.label}>13) Marque o material da cobertura do imóvel:</Text>
           {/* material */}
-          <DropdownComponent datas={cobertura}/>
+          <DropdownComponent datas={cobertura} />
 
           <Text style={styles1.label}>Outros Descrever:</Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always" />
 
           <Text style={styles1.label}>14) Existe fogão a lenha próximo a cozinha? :</Text>
-          <RadioComponent radioButtons={simnao}/>
+          <RadioComponent radioButtons={simnao} />
 
           <Text style={styles1.label}>14.1) Caso houver fogão a lenha, informe a metragem do telhado a ser desconsiderada :</Text>
           <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" />
@@ -224,10 +229,10 @@ export default function TabTwoScreen() {
           <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" />
 
           <Text style={styles1.label}>15) Na residência há fornecimento de água por meio de caminhão pipa? :</Text>
-          <RadioComponent radioButtons={simnao}/>
+          <RadioComponent radioButtons={simnao} />
 
           <Text style={styles1.label}>15.1) Selecione a opção do responsável pelo fornecimento de água :</Text>
-          <RadioComponent radioButtons={respfornecimento}/>
+          <RadioComponent radioButtons={respfornecimento} />
 
           <Text style={styles1.label}>16) São obrigatórias 3 (três) fotos do imóvel e 1 (uma) opcional, sendo:</Text>
           <ImagePickerScreen />
@@ -246,7 +251,7 @@ export default function TabTwoScreen() {
             style={styles1.button}
             onPress={handleSalvarPress}>
             <Text style={styles1.buttonText}>Salvar</Text>
-          </TouchableOpacity> 
+          </TouchableOpacity>
         </View>
 
 
@@ -465,7 +470,7 @@ const styles1 = StyleSheet.create({
     height: 40,
     fontSize: 16,
   },
-  label_info : {
+  label_info: {
     fontWeight: 'bold',
   }
 
