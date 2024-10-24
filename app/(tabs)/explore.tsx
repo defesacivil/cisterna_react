@@ -9,141 +9,39 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { StatusBar } from 'expo-status-bar';
 import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
-import DropdownComponent from '@/components/DropDown';
-import RadioComponent from '@/components/Radio';
 import LocationComponent from '@/components/Location';
 import ImagePickerScreen from '@/components/Fotos';
 import * as ImagePicker from 'expo-image-picker';
+import RadioSN from '@/components/RadioSN';
 
-let datas = require('../assetdata/municipio.json');
+import RadioMoradia from '@/components/RadioMoradia';
+
+import DropDownCs from '@/components/DropDownCs';
+import RadioCobertura from '@/components/RadioCobertura';
+
+const municipio = require('../assetdata/municipio.json');
+const fornecimento = require('../assetdata/fornecimento');
 
 
-const [nome, setNome] = useState('');
-function handleNomeChange(nome) { setNome(nome); }
-
-function handleSalvarPress() {
-}
-//   const listItem = { id: new Date().getTime(), nome };
-//   let savedItems = [];
-//   const response = await AsyncStorage.getItem('items');
-
-//   // if (response) savedItems = JSON.parse(response);
-//   // savedItems.push(listItem);
-
-//   await AsyncStorage.setItem('items', JSON.stringify(savedItems));
-//   //navigation.navigate("AppList", listItem);
-// }
 
 export default function TabTwoScreen() {
 
+  const [nome, setNome] = useState();
+  function handleNomeChange(nome) { setNome(nome); }
 
-  const simnao: RadioButtonProps[] = useMemo(() => ([
-    {
-      id: '1', // acts as primary key, should be unique and non-empty string
-      label: 'Sim',
-      value: 'sim'
-    },
-    {
-      id: '2',
-      label: 'Não',
-      value: 'nao'
-    },
+  function handleSalvarPress() {
+  }
+  //   const listItem = { id: new Date().getTime(), nome };
+  //   let savedItems = [];
+  //   const response = await AsyncStorage.getItem('items');
 
-  ]), []);
+  //   // if (response) savedItems = JSON.parse(response);
+  //   // savedItems.push(listItem);
 
+  //   await AsyncStorage.setItem('items', JSON.stringify(savedItems));
+  //   //navigation.navigate("AppList", listItem);
+  // }
 
-  const respfornecimento: RadioButtonProps[] = useMemo(() => ([
-    {
-      id: '1', // acts as primary key, should be unique and non-empty string
-      label: 'Defesa Civil',
-      value: 'defesacivil'
-    },
-    {
-      id: '2',
-      label: 'Exército',
-      value: 'exercito'
-    },
-    {
-      id: '3',
-      label: 'Particular',
-      value: 'particular'
-    },
-    {
-      id: '4',
-      label: 'Prefeitura',
-      value: 'prefeitura'
-    },
-    {
-      id: '5',
-      label: 'Outros',
-      value: 'outros'
-    },
-
-  ]), []);
-
-
-  const cobertura: RadioButtonProps[] = useMemo(() => ([
-    {
-      id: '1', // acts as primary key, should be unique and non-empty string
-      label: 'PVC',
-      value: 'pvc'
-    },
-    {
-      id: '2',
-      label: 'Amianto',
-      value: 'amianto'
-    },
-    {
-      id: '3',
-      label: 'Concreto',
-      value: 'concreto'
-    },
-    {
-      id: '4',
-      label: 'Outros',
-      value: 'outros'
-    },
-    {
-      id: '5',
-      label: 'Cerâmica',
-      value: 'ceramica'
-    },
-    {
-      id: '6',
-      label: 'Fibrocimento',
-      value: 'fibrocimento'
-    },
-    {
-      id: '7',
-      label: 'Zinco',
-      value: 'zinco'
-    },
-    {
-      id: '8',
-      label: 'Metálica',
-      value: 'metalica'
-    },
-
-  ]), []);
-
-  const rb: RadioButtonProps[] = useMemo(() => ([
-    {
-      id: '1', // acts as primary key, should be unique and non-empty string
-      label: 'Própria',
-      value: 'propria'
-    },
-    {
-      id: '2',
-      label: 'Alugada',
-      value: 'alugada'
-    },
-    {
-      id: '3',
-      label: 'Cedida',
-      value: 'cedida'
-    },
-
-  ]), []);
 
   return (
 
@@ -185,13 +83,13 @@ export default function TabTwoScreen() {
 
 
           <Text style={styles1.label}>6) Marque a situação da residência:</Text>
-          <RadioComponent radioButtons={rb} />
+          <RadioMoradia />
 
           {/* seção */}
           <Text style={styles1.title1}>Localização da imóvel</Text>
 
           {/* Municipio */}
-          <DropdownComponent datas={datas} />
+          <DropDownCs data={municipio} />
 
           <Text style={styles1.label}>8) Nome da Comunidade :</Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always" />
@@ -214,13 +112,13 @@ export default function TabTwoScreen() {
 
           <Text style={styles1.label}>13) Marque o material da cobertura do imóvel:</Text>
           {/* material */}
-          <DropdownComponent datas={cobertura} />
+          <RadioCobertura/>
 
           <Text style={styles1.label}>Outros Descrever:</Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always" />
 
           <Text style={styles1.label}>14) Existe fogão a lenha próximo a cozinha? :</Text>
-          <RadioComponent radioButtons={simnao} />
+          <RadioSN />
 
           <Text style={styles1.label}>14.1) Caso houver fogão a lenha, informe a metragem do telhado a ser desconsiderada :</Text>
           <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" />
@@ -229,10 +127,10 @@ export default function TabTwoScreen() {
           <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" />
 
           <Text style={styles1.label}>15) Na residência há fornecimento de água por meio de caminhão pipa? :</Text>
-          <RadioComponent radioButtons={simnao} />
+          <RadioSN />
 
           <Text style={styles1.label}>15.1) Selecione a opção do responsável pelo fornecimento de água :</Text>
-          <RadioComponent radioButtons={respfornecimento} />
+          <DropDownCs data={fornecimento} />
 
           <Text style={styles1.label}>16) São obrigatórias 3 (três) fotos do imóvel e 1 (uma) opcional, sendo:</Text>
           <ImagePickerScreen />

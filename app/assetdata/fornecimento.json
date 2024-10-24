@@ -1,0 +1,23 @@
+[
+	{
+		"label": "Defesa Civil",
+		"value": "defesacivil"
+	},
+	{
+		"label": "Exército",
+		"value": "exercito"
+	},
+	{
+		"label": "Particular",
+		"value": "particular"
+	},
+	{
+		"label": "Prefeitura",
+		"value": "prefeitura"
+	},
+	{
+		"label": "Outros",
+		"value": "outros"
+	}
+
+]
