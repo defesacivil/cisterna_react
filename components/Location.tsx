@@ -31,7 +31,9 @@ export default function App() {
   }
 
   return (
-    <span>{latlong}</span>
+    <Text>
+      {latlong}
+      </Text>
   );
 }
 

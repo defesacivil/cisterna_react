@@ -11,14 +11,14 @@ const DropDownCs = ({data}) => {
     return (
       <View style={styles.item}>
         <Text style={styles.textItem}>{item.label}</Text>
-        {item.value === value && (
+        {item.value === value ? (
           <AntDesign
             style={styles.icon}
             color="black"
             name="Safety"
             size={20}
           />
-        )}
+        ) :null}
       </View>
     );
   };

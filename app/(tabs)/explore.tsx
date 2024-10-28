@@ -22,6 +22,19 @@ import RadioCobertura from '@/components/RadioCobertura';
 const municipio = require('../assetdata/municipio.json');
 const fornecimento = require('../assetdata/fornecimento');
 
+import * as SQLite from 'expo-sqlite';
+
+
+const db = await SQLite.openDatabaseAsync('databaseName');
+
+// `execAsync()` is useful for bulk queries when you want to execute altogether.
+// Please note that `execAsync()` does not escape parameters and may lead to SQL injection.
+await db.execAsync(`
+PRAGMA journal_mode = WAL;
+CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY NOT NULL, value TEXT NOT NULL, intValue INTEGER);
+`);
+
+
 
 
 export default function TabTwoScreen() {
@@ -30,17 +43,10 @@ export default function TabTwoScreen() {
   function handleNomeChange(nome) { setNome(nome); }
 
   function handleSalvarPress() {
+
+
   }
-  //   const listItem = { id: new Date().getTime(), nome };
-  //   let savedItems = [];
-  //   const response = await AsyncStorage.getItem('items');
-
-  //   // if (response) savedItems = JSON.parse(response);
-  //   // savedItems.push(listItem);
-
-  //   await AsyncStorage.setItem('items', JSON.stringify(savedItems));
-  //   //navigation.navigate("AppList", listItem);
-  // }
+  
 
 
   return (
@@ -60,7 +66,7 @@ export default function TabTwoScreen() {
 
           <Text style={styles1.title1}>Dados do Responsável pelo Imóvel</Text>
 
-          <Text style={styles1.label}>1) Latitude/Longitude :<b>{<LocationComponent />} </b></Text>
+          <Text style={styles1.label}>1) Latitude/Longitude :{<LocationComponent />}</Text>
 
           <Text style={styles1.label}>2) Nome completo :</Text>
           <TextInput
@@ -85,10 +91,10 @@ export default function TabTwoScreen() {
           <Text style={styles1.label}>6) Marque a situação da residência:</Text>
           <RadioMoradia />
 
-          {/* seção */}
+      
           <Text style={styles1.title1}>Localização da imóvel</Text>
 
-          {/* Municipio */}
+      
           <DropDownCs data={municipio} />
 
           <Text style={styles1.label}>8) Nome da Comunidade :</Text>
@@ -97,7 +103,7 @@ export default function TabTwoScreen() {
           <Text style={styles1.label}>9) Endereço Completo :</Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always" />
 
-          {/* seção */}
+      
           <Text style={styles1.title1}>Caracterização do imóvel</Text>
 
           <Text style={styles1.label}>10) Informe a área total do telhado (m²) :</Text>
@@ -111,7 +117,8 @@ export default function TabTwoScreen() {
 
 
           <Text style={styles1.label}>13) Marque o material da cobertura do imóvel:</Text>
-          {/* material */}
+          
+          
           <RadioCobertura/>
 
           <Text style={styles1.label}>Outros Descrever:</Text>
@@ -143,7 +150,7 @@ export default function TabTwoScreen() {
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always" />
 
           <Text style={styles1.label}>Observações :</Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" multiline="true" />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" multiline/>
 
           <TouchableOpacity
             style={styles1.button}
@@ -156,75 +163,6 @@ export default function TabTwoScreen() {
         <StatusBar style="light" />
       </View>
 
-      {/* <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible> */}
     </ParallaxScrollView >
   );
 }
