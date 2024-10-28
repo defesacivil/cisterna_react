@@ -18,28 +18,17 @@ import RadioMoradia from '@/components/RadioMoradia';
 
 import DropDownCs from '@/components/DropDownCs';
 import RadioCobertura from '@/components/RadioCobertura';
+import { SQLiteProvider } from 'expo-sqlite';
+
+import { initializaDb } from '../db/db';
 
 const municipio = require('../assetdata/municipio.json');
 const fornecimento = require('../assetdata/fornecimento');
 
-import * as SQLite from 'expo-sqlite';
-
-
-const db = await SQLite.openDatabaseAsync('databaseName');
-
-// `execAsync()` is useful for bulk queries when you want to execute altogether.
-// Please note that `execAsync()` does not escape parameters and may lead to SQL injection.
-await db.execAsync(`
-PRAGMA journal_mode = WAL;
-CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY NOT NULL, value TEXT NOT NULL, intValue INTEGER);
-`);
-
-
-
-
 export default function TabTwoScreen() {
 
-  const [nome, setNome] = useState();
+  const [nome, setNome] = useState("");
+
   function handleNomeChange(nome) { setNome(nome); }
 
   function handleSalvarPress() {
@@ -50,6 +39,8 @@ export default function TabTwoScreen() {
 
 
   return (
+
+    <SQLiteProvider databaseName='conviv.db'>
 
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -164,6 +155,8 @@ export default function TabTwoScreen() {
       </View>
 
     </ParallaxScrollView >
+
+    </SQLiteProvider>
   );
 }
 
