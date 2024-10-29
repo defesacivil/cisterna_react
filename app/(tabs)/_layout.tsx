@@ -1,14 +1,19 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 
+import { SQLiteProvider } from 'expo-sqlite';
+
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { initializaDb } from '../db/db';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
+    <SQLiteProvider databaseName='seca.db' onInit={initializaDb}>
+      
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
@@ -22,7 +27,7 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
         }}
-      />
+        />
       <Tabs.Screen
         name="explore"
         options={{
@@ -31,7 +36,8 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
         }}
-      />
+        />
     </Tabs>
+        </SQLiteProvider>
   );
 }
