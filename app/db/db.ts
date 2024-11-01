@@ -2,44 +2,59 @@ import { type SQLiteDatabase } from "expo-sqlite";
 
 export async function initializaDb(database: SQLiteDatabase) {
 
+  try {
+    
+  
     await database.execAsync(`
+
     CREATE TABLE IF NOT EXISTS cadastro (
       id INTEGER,
-      nome TEXT NOT NULL);
-      `);
-      
-    //   ,
-    //   cpf TEXT NOT NULL,
-    //   qtd_pessoa INTEGER NOT NULL DEFAULT 1,
-    //   renda_total NUMERIC NOT NULL DEFAULT 0.00,
-    //   tipo_moradia TEXT NOT NULL DEFAULT '0',
-    //   endereco TEXT DEFAULT NULL DEFAULT 'Endereço',
-    //   comunidade TEXT NOT NULL DEFAULT 'Comunidade',
-    //   municipio TEXT NOT NULL DEFAULT 'Município',
-    //   area_telhado NUMERIC NOT NULL DEFAULT 0.00,
-    //   comp_testada NUMERIC NOT NULL DEFAULT 0.00,
-    //   num_caida INTEGER NOT NULL DEFAULT 0,
-    //   ck_amianto INTEGER NOT NULL DEFAULT 0,
-    //   ck_pvc INTEGER NOT NULL DEFAULT 0,
-    //   ck_concreto INTEGER NOT NULL DEFAULT 0,
-    //   ck_ceramica INTEGER NOT NULL DEFAULT 0,
-    //   ck_fib_cimento INTEGER NOT NULL DEFAULT 0,
-    //   ck_zinco INTEGER NOT NULL DEFAULT 0,
-    //   ck_metalico INTEGER NOT NULL DEFAULT 0,
-    //   ck_outros INTEGER NOT NULL DEFAULT 0,
-    //   descr_out_tp_material TEXT DEFAULT NULL,
-    //   fogao_lenha INTEGER NOT NULL DEFAULT 0,
-    //   fog_lenha_metrag_telh INTEGER NOT NULL DEFAULT 0,
-    //   fog_lenha_metrag_calha INTEGER NOT NULL DEFAULT 0,
-    //   fornecimento_pipa INTEGER NOT NULL DEFAULT 0,
-    //   responsavel_fornec_pipa TEXT DEFAULT NULL ,
-    //   agente_resp_pesquisa TEXT NOT NULL,
-    //   matricula_agente TEXT NOT NULL,
-    //   obs TEXT DEFAULT NULL,
-    //   dt_cadastro NUMERIC NOT NULL,
-    //   lat_long TEXT NOT NULL,
-    //   PRIMARY KEY (id AUTOINCREMENT)
-    //   );    
+      municipio TEXT NOT NULL DEFAULT 'Municipio',
+      comunidade TEXT NOT NULL DEFAULT 'Comunidade',
+      endereco TEXT DEFAULT NULL DEFAULT 'Endereço',
+      localiza TEXT NOT NULL,
+      nome TEXT NOT NULL,
+      cpf TEXT NOT NULL,
+      dtNasc TEXT NOT NULL,
+      cadUnico TEXT DEFAULT NULL,
+      qtdPessoa INTEGER NOT NULL DEFAULT 1,
+      renda NUMERIC NOT NULL DEFAULT 0.00,
+      moradia TEXT NOT NULL DEFAULT '0',
+      outroMoradia TEXT DEFAULT NULL,
+      compTelhado NUMERIC NOT NULL DEFAULT 0.00,
+      larguracompTelhado NUMERIC NOT NULL DEFAULT 0.00,
+      areaTotalTelhado NUMERIC NOT NULL DEFAULT 0.00,
+      compTestada NUMERIC DEFAULT 0.00,
+      numCaidaTelhado INTEGER NOT NULL DEFAULT 0,
+      coberturaTelhado INTEGER NOT NULL DEFAULT 0,
+      coberturaOutros TEXT DEFAULT NULL,
+      existeFogaoLenha INTEGER NOT NULL DEFAULT 0,
+      medidaTelhadoAreaFogao INTEGER DEFAULT 0,
+      testadaDispParteFogao INTEGER DEFAULT 0,
+      atendPipa TEXT NOT NULL,
+      outroAtendPipa TEXT DEFAULT NULL,
+      respAtendPipa TEXT DEFAULT NULL ,
+      outrObs TEXT DEFAULT NULL ,
+      nomeAgente TEXT NOT NULL,
+      cpfAgente TEXT NOT NULL,
+      nomeEng TEXT NOT NULL ,
+      creaEng TEXT NOT NULL ,
+      ck_amianto INTEGER DEFAULT 0,
+      ck_pvc INTEGER DEFAULT 0,
+      ck_concreto INTEGER DEFAULT 0,
+      ck_ceramica INTEGER DEFAULT 0,
+      ck_fib_cimento INTEGER DEFAULT 0,
+      ck_zinco INTEGER DEFAULT 0,
+      ck_metalico INTEGER DEFAULT 0,
+      ck_outros INTEGER DEFAULT 0,
+      obs TEXT DEFAULT NULL,
+      dt_cadastro NUMERIC,
+      PRIMARY KEY (id AUTOINCREMENT)
+      );    
         
-    // `)
+    `)
+  } catch (error) {
+
+    console.log(error)
+  }
 }

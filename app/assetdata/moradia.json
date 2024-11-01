@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Própria",
+    "value": "propria"
+  },
+  {
+    "label": "Alugada",
+    "value": "alugada"
+  },
+  {
+    "label": "Cedida",
+    "value": "cedida"
+  },
+  {
+    "label": "Outros",
+    "value": "outros"
+  }
+]

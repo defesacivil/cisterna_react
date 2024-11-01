@@ -1,0 +1,34 @@
+[
+  {
+    "label": "PVC",
+    "value": "pvc"
+  },
+  {
+    "label": "Amianto",
+    "value": "amianto"
+  },
+  {
+    "label": "Concreto",
+    "value": "concreto"
+  },
+  {
+    "label": "Outros",
+    "value": "outros"
+  },
+  {
+    "label": "Cerâmica",
+    "value": "ceramica"
+  },
+  {
+    "label": "Fibrocimento",
+    "value": "fibrocimento"
+  },
+  {
+    "label": "Zinco",
+    "value": "zinco"
+  },
+  {
+    "label": "Metálica",
+    "value": "metalica"
+  }
+]
