@@ -8,6 +8,8 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { initializaDb } from '../db/db';
 
+
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
@@ -21,6 +23,7 @@ export default function TabLayout() {
       }}>
       <Tabs.Screen
         name="index"
+        
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
@@ -40,7 +43,18 @@ export default function TabLayout() {
       <Tabs.Screen
         name="fotos"
         options={{
+         // href :null,
           title: 'Fotos',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+        }}
+        />
+      <Tabs.Screen
+        name="cam"
+        options={{
+        href :null,
+          title: 'Camera',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),

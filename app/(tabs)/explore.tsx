@@ -15,6 +15,9 @@ import { initializaDb } from '../db/db';
 import { useCadastroDb, CadatroDB } from '../db/useCadastroDb';
 import RNPickerSelect from 'react-native-picker-select';
 import * as Location from 'expo-location';
+import { Tabs } from 'expo-router';
+
+import { useRouter } from 'expo-router';
 
 const dropMunicipio = require('../assetdata/municipio.json');
 const fornecimento = require('../assetdata/fornecimento');
@@ -25,6 +28,13 @@ const data_cobertura = require('../assetdata/cobertura.json');
 
 
 export default function () {
+
+  const router = useRouter();
+
+  const navigateToSettings = () => {    
+    // Navega para a aba de configurações
+        router.push('/(tabs)/fotos');
+  };
 
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -104,6 +114,9 @@ export default function () {
 
       Alert.alert("Cadastro Realiza Com Sucesso ! " + response.insertedRowId)
 
+      navigateToSettings()
+
+
     } catch (error) {
       console.log(error)
       Alert.alert("error" + error)
@@ -133,8 +146,8 @@ export default function () {
           <Text style={styles1.label}>Município : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
-              onValueChange={(value) => [setSelectedValue(value), setMunicipio(value)]}
-              value={selectedValue}
+              onValueChange={(value) => setMunicipio(value)}
+              value={municipio}
               items={dropMunicipio}
               placeholder={{ label: 'Select o Município..', value: '' }}
             />
@@ -143,8 +156,8 @@ export default function () {
           <Text style={styles1.label}>Comunidade : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
-              onValueChange={(value) => [setSelectedValue(value), setComunidade(value)]}
-              value={selectedValue}
+              onValueChange={(value) => setComunidade(value)}
+              value={comunidade}
               items={dropComunidade}
               placeholder={{ label: 'Select o Comunidade..', value: '' }}
             />
@@ -162,7 +175,7 @@ export default function () {
 
 
           <Text style={styles1.label}>Nome Morador : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="Nome" keyboardType={'default'} clearButtonMode="always" onChangeText={setNome} value={nome} maxLength={40} />
+          <TextInput style={styles1.input} placeholder="Nome" keyboardType={'text'} clearButtonMode="always" onChangeText={setNome} value={nome} maxLength={40} />
 
           <Text style={styles1.label}>CPF - do Morador : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
