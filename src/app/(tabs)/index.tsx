@@ -1,22 +1,21 @@
-import { Image, StyleSheet, Platform, View } from 'react-native';
+import { Image, StyleSheet, Platform, View } from "react-native"
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
+import { HelloWave } from "@/components/HelloWave"
+import ParallaxScrollView from "@/components/ParallaxScrollView"
+import { ThemedText } from "@/components/ThemedText"
+import { ThemedView } from "@/components/ThemedView"
 
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '', dark: '#1D3D47' }}
+      headerBackgroundColor={{ light: "", dark: "#1D3D47" }}
       headerImage={
         <Image
-          source={require('@/assets/images/logo_defesa_civil.png')}
+          source={require("../../../assets/images/logo_defesa_civil.png")}
           style={styles.reactLogo}
         />
-      }>
-        
+      }
+    >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Projeto Convivência com a Seca</ThemedText>
         {/* <HelloWave /> */}
@@ -49,24 +48,16 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView> */}
-      
-<View>
 
-</View>
-
-
+      <View></View>
     </ParallaxScrollView>
-  );
-
-
-
-
+  )
 }
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
   stepContainer: {
@@ -78,7 +69,7 @@ const styles = StyleSheet.create({
     width: 150,
     // bottom: 0,
     left: 5,
-    top : 5,
-    position: 'absolute',
+    top: 5,
+    position: "absolute",
   },
-});
+})
