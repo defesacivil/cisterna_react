@@ -1,13 +1,13 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
-import { useState, useRef, useEffect } from 'react';
-import { Alert, Button, FlatList, PermissionsAndroid, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useState, useRef, useEffect, SetStateAction } from 'react';
+import { Alert, Button, FlatList, PermissionsAndroid, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
-import { measure } from 'react-native-reanimated';
 import { Image } from 'expo-image';
-import { router } from 'expo-router';
+import { router, useGlobalSearchParams } from 'expo-router';
 import { exists } from 'react-native-fs';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const requestPermission = async () => {
@@ -18,15 +18,17 @@ const requestPermission = async () => {
 };
 
 
+
+
 requestPermission();
 
-const data = [
+let data = [
   {
     id: 1,
     title: 'Foto 1',
     price: 'Frontal',
     nome: 'frontal',
-    source: mapData('frontal'),
+    source: '/data/user/0/host.exp.exponent/files/opseca/frontal.jpg',
 
   },
   {
@@ -34,14 +36,14 @@ const data = [
     title: 'Foto 2',
     price: 'Lateral direita',
     nome: 'lat_direito',
-    source: mapData('lat_direito'),
+    source: '/data/user/0/host.exp.exponent/files/opseca/lat_direito.jpg',
   },
   {
     id: 3,
     title: 'Foto 3',
     price: 'Lateral Esquerda',
     nome: 'lat_esquerdo',
-    image: '/data/user/0/host.exp.exponent/files/opseca/lat_esquerdo.jpg',
+    source: '/data/user/0/host.exp.exponent/files/opseca/lat_esquerdo.jpg',
   },
   {
     id: 4,
@@ -94,152 +96,109 @@ const data = [
   },
 ]
 
+
+
 async function mapData(nomeFot: String) {
 
-  const fileStorage = await FileSystem.getInfoAsync(FileSystem.documentDirectory + '/opseca/' + nomeFot + '.jpg');
+  try {
+    const info = await FileSystem.getInfoAsync(FileSystem.documentDirectory + '/opseca/' + nomeFot + '.jpg');
 
-  return fileStorage
+    if (info.exists) {
+      return info.uri;
+    } else {
+      return "-";
+    }
 
-} [];
+  } catch (error) {
+    console.log('erro acesso a imagem no dispositovo');
+  }
 
-//mapData('frontal');
-
-//console.log(mapData('frontal'))
+};
 
 
 export default function () {
 
-  const cpf = "001";
+  //const cpf = useGlobalSearchParams();
 
-  // async function refreshImage(data: []) {
-  //   useEffect(() => {
-  //     setProducts(data)
-  //   });
-  //   try {
-  //     const fileInfo = await FileSystem.getInfoAsync(FileSystem.documentDirectory + '/opseca/' + name + '.jpg');
+  //console.log(cpf)
+  const cpf = "03260414606";
 
-  //     return fileInfo
-
-
-  //   } catch (error) {
-  //     console.error('Error getting file info: ', error);
-  //   }
-  // }
-  // const [products, setProducts] = useState()
+  const [products, setProducts] = useState(data)
   const [nomeFoto, setNomeFoto] = useState()
+  const [imgUri, setImgUri] = useState(data)
 
 
-    // useEffect(() => {
-    //   setProducts(data)
-    // });
+  useFocusEffect(() => {
+    dataNew(data);
+    setProducts(data);
+  });
 
 
-  addImagem = (nome) => {
+  function dataNew(data) {
+
+    data.map((item) => {
+      return item.source = mapData(item.name);
+    });
+
+  };
+
+
+  async function criaDir() {
+    try {
+      const operacao = await FileSystem.readDirectoryAsync(FileSystem.documentDirectory + 'opseca');
+      if (!operacao) {
+        await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "opseca");
+      }
+
+      const cliente = await FileSystem.readDirectoryAsync(FileSystem.documentDirectory + 'opseca/' + cpf.cpf);
+      if (!cliente) {
+        await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "opseca/" + cpf.cpf);
+      }
+    } catch (error) {
+      console.log(error + ' readdir')
+    }
+
+  }
+
+
+
+  function addImagem(cpf: any, nome: any) {
+    setNomeFoto(nome)
+    router.push({ pathname: '/(tabs)/cam', params: { cpf, nome } }
+    );
+
+  }
+
+  const visualizaImagem = (nome: any) => {
     setNomeFoto(nome)
     router.push({ pathname: '/(tabs)/cam', params: { nomeFoto: nome } }
     );
 
-  };
+  }
 
   function removeImagem() {
     Alert.alert('Success', 'The product has been added to your cart')
   };
 
 
-  try {
-    const dir = FileSystem.readDirectoryAsync(FileSystem.documentDirectory + 'opseca');
-    if (!dir) {
-      FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "opseca");
-    }
-  } catch (error) {
-    console.log(error + ' readdir')
-  }
-
 
   return (
 
-    // <View style={styles3.container} >
-
-    //   <View style={styles3.row}>
-    //     <Text>Fontal</Text>
-
-    //     <TouchableOpacity
-    //       style={styles2.socialBarButton}
-    //       onPress={() => addImagem('frontal')}
-    //     >
-    //       <Image style={styles3.imagem} source='file:///data/user/0/host.exp.exponent/files/opseca/frontal.jpg' />
-    //     </TouchableOpacity>
-    //   </View>
-
-    //   <View style={styles3.row}>
-    //     <Text>Lateral Direita</Text>
-    //     <Image style={styles3.imagem} source='file:///data/user/0/host.exp.exponent/files/opseca/lat_direito.jpg' />
-    //   </View>
-
-
-
-
-
-    // </View>
-
-
-
-
     <View style={styles2.container}>
-      <FlatList
-        style={styles2.list}
-        contentContainerStyle={styles2.listContainer}
-        data={products}
-        horizontal={false}
-        numColumns={2}
-        keyExtractor={item => {
-          return item.id
-        }}
-        ItemSeparatorComponent={() => {
-          return <View style={styles2.separator} />
-        }}
-        renderItem={post => {
-          const item = post.item
-          return (
-            <View style={styles2.card}>
-              <View style={styles2.cardHeader}>
-                <View>
-                  <Text style={styles2.title}>{item.title}</Text>
-                  <Text style={styles2.price}>{item.price}</Text>
-                </View>
-              </View>
 
-              <TouchableOpacity
-                style={styles2.socialBarButton}
-                onPress={() => this.addImagem(item.nome)}
-              >
-                {/* <Image style={styles2.cardImage} source={{ uri: item.image }} /> */}
-                <Image style={styles2.cardImage} source={{ uri: item.image }} />
-
-              </TouchableOpacity>
-
-              <View style={styles2.cardFooter}>
-                <View style={styles2.socialBarContainer}>
-                  <View style={styles2.socialBarSection}>
-                    <TouchableOpacity
-                      style={styles2.socialBarButton}
-                      onPress={removeImagem}
-                    >
-                      <Image
-                        style={styles2.icon}
-                        source={{
-                          uri: 'https://img.icons8.com/nolan/96/3498db/add-shopping-cart.png',
-                        }}
-                      />
-                    </TouchableOpacity>
+      <ScrollView>
+        {data.map((post) => {
+          return  <View><View style={styles3.imagem}>
+                      <Text>{post.nome}</Text>
                   </View>
+                  <View style={styles3.imagem}>
+                    <Image source={{ uri: 'file:' + post.image }} style={{ width: 150, height: 150 }} />
+                  </View>
+                  </View>
+        })}
 
-                </View>
-              </View>
-            </View>
-          )
-        }}
-      />
+
+      </ScrollView>
     </View>
 
   );

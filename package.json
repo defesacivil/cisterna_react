@@ -29,7 +29,7 @@
     "expo-location": "~17.0.1",
     "expo-media-library": "~16.0.5",
     "expo-radio-button": "^1.0.8",
-    "expo-router": "~3.5.23",
+    "expo-router": "~3.5.24",
     "expo-splash-screen": "~0.27.5",
     "expo-sqlite": "~14.0.6",
     "expo-status-bar": "~1.12.1",
