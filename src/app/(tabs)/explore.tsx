@@ -29,20 +29,14 @@ const data_cobertura = require('../assetdata/cobertura.json');
 
 export default function () {
 
-  const router = useRouter();
-
-  const navigateToSettings = () => {    
-    // Navega para a aba de configurações
-        router.push('/(tabs)/fotos');
-  };
-
+  
   const [selectedValue, setSelectedValue] = useState('');
-
+  
   const [municipio, setMunicipio] = useState("");
   const [comunidade, setComunidade] = useState("");
   const [endereco, setEndereco] = useState("");
   const [localiza, setLocaliza] = useState("");
-
+  
   const [id, setId] = useState("");
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -52,7 +46,7 @@ export default function () {
   const [renda, setRenda] = useState("");
   const [moradia, setMoradia] = useState("");
   const [outroMoradia, setOutroMoradia] = useState("");
-
+  
   const [compTelhado, setCompTelhado] = useState("");
   const [larguracompTelhado, setLarguraCompTelhado] = useState("");
   const [areaTotalTelhado, setAreaTotalTelhado] = useState("");
@@ -60,7 +54,7 @@ export default function () {
   const [numCaidaTelhado, setNumCaidaTelhado] = useState("");
   const [coberturaTelhado, setCoberturaTelhado] = useState("");
   const [coberturaOutros, setCobertOutros] = useState("");
-
+  
   const [existeFogaoLenha, setExisteFogaoLenha] = useState("");
   const [medidaTelhadoAreaFogao, setMedidaTelhadoAreaFogao] = useState("");
   const [testadaDispParteFogao, setTestadaDispParteFogao] = useState("");
@@ -68,17 +62,33 @@ export default function () {
   const [outroAtendPipa, setOutroAtendPipa] = useState("");
   const [respAtendPipa, setRespAtendPipa] = useState("");
   const [outrObs, setOutrObs] = useState("");
-
+  
   const [nomeAgente, setNomeAgente] = useState("");
   const [cpfAgente, setCpfAgente] = useState("");
   const [nomeEng, setNomeEng] = useState("");
   const [creaEng, setCreaEng] = useState("");
+  
+  //console.log("000.000.000-00".replace(". -", ""));
+  
+  const router = useRouter();
 
+  
+  const navigateToSettings = (cpf2: String) => {    
+    const cpf1 = cpf2.replaceAll(`.`, '').replace(`-`, '')
+    // Navega para a aba de configurações
+    //router.push('/(tabs)/fotos');
+    router.push({ pathname: '/(tabs)/fotos', params: { cpf: cpf1 } })
+
+    
+  };
+  
+
+  
   const cadastrodb = useCadastroDb()
-
+  
   async function create() {
     try {
-
+      
       const response = await cadastrodb.create({
         municipio,
         comunidade,
@@ -114,7 +124,7 @@ export default function () {
 
       Alert.alert("Cadastro Realiza Com Sucesso ! " + response.insertedRowId)
 
-      navigateToSettings()
+      navigateToSettings(cpf)
 
 
     } catch (error) {
