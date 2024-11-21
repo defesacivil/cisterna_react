@@ -12,7 +12,7 @@ import * as ImagePicker from 'expo-image-picker';
 import MaskInput, { Masks } from 'react-native-mask-input';
 import { SQLiteProvider } from 'expo-sqlite';
 import { initializaDb } from '../db/db';
-import { useCadastroDb, CadatroDB } from '../db/useCadastroDb';
+import { useCadastroDb } from '../db/useCadastroDb';
 import RNPickerSelect from 'react-native-picker-select';
 import * as Location from 'expo-location';
 import { Tabs } from 'expo-router';
@@ -72,7 +72,6 @@ export default function () {
   
   const router = useRouter();
 
-  
   const navigateToSettings = (cpf2: String) => {    
     const cpf1 = cpf2.replaceAll(`.`, '').replace(`-`, '')
     // Navega para a aba de configurações

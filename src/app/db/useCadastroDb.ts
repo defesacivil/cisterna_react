@@ -35,6 +35,15 @@ export type CadatroDB = {
     creaEng: string
 }
 
+export type UpdateObs = {
+
+    id: number,
+    foto: string,
+    field: string
+}
+
+
+
 export function useCadastroDb() {
 
     const database = useSQLiteContext()
@@ -158,6 +167,8 @@ export function useCadastroDb() {
         }
 
     }
+
+    // update
     async function update(data: CadatroDB) {
 
         const statement = await database.prepareAsync(
@@ -178,5 +189,27 @@ export function useCadastroDb() {
 
     }
 
-    return { create, searchByName, update }
+    // update
+    async function updateObs(data: UpdateObs) {
+
+        const statement = await database.prepareAsync(
+            "UPDATE cadastro SET $field = $foto WHERE id = $id"
+        )
+
+        try {
+            await statement.executeAsync({
+                $id: data.id,
+                $foto: data.foto,
+                $field: data.field
+            })
+
+        } catch (error) {
+            throw (error)
+        } finally {
+            await statement.finalizeAsync()
+        }
+
+    }
+
+    return { create, searchByName, update, updateObs }
 }
