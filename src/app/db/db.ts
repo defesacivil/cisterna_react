@@ -48,6 +48,16 @@ export async function initializaDb(database: SQLiteDatabase) {
       ck_outros INTEGER DEFAULT 0,
       obs TEXT DEFAULT NULL,
       dt_cadastro NUMERIC,
+      img_frontal TEXT DEFAULT NULL,
+      img_lat_direito TEXT DEFAULT NULL,
+      img_lat_esquerdo TEXT DEFAULT NULL,
+      img_fundo TEXT DEFAULT NULL,
+      img_local_ins_p1 TEXT DEFAULT NULL,
+      img_local_ins_p2 TEXT DEFAULT NULL,
+      img_op1 TEXT DEFAULT NULL,
+      img_op2 TEXT DEFAULT NULL,
+      img_op3 TEXT DEFAULT NULL,
+      img_op4 TEXT DEFAULT NULL,
       PRIMARY KEY (id AUTOINCREMENT)
       );    
         

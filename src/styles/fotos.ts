@@ -82,18 +82,22 @@ export const styles = StyleSheet.create({
     backgroundColor: "blue",
     textAlign: "center",
     paddingHorizontal: 12,
-    paddingVertical: 6,
+    //paddingVertical: 6,
     borderRadius: 4,
+    flexDirection: "row",
   },
   obs: {
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
 
   },
   button1: {
-    height: 40,
-
+    height: 30,
+    width:100,
     backgroundColor: 'blue',
     borderRadius: 5,
-    paddingHorizontal: 24,
+    //paddingHorizontal: 24,
     fontSize: 16,
     alignItems: 'center',
     justifyContent: 'center',
@@ -104,6 +108,7 @@ export const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+    
   },
   
 })

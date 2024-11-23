@@ -15,11 +15,10 @@ import { CadatroDB, useCadastroDb } from '../db/useCadastroDb';
 import { Cadastro } from '@/components/Cadastros';
 import { router, useNavigation, } from 'expo-router';
 
-
+//import { List, List1 } from '@/components/list1';
 
 
 export default function TabTwoScreen() {
-
 
   const cadastrodb = useCadastroDb()
 
@@ -27,6 +26,11 @@ export default function TabTwoScreen() {
   const [cadastros, setCadastros] = useState<CadatroDB[]>()
 
 
+  async function deletar(id) {
+
+    const response = await cadastrodb.deletar(id);
+    return true;
+  }
 
   async function list() {
 
@@ -80,7 +84,8 @@ export default function TabTwoScreen() {
 
     return (
 
-      <View style={styles.container}>
+      <View key={(0+1)} style={styles.container}>
+
         <View>
           <Text style={styles.titulo}>Lista de Registros</Text>
           <Text style={styles.total} >Total Registros {totalReg()}</Text>
@@ -90,18 +95,16 @@ export default function TabTwoScreen() {
             <View>
               <Text style={[styles.link, styles.nome]} key={item.id}>{item.id} - {item.nome} / {item.cpf}</Text>
             </View>
-            <View style={{flexDirection:"row"}}>
+            <View style={{ flexDirection: "row" }} key={"_" + item.id}>
 
               {/* Alterar */}
               <View style={styles.imageView}>
                 <TouchableOpacity
                   activeOpacity={0.7}
                   onPress={() => {
-                    //setSelectedIndex(index)
-                    //setImage(item)
+                    router.push({ pathname: '/(tabs)/explore', params: { id: item.id } })
                   }}
                 >
-
                   <Image
                     style={styles.icon}
                     source={require("../../../assets/images/edit.png")
@@ -115,8 +118,7 @@ export default function TabTwoScreen() {
                 <TouchableOpacity
                   activeOpacity={0.7}
                   onPress={() => {
-                    //setSelectedIndex(index)
-                    //setImage(item)
+                    deletar(item.id)
                   }}
                 >
 
@@ -137,8 +139,6 @@ export default function TabTwoScreen() {
   };
 
   return (
-
-
 
     listagem()
 
@@ -172,16 +172,16 @@ const styles = StyleSheet.create({
   },
   list: {
     margin: 5,
-    padding:5,
+    padding: 5,
     height: 44,
     backgroundColor: "silver",
     verticalAlign: "middle",
-    flexDirection:"row",
+    flexDirection: "row",
     borderRadius: 5,
   }
   , titulo: {
     fontSize: 20,
-    textAlign:"center",
+    textAlign: "center",
     alignItems: "center",
     margin: 20,
   },
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   op: {
-    
+
   },
   link: {
     color: "blue",

@@ -15,7 +15,7 @@ import { initializaDb } from '../db/db';
 import { useCadastroDb } from '../db/useCadastroDb';
 import RNPickerSelect from 'react-native-picker-select';
 import * as Location from 'expo-location';
-import { Tabs } from 'expo-router';
+import { Tabs, useGlobalSearchParams } from 'expo-router';
 
 import { useRouter } from 'expo-router';
 
@@ -69,21 +69,37 @@ export default function () {
   const [creaEng, setCreaEng] = useState("");
   
   //console.log("000.000.000-00".replace(". -", ""));
+
+  const param = useGlobalSearchParams();
+  
+  const cadastrodb = useCadastroDb()
+
+  useState(() => {
+    if(param.id) {
+      setId(param.id)
+      console.log(param.id)
+      
+      
+      //searchById(param.id);
+      
+      //console.log(data)
+    }
+  })
   
   const router = useRouter();
 
-  const navigateToSettings = (cpf2: String) => {    
+  const navigateToSettings = (cpf2: String, id: String) => {    
     const cpf1 = cpf2.replaceAll(`.`, '').replace(`-`, '')
     // Navega para a aba de configurações
     //router.push('/(tabs)/fotos');
-    router.push({ pathname: '/(tabs)/fotos', params: { cpf: cpf1 } })
-
-    
+    router.push({ pathname: '/(tabs)/fotos', params: { cpf: cpf1, id: id } })
   };
   
+async function searchById(id:number) {
 
+  const response = await cadastrodb.searchById(id)
   
-  const cadastrodb = useCadastroDb()
+}
   
   async function create() {
     try {
@@ -123,7 +139,7 @@ export default function () {
 
       Alert.alert("Cadastro Realiza Com Sucesso ! " + response.insertedRowId)
 
-      navigateToSettings(cpf)
+      navigateToSettings(cpf, response.insertedRowId)
 
 
     } catch (error) {

@@ -19,7 +19,8 @@ import * as ImagePicker from "expo-image-picker"
 import { ModalPicture } from "@/components/ModalPicture"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-import { useUpdateDb } from '../db/useCadastroDb';
+import { useCadastroDb } from '../db/useCadastroDb';
+import { useGlobalSearchParams, useRouter } from "expo-router"
 
 export type Product = {
   id: number
@@ -94,6 +95,9 @@ const data: Product[] = [
 ]
 
 export default function Fotos() {
+
+  const param = useGlobalSearchParams();
+
   const [products, setProducts] = useState(data)
 
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -102,20 +106,30 @@ export default function Fotos() {
   const [modalObs, setModalObs] = useState(false)
   const [obs, setObs] = useState(null)
 
-  const cadastrodb = useUpdateDb();
+  const [id, setId] = useState("")
+  const [foto, setFoto] = useState("")
+  const [field, setField] = useState("")
+  const [cpf, setCpf] = useState("")
+
+
+  const router = useRouter();
+
+  const useUpdateObs = useCadastroDb();
 
   async function updateObs() {
     try {
-      
-      const response = await cadastrodb.updateObs({
+
+      const response = await useUpdateObs.updateObs({
         id,
         foto,
         field
       })
 
-      Alert.alert("Cadastro Realiza Com Sucesso ! " + response.insertedRowId)
+      // verifica as obsevacoes
+      if(true) {
 
-      //navigateToSettings(cpf)
+      }
+      router.push('/(tabs)/lista')
 
 
     } catch (error) {
@@ -134,6 +148,7 @@ export default function Fotos() {
 
   async function isImageExists() {
     const fileStorage = await AsyncStorage.getItem("fotos")
+    console.log(fileStorage)
     const data = fileStorage ? JSON.parse(fileStorage) : []
     data.map((item: Product) => {
       if (item.source) {
@@ -169,6 +184,7 @@ export default function Fotos() {
           const newProducts = [...prevProducts]
           const index = newProducts.indexOf(item)
           newProducts[index].source = result.assets[0].uri
+          console.log(result.assets)
           return newProducts
         })
         await AsyncStorage.setItem("fotos", JSON.stringify(products))
@@ -187,7 +203,17 @@ export default function Fotos() {
   }
 
   async function salvarObs() {
-    updateObs();
+
+    if (obs.length == 0) {
+      Alert.alert('Este Campo é Obrigatório');
+    } else {
+      updateObs
+    }
+
+    //console.log("id:" + id);
+    //console.log("cpf:" + cpf);
+    //console.log("foto:" + foto);
+    //console.log("obs:" + obs);
     setModalObs(false)
   }
 
@@ -197,6 +223,14 @@ export default function Fotos() {
 
   function handleCloseModal() {
     setModalVisible(false)
+  }
+  function closeModalObs() {
+    setModalObs(false)
+  }
+
+
+  function setData() {
+
   }
 
   useEffect(() => {
@@ -231,9 +265,8 @@ export default function Fotos() {
                 ) : (
                   <Image
                     style={styles.icon}
-                    source={{
-                      uri: "https://img.icons8.com/nolan/96/3498db/add-shopping-cart.png",
-                    }}
+                    source={require("../../../assets/images/camera.png")
+                    }
                   />
                 )}
               </TouchableOpacity>
@@ -242,8 +275,15 @@ export default function Fotos() {
             <View style={styles.obs}>
               <TouchableOpacity
                 style={styles.button1}
-                onPress={openModalObs}>
-                <Text style={styles.buttonText}>Obs</Text>
+                onPress={() => {
+                  openModalObs()
+                  setId(param.id)
+                  setFoto("img_" + item.nome)
+                  setCpf(param.cpf)
+                  setObs
+                }}
+              >
+                <Text style={styles.buttonText}>Observações</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -281,8 +321,8 @@ export default function Fotos() {
       >
         <View style={styles.containerModal}>
           <View style={styles.modalButton}>
-            <View style={styles.obs}>
-              <Text style={{fontWeight: "bold"}} >Obs :</Text>
+            <View>
+              <Text style={{ fontWeight: "bold" }} >Observações :</Text>
               <TextInput multiline={true}
                 numberOfLines={10}
                 style={{
@@ -296,6 +336,9 @@ export default function Fotos() {
             <View style={styles.wrapperButtons}>
               <Pressable style={styles.button} onPress={salvarObs}>
                 <Text style={styles.buttonText}>Salvar</Text>
+              </Pressable>
+              <Pressable style={styles.button} onPress={closeModalObs}>
+                <Text style={styles.buttonText}>Fechar</Text>
               </Pressable>
             </View>
           </View>
