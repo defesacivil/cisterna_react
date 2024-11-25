@@ -16,16 +16,16 @@ export type CadatroDB = {
     renda: string
     moradia: string
     outroMoradia:string
-    compTelhado: number
-    larguracompTelhado: number
-    areaTotalTelhado: number
-    compTestada: number
+    compTelhado: string
+    larguracompTelhado: string
+    areaTotalTelhado: string
+    compTestada: string
     numCaidaTelhado: number
-    coberturaTelhado: number
+    coberturaTelhado: string
     coberturaOutros:string
     existeFogaoLenha: string
-    medidaTelhadoAreaFogao: number
-    testadaDispParteFogao: number
+    medidaTelhadoAreaFogao: string
+    testadaDispParteFogao: string
     atendPipa: string
     outroAtendPipa:string
     respAtendPipa: string

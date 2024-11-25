@@ -101,6 +101,55 @@ export default function () {
 
   }
 
+  async function create() {
+
+    try {
+
+      const response = await cadastrodb.create({
+        municipio,
+        comunidade,
+        endereco,
+        localiza,
+        nome,
+        cpf,
+        dtNasc,
+        cadUnico,
+        qtdPessoa: Number(qtdPessoa),
+        renda,
+        moradia,
+        outroMoradia,
+        compTelhado,
+        larguracompTelhado,
+        areaTotalTelhado,
+        compTestada,
+        numCaidaTelhado: Number(numCaidaTelhado),
+        coberturaTelhado,
+        coberturaOutros,
+        existeFogaoLenha,
+        medidaTelhadoAreaFogao,
+        testadaDispParteFogao,
+        atendPipa,
+        outroAtendPipa,
+        respAtendPipa,
+        outrObs,
+        nomeAgente,
+        cpfAgente,
+        nomeEng,
+        creaEng
+      })
+
+      Alert.alert("Cadastro Realiza Com Sucesso ! " + response.insertedRowId)
+
+      navigateToSettings(cpf, response.insertedRowId)
+
+
+    } catch (error) {
+      console.log(error)
+      Alert.alert("error" + error)
+
+    }
+  }
+
   function valida() {
 
     if (municipio.trim() == "") {
@@ -165,55 +214,8 @@ export default function () {
 
     } else {
 
-      async function create() {
+      create();
 
-        try {
-
-          const response = await cadastrodb.create({
-            municipio,
-            comunidade,
-            endereco,
-            localiza,
-            nome,
-            cpf,
-            dtNasc,
-            cadUnico,
-            qtdPessoa: Number(qtdPessoa),
-            renda,
-            moradia,
-            outroMoradia,
-            compTelhado: Number(compTelhado),
-            larguracompTelhado: Number(larguracompTelhado),
-            areaTotalTelhado: Number(areaTotalTelhado),
-            compTestada: Number(compTestada),
-            numCaidaTelhado: Number(numCaidaTelhado),
-            coberturaTelhado: Number(coberturaTelhado),
-            coberturaOutros,
-            existeFogaoLenha,
-            medidaTelhadoAreaFogao: Number(medidaTelhadoAreaFogao),
-            testadaDispParteFogao: Number(testadaDispParteFogao),
-            atendPipa,
-            outroAtendPipa,
-            respAtendPipa,
-            outrObs,
-            nomeAgente,
-            cpfAgente,
-            nomeEng,
-            creaEng
-          })
-
-          Alert.alert("Cadastro Realiza Com Sucesso ! " + response.insertedRowId)
-
-
-          navigateToSettings(cpf, response.insertedRowId)
-
-
-        } catch (error) {
-          console.log(error)
-          Alert.alert("error" + error)
-
-        }
-      }
     }
   }
 
@@ -376,10 +378,10 @@ export default function () {
           </View>
 
           <Text style={styles1.label}>Medida do telhado desconsiderando a área do fogão à lenha(m2): <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" onChangeText={setMedidaTelhadoAreaFogao} maxLength={2} />
+          <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'} clearButtonMode="always" onChangeText={setMedidaTelhadoAreaFogao} maxLength={5} />
 
           <Text style={styles1.label}>Testada disponível, desconsiderando a parte do fogão à lenha(m) :</Text>
-          <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" onChangeText={setTestadaDispParteFogao} maxLength={2} />
+          <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'} clearButtonMode="always" onChangeText={setTestadaDispParteFogao} maxLength={5} />
 
 
           <Text style={styles1.label}>Atendimento por caminhão Pipa ?: <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
