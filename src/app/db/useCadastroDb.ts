@@ -1,4 +1,5 @@
 import { useSQLiteContext } from "expo-sqlite"
+import { Alert } from "react-native"
 
 export type CadatroDB = {
 
@@ -12,7 +13,7 @@ export type CadatroDB = {
     dtNasc: string
     cadUnico: string
     qtdPessoa: number
-    renda: number
+    renda: string
     moradia: string
     outroMoradia:string
     compTelhado: number
@@ -34,6 +35,15 @@ export type CadatroDB = {
     nomeEng: string
     creaEng: string
 }
+
+export type UpdateObs = {
+
+    id: string
+    foto: string
+    field: string
+}
+
+
 
 export function useCadastroDb() {
 
@@ -158,10 +168,26 @@ export function useCadastroDb() {
         }
 
     }
+
+    async function searchById(id: number) {
+        try {
+            const query = "SELECT * from cadastro WHERE id = ?"
+
+            const response = await database.getAllAsync<CadatroDB>(query, `${id}`)
+
+            return response
+
+        } catch (error) {
+
+        }
+
+    }
+
+    // update
     async function update(data: CadatroDB) {
 
         const statement = await database.prepareAsync(
-            "UPDATE cadastro SET nome = $nome WHERE id = $id"
+            `UPDATE cadastro SET nome = $nome WHERE id = $id`
         )
 
         try {
@@ -178,5 +204,48 @@ export function useCadastroDb() {
 
     }
 
-    return { create, searchByName, update }
+    // update Obs
+    async function updateObs(data: UpdateObs) {
+
+        const statement = await database.prepareAsync(
+            `UPDATE cadastro SET $field = $foto WHERE id = $id`
+        )
+
+        try {
+            await statement.executeAsync({
+                $id: data.id,
+                $foto: data.foto,
+                $field: data.field
+            })
+
+            Alert.alert("cad");
+
+        } catch (error) {
+            throw (error)
+        } 
+
+    }
+
+    // update Obs
+    async function deletar(id: number) {
+
+        const statement = await database.prepareAsync(
+            `DELETE from cadastro WHERE id = $id`
+        )
+
+        try {
+            await statement.executeAsync({
+                $id: id,
+                
+            })
+
+            Alert.alert("Cadastro Deletado com Sucesso !");
+
+        } catch (error) {
+            throw (error)
+        } 
+
+    }
+
+    return { create, searchByName, searchById, update, updateObs, deletar }
 }
