@@ -12,22 +12,22 @@ export type CadatroDB = {
     cpf: string
     dtNasc: string
     cadUnico: string
-    qtdPessoa: number
+    qtdPessoa: string
     renda: string
     moradia: string
-    outroMoradia:string
+    outroMoradia: string
     compTelhado: string
     larguracompTelhado: string
     areaTotalTelhado: string
     compTestada: string
     numCaidaTelhado: number
     coberturaTelhado: string
-    coberturaOutros:string
+    coberturaOutros: string
     existeFogaoLenha: string
     medidaTelhadoAreaFogao: string
     testadaDispParteFogao: string
     atendPipa: string
-    outroAtendPipa:string
+    outroAtendPipa: string
     respAtendPipa: string
     outrObs: string
     nomeAgente: string
@@ -173,7 +173,7 @@ export function useCadastroDb() {
         try {
             const query = "SELECT * from cadastro WHERE id = ?"
 
-            const response = await database.getAllAsync<CadatroDB>(query, `${id}`)
+            const response = await database.getFirstAsync<CadatroDB>(query, `${id}`)
 
             return response;
 
@@ -189,14 +189,75 @@ export function useCadastroDb() {
     async function update(data: CadatroDB) {
 
         const statement = await database.prepareAsync(
-            `UPDATE cadastro SET nome = $nome WHERE id = $id`
+            `UPDATE cadastro SET nome = $nome ,
+                municipio       =  $municipio,
+                comunidade      =  $comunidade,
+                endereco        =  $endereco,
+                localiza        =  $localiza,
+                cpf             =  $cpf,
+                dtNasc          =  $dtNasc,
+                cadUnico        =  $cadUnico,
+                qtdPessoa       =  $qtdPessoa,
+                renda           =  $renda,
+                moradia         =  $moradia,
+                outroMoradia    =  $outroMoradia,
+                compTelhado     =  $compTelhado,
+                larguracompTelhado =  $larguracompTelhado,
+                areaTotalTelhado =  $areaTotalTelhado,
+                compTestada     =  $compTestada,
+                numCaidaTelhado =  $numCaidaTelhado,
+                coberturaTelhado=  $coberturaTelhado,
+                coberturaOutros =  $coberturaOutros,
+                existeFogaoLenha=  $existeFogaoLenha,
+                medidaTelhadoAreaFogao =  $medidaTelhadoAreaFogao,
+                testadaDispParteFogao =  $testadaDispParteFogao,
+                atendPipa       =  $atendPipa,
+                outroAtendPipa  =  $outroAtendPipa,
+                respAtendPipa   =  $respAtendPipa,
+                outrObs         =  $outrObs,
+                nomeAgente      =  $nomeAgente,
+                cpfAgente       =  $cpfAgente,
+                nomeEng         =  $nomeEng,
+                creaEng         =  $creaEng
+                WHERE id        = $id`
         )
 
         try {
             await statement.executeAsync({
                 $id: data.id,
-                $nome: data.nome
+                $nome: data.nome,
+                $municipio: data.municipio,
+                $comunidade: data.comunidade,
+                $endereco: data.endereco,
+                $localiza: data.localiza,
+                $cpf: data.cpf,
+                $dtNasc: data.dtNasc,
+                $cadUnico: data.cadUnico,
+                $qtdPessoa: data.qtdPessoa,
+                $renda: data.renda,
+                $moradia: data.moradia,
+                $outroMoradia: data.outroMoradia,
+                $compTelhado: data.compTelhado,
+                $larguracompTelhado: data.larguracompTelhado,
+                $areaTotalTelhado: data.areaTotalTelhado,
+                $compTestada: data.compTestada,
+                $numCaidaTelhado: data.numCaidaTelhado,
+                $coberturaTelhado: data.coberturaTelhado,
+                $coberturaOutros: data.coberturaOutros,
+                $existeFogaoLenha: data.existeFogaoLenha,
+                $medidaTelhadoAreaFogao: data.medidaTelhadoAreaFogao,
+                $testadaDispParteFogao: data.testadaDispParteFogao,
+                $atendPipa: data.atendPipa,
+                $outroAtendPipa: data.outroAtendPipa,
+                $respAtendPipa: data.respAtendPipa,
+                $outrObs: data.outrObs,
+                $nomeAgente: data.nomeAgente,
+                $cpfAgente: data.cpfAgente,
+                $nomeEng: data.nomeEng,
+                $creaEng: data.creaEng,
             })
+
+            return true;
 
         } catch (error) {
             throw (error)
@@ -224,7 +285,7 @@ export function useCadastroDb() {
 
         } catch (error) {
             throw (error)
-        } 
+        }
 
     }
 
@@ -238,14 +299,14 @@ export function useCadastroDb() {
         try {
             await statement.executeAsync({
                 $id: id,
-                
+
             })
 
             Alert.alert("Cadastro Deletado com Sucesso !");
 
         } catch (error) {
             throw (error)
-        } 
+        }
 
     }
 

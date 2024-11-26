@@ -11,11 +11,11 @@ import { useEffect, useState } from 'react';
 import { initializaDb } from '../db/db';
 import { CadatroDB, useCadastroDb } from '../db/useCadastroDb';
 
-
 import { Cadastro } from '@/components/Cadastros';
 import { router, useNavigation, } from 'expo-router';
 
-//import { List, List1 } from '@/components/list1';
+import {GoogleSignin, statusCodes} from '@react-native-google-signin/google-signin'
+	import GDrive from '@react-native-google-drive-api-wrapper';
 
 
 export default function TabTwoScreen() {
@@ -26,7 +26,30 @@ export default function TabTwoScreen() {
   const [cadastros, setCadastros] = useState<CadatroDB[]>()
 
 
-  async function deletar(id) {
+
+// = Somewhere in your code = //
+GoogleSignin.configure(...);
+await GoogleSignin.signIn();
+
+const gdrive = new GDrive();
+gdrive.accessToken = (await GoogleSignin.getTokens()).accessToken;
+
+console.log(await gdrive.files.list());
+
+const id = (await gdrive.files.newMultipartUploader()
+  .setData([1, 2, 3, 4, 5], MimeTypes.BINARY)
+  .setRequestBody({
+    name: "multipart_bin"
+  })
+  .execute()
+).id;
+
+console.log(await gdrive.files.getBinary(id));
+
+
+
+
+  async function deletar(id: Number) {
 
     const response = await cadastrodb.deletar(id);
     return true;

@@ -14,6 +14,7 @@
       "backgroundColor": "#ffffff"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff",
@@ -28,6 +29,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      ["@react-native-google-signin/google-signin"],
       "expo-router",
       [
         "expo-location",
@@ -58,6 +60,7 @@
           "photosPermission": "Permite que o aplicativo acesse sua galeria de fotos?."
         }
       ],
+
       "expo-font"
     ],
     "experiments": {

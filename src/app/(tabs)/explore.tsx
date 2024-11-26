@@ -30,7 +30,8 @@ const data_cobertura = require('../assetdata/cobertura.json');
 export default function () {
 
   const params = useGlobalSearchParams();
-  const param_id = (params.id) ? params.id : "";
+
+  let param_id = (params.id) ? params.id : "";
 
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -69,10 +70,13 @@ export default function () {
   const [cpfAgente, setCpfAgente] = useState("");
   const [nomeEng, setNomeEng] = useState("");
   const [creaEng, setCreaEng] = useState("");
+  const [funcBotao, setFuncBotao] = useState("");
+
+  
 
   //console.log("000.000.000-00".replace(". -", ""));
 
-   const cadastrodb = useCadastroDb()
+  const cadastrodb = useCadastroDb()
 
   // if (param.id) {
   //   setId(param.id.toString())
@@ -80,41 +84,60 @@ export default function () {
   //   console.log("id :" + id);
   // }
 
-  useState(() => {
-    searchById().then(dados => {
-      setMunicipio(dados[0].municipio);
-      setComunidade(dados[0].comunidade);
-      setEndereco(dados[0].endereco);
-      setNome(dados[0].nome);
-      setCpf(dados[0].cpf);
-      setCpf(dados[0].cpf);
-      setDtNasc(dados[0].dtNasc);
-      setCadUnico(dados[0].cadUnico);
-      setQtdPessoa(dados[0].qtdPessoa.toString());
-      setRenda(dados[0].renda);
-      setMoradia(dados[0].moradia);
-      setOutroMoradia(dados[0].outroMoradia);
-      setCompTelhado(dados[0].compTelhado);
-      setLarguraCompTelhado(dados[0].larguracompTelhado);
-      setAreaTotalTelhado(dados[0].areaTotalTelhado);
-      setCompTestada(dados[0].compTestada);
-      setNumCaidaTelhado(dados[0].numCaidaTelhado.toString());
-      setCoberturaTelhado(dados[0].coberturaTelhado);
-      setCobertOutros(dados[0].coberturaOutros);
-      setCobertOutros(dados[0].coberturaOutros);
-      setExisteFogaoLenha(dados[0].existeFogaoLenha);
-      setMedidaTelhadoAreaFogao(dados[0].medidaTelhadoAreaFogao);
-      setTestadaDispParteFogao(dados[0].testadaDispParteFogao);
-      setAtendPipa(dados[0].atendPipa);
-      setRespAtendPipa(dados[0].respAtendPipa);
-      setOutroAtendPipa(dados[0].outroAtendPipa);
-      setNomeAgente(dados[0].nomeAgente);
-      setCpfAgente(dados[0].cpfAgente);
-      setNomeEng(dados[0].nomeEng);
-      setCreaEng(dados[0].creaEng);
-      setOutrObs(dados[0].outrObs);
+  useState(()=> {
+
+    searchById(param_id).then(dados => {
+      if (dados != null) {
+        setMunicipio(dados.municipio);
+        setComunidade(dados.comunidade);
+        setEndereco(dados.endereco);
+        setNome(dados.nome);
+        setCpf(dados.cpf);
+        setCpf(dados.cpf);
+        setDtNasc(dados.dtNasc);
+        setCadUnico(dados.cadUnico);
+        setQtdPessoa(dados.qtdPessoa);
+        setRenda(dados.renda);
+        setMoradia(dados.moradia);
+        setOutroMoradia(dados.outroMoradia);
+        setCompTelhado(dados.compTelhado);
+        setLarguraCompTelhado(dados.larguracompTelhado);
+        setAreaTotalTelhado(dados.areaTotalTelhado);
+        setCompTestada(dados.compTestada);
+        setNumCaidaTelhado(dados.numCaidaTelhado.toString());
+        setCoberturaTelhado(dados.coberturaTelhado);
+        setCobertOutros(dados.coberturaOutros);
+        setCobertOutros(dados.coberturaOutros);
+        setExisteFogaoLenha(dados.existeFogaoLenha);
+        setMedidaTelhadoAreaFogao(dados.medidaTelhadoAreaFogao);
+        setTestadaDispParteFogao(dados.testadaDispParteFogao);
+        setAtendPipa(dados.atendPipa);
+        setRespAtendPipa(dados.respAtendPipa);
+        setOutroAtendPipa(dados.outroAtendPipa);
+        setNomeAgente(dados.nomeAgente);
+        setCpfAgente(dados.cpfAgente);
+        setNomeEng(dados.nomeEng);
+        setCreaEng(dados.creaEng);
+        setOutrObs(dados.outrObs);
+      }
     });
+    
+    
   });
+  
+  useEffect(() => {
+    
+    console.log(param_id);
+    if(param_id) {
+      setFuncBotao("Atualizar")
+    }else {
+      setFuncBotao("Salvar")
+    }
+
+    
+  }, []);
+
+
 
   const router = useRouter();
 
@@ -122,11 +145,11 @@ export default function () {
     const cpf1 = cpf2.replaceAll(`.`, '').replace(`-`, '')
     // Navega para a aba de configurações
     //router.push('/(tabs)/fotos');
-    router.push({ pathname: '/(tabs)/fotos', params: { cpf: cpf1, id: id } })
+    router.push({ pathname: '/(tabs)/fotos', params: { cpf: cpf1, id: id.toString() } })
   };
 
-  async function searchById() {
-    const response = await cadastrodb.searchById(Number(id))
+  async function searchById(id) {
+    const response = await cadastrodb.searchById(id)
     return response;
   }
 
@@ -142,7 +165,7 @@ export default function () {
         cpf,
         dtNasc,
         cadUnico,
-        qtdPessoa: Number(qtdPessoa),
+        qtdPessoa,
         renda,
         moradia,
         outroMoradia,
@@ -174,6 +197,55 @@ export default function () {
 
     }
   }
+
+
+  async function atualiza() {
+    try {
+
+      const response = await cadastrodb.update({
+        id: Number(id),
+        municipio,
+        comunidade,
+        endereco,
+        localiza,
+        nome,
+        cpf,
+        dtNasc,
+        cadUnico,
+        qtdPessoa,
+        renda,
+        moradia,
+        outroMoradia,
+        compTelhado,
+        larguracompTelhado,
+        areaTotalTelhado,
+        compTestada,
+        numCaidaTelhado: Number(numCaidaTelhado),
+        coberturaTelhado,
+        coberturaOutros,
+        existeFogaoLenha,
+        medidaTelhadoAreaFogao,
+        testadaDispParteFogao,
+        atendPipa,
+        outroAtendPipa,
+        respAtendPipa,
+        outrObs,
+        nomeAgente,
+        cpfAgente,
+        nomeEng,
+        creaEng
+      })
+
+      Alert.alert("Cadastro Atualizado Com Sucesso ! " + id)
+
+      navigateToSettings(cpf, id)
+
+    } catch (error) {
+
+    }
+  }
+
+
 
   function valida() {
 
@@ -239,7 +311,12 @@ export default function () {
 
     } else {
 
-      create();
+      if(param_id) {
+        atualiza();
+      }else{
+        create();
+      }
+
 
     }
   }
@@ -295,7 +372,7 @@ export default function () {
 
 
           <Text style={styles1.label}>Nome Morador : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="Nome" keyboardType={'text'} clearButtonMode="always" onChangeText={setNome} value={nome} maxLength={40} />
+          <TextInput style={styles1.input} placeholder="Nome" keyboardType={'default'} clearButtonMode="always" onChangeText={setNome} value={nome} maxLength={40} />
 
           <Text style={styles1.label}>CPF - do Morador : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
@@ -319,10 +396,10 @@ export default function () {
           />
 
           <Text style={styles1.label}>N Cad Único:</Text>
-          <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" onChangeText={setCadUnico} maxLength={15} />
+          <TextInput style={styles1.input} placeholder="" keyboardType={'default'} clearButtonMode="always" onChangeText={setCadUnico} value={cadUnico} maxLength={15} />
 
           <Text style={styles1.label}>Quantidade de pessoas que residem no imóvel : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" onChangeText={setQtdPessoa} maxLength={2} />
+          <TextInput style={styles1.input} placeholder="" keyboardType={'numeric'} clearButtonMode="always" onChangeText={setQtdPessoa} value={qtdPessoa} maxLength={2} />
 
 
 
@@ -347,26 +424,26 @@ export default function () {
           </View>
 
           <Text style={styles1.label}>Outros Descrever :</Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setOutroMoradia} maxLength={120} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setOutroMoradia} value={outroMoradia} maxLength={120} />
 
 
           <Text style={styles1.title1}>Caracterização do imóvel</Text>
 
 
           <Text style={styles1.label}>Comprimento Total do Telhado (m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setCompTelhado} keyboardType={'decimal-pad'} maxLength={5} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setCompTelhado} keyboardType={'decimal-pad'} value={compTelhado} maxLength={5} />
 
           <Text style={styles1.label}>Largura do Telhado (m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setLarguraCompTelhado} keyboardType={'decimal-pad'} maxLength={5} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setLarguraCompTelhado} keyboardType={'decimal-pad'} value={larguracompTelhado} maxLength={5} />
 
           <Text style={styles1.label}>Área total do telhado (m2) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setAreaTotalTelhado} keyboardType={'decimal-pad'} maxLength={5} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setAreaTotalTelhado} keyboardType={'decimal-pad'} value={areaTotalTelhado} maxLength={5} />
 
           <Text style={styles1.label}>Comprimeto da testada (m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setCompTestada} keyboardType={'decimal-pad'} maxLength={5} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setCompTestada} keyboardType={'decimal-pad'} maxLength={5} value={compTestada}/>
 
           <Text style={styles1.label}>Número de caídas do telhado  : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setNumCaidaTelhado} keyboardType={'numeric'} maxLength={2} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setNumCaidaTelhado} keyboardType={'numeric'} maxLength={2} value={numCaidaTelhado}/>
 
           <Text style={styles1.label}>Tipo de cobertura do imóvel:</Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
@@ -379,7 +456,7 @@ export default function () {
           </View>
 
           <Text style={styles1.label}>Outros Descrever:</Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setCobertOutros} maxLength={120} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setCobertOutros} maxLength={120} value={coberturaOutros}/>
 
 
           <Text style={styles1.title1}>Dados Complementares</Text>
@@ -403,10 +480,10 @@ export default function () {
           </View>
 
           <Text style={styles1.label}>Medida do telhado desconsiderando a área do fogão à lenha(m2): <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'} clearButtonMode="always" onChangeText={setMedidaTelhadoAreaFogao} maxLength={5} />
+          <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'} clearButtonMode="always" onChangeText={setMedidaTelhadoAreaFogao} maxLength={5} value={medidaTelhadoAreaFogao}/>
 
           <Text style={styles1.label}>Testada disponível, desconsiderando a parte do fogão à lenha(m) :</Text>
-          <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'} clearButtonMode="always" onChangeText={setTestadaDispParteFogao} maxLength={5} />
+          <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'} clearButtonMode="always" onChangeText={setTestadaDispParteFogao} maxLength={5} value={testadaDispParteFogao}/>
 
 
           <Text style={styles1.label}>Atendimento por caminhão Pipa ?: <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
@@ -437,12 +514,12 @@ export default function () {
           </View>
 
           <Text style={styles1.label}>Outros Descrever:</Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setOutroAtendPipa} maxLength={120} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setOutroAtendPipa} maxLength={120} value={outroAtendPipa}/>
 
           <Text style={styles1.label}>Identificação dos Agentes :</Text>
 
           <Text style={styles1.label}>Nome do Agente : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setNomeAgente} maxLength={50} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setNomeAgente} maxLength={50} value={nomeAgente}/>
 
           <Text style={styles1.label}>CPF do Agente : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
@@ -455,18 +532,18 @@ export default function () {
           />
 
           <Text style={styles1.label}>Nome do Engenheiro responsável : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setNomeEng} maxLength={50} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setNomeEng} maxLength={50} value={nomeEng}/>
 
           <Text style={styles1.label}>Crea do Engenheiro responsável : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setCreaEng} maxLength={15} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" onChangeText={setCreaEng} maxLength={15} value={creaEng}/>
 
           <Text style={styles1.label}>Observações :</Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" multiline onChangeText={setOutrObs} maxLength={120} />
+          <TextInput style={styles1.input} placeholder="" clearButtonMode="always" multiline onChangeText={setOutrObs} maxLength={120} value={outrObs}/>
 
           <TouchableOpacity
             style={styles1.button}
             onPress={valida}>
-            <Text style={styles1.buttonText}>Salvar</Text>
+            <Text style={styles1.buttonText}>{funcBotao}</Text>
           </TouchableOpacity>
         </View>
 
