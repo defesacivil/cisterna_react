@@ -12,7 +12,7 @@ import * as ImagePicker from 'expo-image-picker';
 import MaskInput, { Masks } from 'react-native-mask-input';
 import { SQLiteProvider } from 'expo-sqlite';
 import { initializaDb } from '../db/db';
-import { useCadastroDb } from '../db/useCadastroDb';
+import { CadatroDB, useCadastroDb } from '../db/useCadastroDb';
 import RNPickerSelect from 'react-native-picker-select';
 import * as Location from 'expo-location';
 import { Tabs, useGlobalSearchParams } from 'expo-router';
@@ -29,6 +29,8 @@ const data_cobertura = require('../assetdata/cobertura.json');
 
 export default function () {
 
+  const params = useGlobalSearchParams();
+  const param_id = (params.id) ? params.id : "";
 
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -37,7 +39,7 @@ export default function () {
   const [endereco, setEndereco] = useState("");
   const [localiza, setLocaliza] = useState("");
 
-  const [id, setId] = useState("");
+  const [id, setId] = useState(param_id);
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const [dtNasc, setDtNasc] = useState("");
@@ -70,21 +72,49 @@ export default function () {
 
   //console.log("000.000.000-00".replace(". -", ""));
 
-  const param = useGlobalSearchParams();
+   const cadastrodb = useCadastroDb()
 
-  const cadastrodb = useCadastroDb()
+  // if (param.id) {
+  //   setId(param.id.toString())
+  //   console.log("param :" + param.id);
+  //   console.log("id :" + id);
+  // }
 
   useState(() => {
-    if (param.id) {
-      setId(param.id)
-      console.log(param.id)
-
-
-      //searchById(param.id);
-
-      //console.log(data)
-    }
-  })
+    searchById().then(dados => {
+      setMunicipio(dados[0].municipio);
+      setComunidade(dados[0].comunidade);
+      setEndereco(dados[0].endereco);
+      setNome(dados[0].nome);
+      setCpf(dados[0].cpf);
+      setCpf(dados[0].cpf);
+      setDtNasc(dados[0].dtNasc);
+      setCadUnico(dados[0].cadUnico);
+      setQtdPessoa(dados[0].qtdPessoa.toString());
+      setRenda(dados[0].renda);
+      setMoradia(dados[0].moradia);
+      setOutroMoradia(dados[0].outroMoradia);
+      setCompTelhado(dados[0].compTelhado);
+      setLarguraCompTelhado(dados[0].larguracompTelhado);
+      setAreaTotalTelhado(dados[0].areaTotalTelhado);
+      setCompTestada(dados[0].compTestada);
+      setNumCaidaTelhado(dados[0].numCaidaTelhado.toString());
+      setCoberturaTelhado(dados[0].coberturaTelhado);
+      setCobertOutros(dados[0].coberturaOutros);
+      setCobertOutros(dados[0].coberturaOutros);
+      setExisteFogaoLenha(dados[0].existeFogaoLenha);
+      setMedidaTelhadoAreaFogao(dados[0].medidaTelhadoAreaFogao);
+      setTestadaDispParteFogao(dados[0].testadaDispParteFogao);
+      setAtendPipa(dados[0].atendPipa);
+      setRespAtendPipa(dados[0].respAtendPipa);
+      setOutroAtendPipa(dados[0].outroAtendPipa);
+      setNomeAgente(dados[0].nomeAgente);
+      setCpfAgente(dados[0].cpfAgente);
+      setNomeEng(dados[0].nomeEng);
+      setCreaEng(dados[0].creaEng);
+      setOutrObs(dados[0].outrObs);
+    });
+  });
 
   const router = useRouter();
 
@@ -95,14 +125,12 @@ export default function () {
     router.push({ pathname: '/(tabs)/fotos', params: { cpf: cpf1, id: id } })
   };
 
-  async function searchById(id: number) {
-
-    const response = await cadastrodb.searchById(id)
-
+  async function searchById() {
+    const response = await cadastrodb.searchById(Number(id))
+    return response;
   }
 
   async function create() {
-
     try {
 
       const response = await cadastrodb.create({
@@ -142,10 +170,7 @@ export default function () {
 
       navigateToSettings(cpf, response.insertedRowId)
 
-
     } catch (error) {
-      console.log(error)
-      Alert.alert("error" + error)
 
     }
   }

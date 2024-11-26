@@ -175,7 +175,9 @@ export function useCadastroDb() {
 
             const response = await database.getAllAsync<CadatroDB>(query, `${id}`)
 
-            return response
+            return response;
+
+            //console.log(response);
 
         } catch (error) {
 
