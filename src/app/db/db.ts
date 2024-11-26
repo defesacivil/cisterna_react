@@ -6,7 +6,6 @@ export async function initializaDb(database: SQLiteDatabase) {
     
   
     await database.execAsync(`
-    DROP TABLE CADASTRO;
     CREATE TABLE IF NOT EXISTS cadastro (
       id INTEGER,
       municipio TEXT NOT NULL DEFAULT 'Municipio',

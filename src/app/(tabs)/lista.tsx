@@ -84,20 +84,20 @@ export default function TabTwoScreen() {
 
     return (
 
-      <View key={(0+1)} style={styles.container}>
+      <View key="0" style={styles.container}>
 
-        <View>
-          <Text style={styles.titulo}>Lista de Registros</Text>
+        <View key="1">
+          <Text  style={styles.titulo}>Lista de Registros</Text>
           <TouchableOpacity
             style={styles.button}
-            onPress>
+            >
             <Text style={styles.buttonText}>Sincronizar Dados</Text>
           </TouchableOpacity>
           
           <Text style={styles.total} >Total Registros {totalReg()}</Text>
         </View>
-        {cadastros?.map((item) => (
-          <View style={styles.list}>
+        {cadastros?.map((item, index) => (
+          <View key={index} style={styles.list}>
             <View>
               <Text style={[styles.link, styles.nome]} key={item.id}>{item.id} - {item.nome} / {item.cpf}</Text>
             </View>
