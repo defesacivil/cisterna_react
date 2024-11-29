@@ -37,6 +37,12 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "red",
+  },
   cardPrice: {
     fontSize: 16,
     fontWeight: "bold",

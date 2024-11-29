@@ -20,7 +20,7 @@ export type CadatroDB = {
     larguracompTelhado: string
     areaTotalTelhado: string
     compTestada: string
-    numCaidaTelhado: number
+    numCaidaTelhado: string
     coberturaTelhado: string
     coberturaOutros: string
     existeFogaoLenha: string
@@ -40,7 +40,7 @@ export type UpdateObs = {
 
     id: string
     foto: string
-    field: string
+    obs: string
 }
 
 
@@ -188,6 +188,7 @@ export function useCadastroDb() {
     // update
     async function update(data: CadatroDB) {
 
+
         const statement = await database.prepareAsync(
             `UPDATE cadastro SET nome = $nome ,
                 municipio       =  $municipio,
@@ -254,15 +255,18 @@ export function useCadastroDb() {
                 $nomeAgente: data.nomeAgente,
                 $cpfAgente: data.cpfAgente,
                 $nomeEng: data.nomeEng,
-                $creaEng: data.creaEng,
+                $creaEng: data.creaEng
             })
 
             return true;
 
+
+
+
         } catch (error) {
             throw (error)
         } finally {
-            await statement.finalizeAsync()
+            statement.finalizeAsync();
         }
 
     }
@@ -270,21 +274,16 @@ export function useCadastroDb() {
     // update Obs
     async function updateObs(data: UpdateObs) {
 
-        const statement = await database.prepareAsync(
-            `UPDATE cadastro SET $field = $foto WHERE id = $id`
-        )
-
         try {
-            await statement.executeAsync({
-                $id: data.id,
-                $foto: data.foto,
-                $field: data.field
-            })
+            const statement = await database.execAsync(
+                'UPDATE cadastro SET ' + data.foto + ' = "' + data.obs + '" WHERE id = ' + data.id
+            )
 
-            Alert.alert("cad");
+            Alert.alert("Lançamento realizado !");
 
         } catch (error) {
             throw (error)
+        } finally {
         }
 
     }

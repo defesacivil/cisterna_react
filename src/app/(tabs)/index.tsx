@@ -4,8 +4,27 @@ import { HelloWave } from "@/components/HelloWave"
 import ParallaxScrollView from "@/components/ParallaxScrollView"
 import { ThemedText } from "@/components/ThemedText"
 import { ThemedView } from "@/components/ThemedView"
+import * as FileSystem from "expo-file-system"
+import { useEffect } from "react"
 
 export default function HomeScreen() {
+
+  useEffect(() => {
+    const createDirectory = async () => {
+      const directoryUri = FileSystem.documentDirectory + 'opseca';
+      try {
+        const direct = await FileSystem.getInfoAsync(directoryUri);
+        if(!direct.exists){
+          await FileSystem.makeDirectoryAsync(directoryUri, { intermediates: true });
+        }
+        //console.log('Pasta criada com sucesso!');
+      } catch (error) {
+        //console.log('Erro ao criar pasta:', error);
+      }
+    };
+  
+    createDirectory();
+  }, []);
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "", dark: "#1D3D47" }}

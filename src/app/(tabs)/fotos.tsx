@@ -1,24 +1,9 @@
-import {
-  Alert,
-  Button,
-  FlatList,
-  Image,
-  Modal,
-  Pressable,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native"
+import { Alert, Button, FlatList, Image, Modal, Pressable, Text, TextInput, TouchableOpacity, View, RefreshControl } from "react-native"
 import * as FileSystem from "expo-file-system"
-import * as MediaLibrary from "expo-media-library"
 import { styles } from "@/styles/fotos"
-import { useEffect, useRef, useState } from "react"
-import { Camera, CameraView, CameraViewRef } from "expo-camera"
+import React, { useEffect, useRef, useState } from "react"
 import * as ImagePicker from "expo-image-picker"
-import { ModalPicture } from "@/components/ModalPicture"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-
 import { useCadastroDb } from '../db/useCadastroDb';
 import { useGlobalSearchParams, useRouter } from "expo-router"
 
@@ -91,79 +76,97 @@ const data: Product[] = [
     price: "Opcional 4",
     nome: "op4",
   },
-  // Adicione os outros itens do array `data` aqui
 ]
+
 
 export default function Fotos() {
 
-  const param = useGlobalSearchParams();
+  const params = useGlobalSearchParams();
 
-  const [products, setProducts] = useState(data)
-
-  const [selectedIndex, setSelectedIndex] = useState(0)
-
-  const [modalVisible, setModalVisible] = useState(false)
-  const [modalObs, setModalObs] = useState(false)
-  const [obs, setObs] = useState(null)
-
-  const [id, setId] = useState("")
-  const [foto, setFoto] = useState("")
-  const [field, setField] = useState("")
-  const [cpf, setCpf] = useState("")
+  var param_id = (params.id) ? params.id : "";
+  var param_cpf = (params.cpf) ? params.cpf : "";
 
 
+  //console.log("param" + params.id)
   const router = useRouter();
-
   const useUpdateObs = useCadastroDb();
 
+  const [products, setProducts] = useState(data)
+  const [refreshing, setRefreshing] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [modalObs, setModalObs] = useState(false)
+  const [obs, setObs] = useState("")
+  const [id, setId] = useState(param_id)
+  const [foto, setFoto] = useState("")
+  const [cpf, setCpf] = useState(param_cpf)
+
+  useEffect(() => {
+    //setCpf(params.cpf)
+    checaDirCpf();
+    isImageExists()
+  }, [param_id, param_cpf])
+
+  //console.log(setCpf)
+  /* Atualizar obse da foto */
   async function updateObs() {
     try {
-
-      const response = await useUpdateObs.updateObs({
+      const result = await useUpdateObs.updateObs({
         id,
         foto,
-        field
+        obs
+      }).then(response => {
+        //console.log(response);
       })
-
-      // verifica as obsevacoes
-      if(true) {
-
-      }
-      router.push('/(tabs)/lista')
-
-
     } catch (error) {
       console.log(error)
-      Alert.alert("error" + error)
-
     }
   }
 
-  // async function mapData(nomeFoto: string) {
-  //   const fileStorage = await FileSystem.getInfoAsync(
-  //     FileSystem.documentDirectory + "/opseca/" + nomeFoto + ".jpg"
-  //   )
-  //   return fileStorage
-  // }
-
-  async function isImageExists() {
-    const fileStorage = await AsyncStorage.getItem("fotos")
-    console.log(fileStorage)
-    const data = fileStorage ? JSON.parse(fileStorage) : []
-    data.map((item: Product) => {
-      if (item.source) {
-        setProducts((prevProducts) => {
-          const newProducts = [...prevProducts]
-          const index = newProducts.filter(
-            (product) => product.id === item.id
-          )[0]
-          index.source = item.source
-          newProducts[index.id - 1] = index
-          return newProducts
+  /* checa dir cpf */
+  async function checaDirCpf() {
+    try {
+      const dir = await FileSystem.getInfoAsync(FileSystem.documentDirectory + "opseca/" + cpf)
+        .then(function (response) {
+          console.log(response.isDirectory + "Não Remover checagem dir Cpf");
+          if (!response.exists) {
+            criaDirCpf(cpf);
+          }
         })
-      }
-    })
+    } catch (error) {
+      console.log(error + " erro ao checar dir cpf !")
+    }
   }
+
+  /* 
+    Cria dir cpf  /data/data/host.exp.exponent/files/opseca/cpf
+   */
+  async function criaDirCpf(fdcpf: string) {
+    try {
+      await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "opseca/" + fdcpf, { intermediates: true })
+    } catch (error) {
+      console.log(error + " erro ao criar dir cpf ")
+    }
+  }
+
+  /* Verifica imagem do disco e visualiza */
+  async function isImageExists() {
+    const dirCPFexist = await FileSystem.getInfoAsync(FileSystem.documentDirectory + "opseca/" + param_cpf)
+    await FileSystem.readDirectoryAsync(FileSystem.documentDirectory + "opseca/" + param_cpf)
+      .then(function (response) {
+        const data1 = response;
+        data.forEach((file, index) => {
+          data1.forEach((dado) => { //diretorio cpf
+            if (dado.indexOf(file.nome.toString()) != -1) {
+              data[index].source = "file:///data/data/host.exp.exponent/files/opseca/"+param_cpf+"/"+dado
+            }
+          })
+        });
+
+        setProducts(data)
+      })
+  }
+
 
   const setImage = (item: Product) => {
     if (item.source) {
@@ -173,6 +176,19 @@ export default function Fotos() {
     }
   }
 
+  /* mover arquivos */
+  const moveFile = async (sourceUri: string, destinationUri: string) => {
+    try {
+      await FileSystem.moveAsync({
+        from: sourceUri,
+        to: destinationUri,
+      });
+      //console.log('File moved successfully!');
+    } catch (error) {
+      //console.error('Error moving file:', error);
+    }
+  };
+
   async function handleSelectImage(item: Product) {
     const { granted } = await ImagePicker.getCameraPermissionsAsync()
     if (!granted) {
@@ -180,14 +196,29 @@ export default function Fotos() {
     } else {
       const result = await ImagePicker.launchCameraAsync()
       if (result.assets) {
+        //console.log(FileSystem.documentDirectory);
         setProducts((prevProducts) => {
           const newProducts = [...prevProducts]
           const index = newProducts.indexOf(item)
-          newProducts[index].source = result.assets[0].uri
-          console.log(result.assets)
+          /* mover fotos */
+          criaDirCpf
+          const sourceUri = result.assets[0].uri;
+          const destinationUri = FileSystem.documentDirectory + "opseca/" + param_cpf + '/' + param_cpf + foto + '.jpeg';
+
+          console.log("foto_state :" + foto)
+          console.log("sourceUri :" + sourceUri)
+          console.log("destinationUri : " + destinationUri)
+
+          moveFile(sourceUri, destinationUri)
+            .then(() => console.log('File moved successfully!'))
+            .catch(error => console.error('Error moving file:', error));
+
+          newProducts[index].source = destinationUri;
+          /* /data/data/host.exp.exponent/files/cpf/cpf_imagem */
+
           return newProducts
         })
-        await AsyncStorage.setItem("fotos", JSON.stringify(products))
+        //await AsyncStorage.setItem("fotos", JSON.stringify(products))
       }
     }
   }
@@ -198,22 +229,15 @@ export default function Fotos() {
       newProducts[selectedIndex].source = undefined
       return newProducts
     })
-    await AsyncStorage.setItem("fotos", JSON.stringify(products))
     setModalVisible(false)
   }
 
   async function salvarObs() {
-
     if (obs.length == 0) {
       Alert.alert('Este Campo é Obrigatório');
     } else {
-      updateObs
+      updateObs();
     }
-
-    //console.log("id:" + id);
-    //console.log("cpf:" + cpf);
-    //console.log("foto:" + foto);
-    //console.log("obs:" + obs);
     setModalObs(false)
   }
 
@@ -228,17 +252,12 @@ export default function Fotos() {
     setModalObs(false)
   }
 
-
-  function setData() {
-
-  }
-
-  useEffect(() => {
-    isImageExists()
-  }, [])
-
   return (
     <View style={styles.container}>
+
+      <View >
+        <Text style={styles.title}>CPF: {param_cpf}</Text>
+      </View>
       <FlatList
         style={styles.list}
         contentContainerStyle={styles.listContainer}
@@ -258,6 +277,8 @@ export default function Fotos() {
                 onPress={() => {
                   setSelectedIndex(index)
                   setImage(item)
+                  setFoto(item.nome.toString())
+                  console.log(item.nome)
                 }}
               >
                 {item.source ? (
@@ -269,6 +290,10 @@ export default function Fotos() {
                     }
                   />
                 )}
+                {/* debug
+                <View>
+                  <Text>{item.source}</Text>
+                </View> */}
               </TouchableOpacity>
             </View>
 
@@ -277,9 +302,8 @@ export default function Fotos() {
                 style={styles.button1}
                 onPress={() => {
                   openModalObs()
-                  setId(param.id)
+                  setId(String(params.id))
                   setFoto("img_" + item.nome)
-                  setCpf(param.cpf)
                   setObs
                 }}
               >

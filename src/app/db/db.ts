@@ -8,10 +8,10 @@ export async function initializaDb(database: SQLiteDatabase) {
     await database.execAsync(`
     CREATE TABLE IF NOT EXISTS cadastro (
       id INTEGER,
-      municipio TEXT NOT NULL DEFAULT 'Municipio',
-      comunidade TEXT NOT NULL DEFAULT 'Comunidade',
-      endereco TEXT DEFAULT NULL DEFAULT 'Endereço',
-      localiza TEXT NOT NULL,
+      municipio TEXT DEFAULT 'Municipio',
+      comunidade TEXT DEFAULT 'Comunidade',
+      endereco TEXT DEFAULT 'Endereço',
+      localiza TEXT,
       nome TEXT NOT NULL,
       cpf TEXT NOT NULL,
       dtNasc TEXT NOT NULL,
@@ -64,5 +64,6 @@ export async function initializaDb(database: SQLiteDatabase) {
     `)
   } catch (error) {
     console.log(error)
+  }finally{
   }
 }
