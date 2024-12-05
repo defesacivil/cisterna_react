@@ -31,9 +31,7 @@ export default function App() {
   }
 
   return (
-    <Text>
-      {latlong}
-      </Text>
+      latlong
   );
 }
 

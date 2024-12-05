@@ -7,9 +7,6 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { initializaDb } from '../db/db';
-import { Alert } from 'react-native';
-
-import FileSystem from 'expo-file-system';
 
 
 export default function TabLayout() {

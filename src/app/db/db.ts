@@ -3,8 +3,8 @@ import { type SQLiteDatabase } from "expo-sqlite";
 export async function initializaDb(database: SQLiteDatabase) {
 
   try {
-    
-  
+
+
     await database.execAsync(`
     CREATE TABLE IF NOT EXISTS cadastro (
       id INTEGER,
@@ -14,6 +14,7 @@ export async function initializaDb(database: SQLiteDatabase) {
       localiza TEXT,
       nome TEXT NOT NULL,
       cpf TEXT NOT NULL,
+      tel TEXT,
       dtNasc TEXT NOT NULL,
       cadUnico TEXT DEFAULT NULL,
       qtdPessoa TEXT NOT NULL DEFAULT 1,
@@ -31,8 +32,12 @@ export async function initializaDb(database: SQLiteDatabase) {
       medidaTelhadoAreaFogao TEXT DEFAULT 0,
       testadaDispParteFogao TEXT DEFAULT 0,
       atendPipa TEXT NOT NULL,
+      respAtDefesaCivil INTEGER DEFAULT 0,
+      respAtExercito INTEGER DEFAULT 0,
+      respAtParticular INTEGER DEFAULT 0,
+      respAtPrefeitura INTEGER DEFAULT 0,
+      respAtOutros INTEGER DEFAULT 0,
       outroAtendPipa TEXT DEFAULT NULL,
-      respAtendPipa TEXT DEFAULT NULL ,
       outrObs TEXT DEFAULT NULL ,
       nomeAgente TEXT NOT NULL,
       cpfAgente TEXT NOT NULL,
@@ -64,6 +69,6 @@ export async function initializaDb(database: SQLiteDatabase) {
     `)
   } catch (error) {
     console.log(error)
-  }finally{
+  } finally {
   }
 }

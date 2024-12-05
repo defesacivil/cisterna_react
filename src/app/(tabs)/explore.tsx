@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform, Text, View, TextInput, TouchableOpacity, FlatList, TextInputComponent, Alert, Pressable } from 'react-native';
+import { StyleSheet, Image, Platform, Text, View, TextInput, TouchableOpacity, FlatList, TextInputComponent, Alert, Pressable, Button} from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { StatusBar } from 'expo-status-bar';
-import LocationComponent from '@/components/Location';
 import ImagePickerScreen from '@/components/Fotos';
 import * as ImagePicker from 'expo-image-picker';
 import MaskInput, { Masks } from 'react-native-mask-input';
@@ -18,6 +17,9 @@ import { Tabs, useGlobalSearchParams, useLocalSearchParams } from 'expo-router';
 
 import { useRouter } from 'expo-router';
 import { NativeStatement } from 'expo-sqlite/build/NativeStatement';
+import Checkbox from 'expo-checkbox';
+import Modal from 'react-native-modal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const dropMunicipio = require('../assetdata/municipio.json');
 const fornecimento = require('../assetdata/fornecimento');
@@ -25,6 +27,7 @@ const dropComunidade = require('../assetdata/comunidade.json');
 const data_moradia = require('../assetdata/moradia.json');
 const data_cobertura = require('../assetdata/cobertura.json');
 
+let background = "";
 
 export default function () {
 
@@ -66,6 +69,7 @@ export default function () {
 
   const [municipio, setMunicipio] = useState("");
   const [comunidade, setComunidade] = useState("");
+  const [comunidades, setComunidades] = useState([]);
   const [endereco, setEndereco] = useState("");
   const [localiza, setLocaliza] = useState("");
 
@@ -73,6 +77,7 @@ export default function () {
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState(params.cpf);
   const [dtNasc, setDtNasc] = useState("");
+  const [tel, setTel] = useState("");
   const [cadUnico, setCadUnico] = useState("");
   const [qtdPessoa, setQtdPessoa] = useState("");
   const [renda, setRenda] = useState(0);
@@ -87,12 +92,11 @@ export default function () {
   const [coberturaTelhado, setCoberturaTelhado] = useState("");
   const [coberturaOutros, setCobertOutros] = useState("");
 
-  const [existeFogaoLenha, setExisteFogaoLenha] = useState("");
+  const [existeFogaoLenha, setExisteFogaoLenha] = useState("0");
   const [medidaTelhadoAreaFogao, setMedidaTelhadoAreaFogao] = useState("");
   const [testadaDispParteFogao, setTestadaDispParteFogao] = useState("");
-  const [atendPipa, setAtendPipa] = useState("");
+  const [atendPipa, setAtendPipa] = useState("0");
   const [outroAtendPipa, setOutroAtendPipa] = useState("");
-  const [respAtendPipa, setRespAtendPipa] = useState("");
   const [outrObs, setOutrObs] = useState("");
 
   const [nomeAgente, setNomeAgente] = useState("");
@@ -101,30 +105,76 @@ export default function () {
   const [creaEng, setCreaEng] = useState("");
   const [funcBotao, setFuncBotao] = useState("");
 
+  const [isChRespAtPipaDefesaCivil, setChRespAtPipaDefesaCivil] = useState(false);
+  const [isChRespAtPipaExercito, setChRespAtPipaExercito] = useState(false);
+  const [isChRespAtPipaParticular, setChRespAtPipaParticular] = useState(false);
+  const [isChRespAtPipaPrefeitura, setChRespAtPipaPrefeitura] = useState(false);
+  const [isChRespAtPipaOutros, setChRespAtPipaOutros] = useState(false);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const cadastrodb = useCadastroDb()
 
+  console.log(getUserData());
 
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const handleConfirm = () => {
+    // Perform the action here
+    //console.log('Confirmed!');
+    getLatLong();
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+
+  /* pega Lat Long */
+  function getLatLong() {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+      let localiza = await Location.getCurrentPositionAsync({});
+      setLocaliza("lat: "+localiza.coords.latitude+" Long: "+localiza.coords.longitude);
+    })();
+}
+
+  // Get location 
+  useEffect(() => {
+    getLatLong();
+  }, []);
 
   useEffect(() => {
-
     if (param_id) {
       setFuncBotao("Atualizar")
+      background = "#87CEFA";
 
-      
       searchById(Number(param_id)).then(async dados => {
-      //console.log(dados?.renda)
+        //console.log(dados?.renda)
         if (dados != null) {
+          console.log(dados.localiza)
 
           setId(dados.id);
           setMunicipio(dados.municipio);
           setComunidade(dados.comunidade);
           setEndereco(dados.endereco);
+          setLocaliza(dados.localiza)
           setNome(dados.nome);
           setCpf(dados.cpf);
           setDtNasc(dados.dtNasc);
+          setTel(dados.tel);
           setCadUnico(dados.cadUnico);
           setQtdPessoa(dados.qtdPessoa.toString()),
-          setRenda(dados.renda.toString());
+            setRenda(dados.renda.toString());
           setMoradia(dados.moradia);
           setOutroMoradia(dados.outroMoradia);
           setCompTelhado(dados.compTelhado.toString());
@@ -138,15 +188,19 @@ export default function () {
           setMedidaTelhadoAreaFogao(String(dados.medidaTelhadoAreaFogao));
           setTestadaDispParteFogao(dados.testadaDispParteFogao.toString());
           setAtendPipa(dados.atendPipa);
-          setRespAtendPipa(dados.respAtendPipa);
           setOutroAtendPipa(dados.outroAtendPipa);
+          setChRespAtPipaDefesaCivil(Boolean(dados.respAtDefesaCivil));
+          setChRespAtPipaExercito(Boolean(dados.respAtExercito));
+          setChRespAtPipaParticular(Boolean(dados.respAtParticular));
+          setChRespAtPipaPrefeitura(Boolean(dados.respAtPrefeitura));
+          setChRespAtPipaOutros(Boolean(dados.respAtOutros));
           setNomeAgente(dados.nomeAgente);
           setCpfAgente(dados.cpfAgente);
           setNomeEng(dados.nomeEng);
           setCreaEng(dados.creaEng);
           setOutrObs(dados.outrObs);
         }
-       });
+      });
 
     } else {
       setId("");
@@ -156,9 +210,10 @@ export default function () {
       setNome("");
       setCpf("");
       setDtNasc("");
+      setTel("");
       setCadUnico("");
       setQtdPessoa(""),
-      setRenda(0);
+        setRenda(0);
       setMoradia("");
       setOutroMoradia("");
       setCompTelhado("");
@@ -168,11 +223,15 @@ export default function () {
       setNumCaidaTelhado("");
       setCoberturaTelhado("");
       setCobertOutros("");
-      setExisteFogaoLenha("");
+      setExisteFogaoLenha("0");
       setMedidaTelhadoAreaFogao("");
       setTestadaDispParteFogao("");
-      setAtendPipa("");
-      setRespAtendPipa("");
+      setAtendPipa("0");
+      setChRespAtPipaDefesaCivil(false)
+      setChRespAtPipaExercito(false)
+      setChRespAtPipaParticular(false)
+      setChRespAtPipaPrefeitura(false)
+      setChRespAtPipaOutros(false)
       setOutroAtendPipa("");
       setNomeAgente("");
       setCpfAgente("");
@@ -200,7 +259,6 @@ export default function () {
 
   async function create() {
     try {
-
       const response = await cadastrodb.create({
         municipio,
         comunidade,
@@ -209,6 +267,7 @@ export default function () {
         nome,
         cpf,
         dtNasc,
+        tel,
         cadUnico,
         qtdPessoa,
         renda,
@@ -226,7 +285,11 @@ export default function () {
         testadaDispParteFogao,
         atendPipa,
         outroAtendPipa,
-        respAtendPipa,
+        isChRespAtPipaDefesaCivil,
+        isChRespAtPipaExercito,
+        isChRespAtPipaParticular,
+        isChRespAtPipaPrefeitura,
+        isChRespAtPipaOutros,
         outrObs,
         nomeAgente,
         cpfAgente,
@@ -261,6 +324,7 @@ export default function () {
         nome,
         cpf,
         dtNasc,
+        tel,
         cadUnico,
         qtdPessoa,
         renda,
@@ -278,7 +342,11 @@ export default function () {
         testadaDispParteFogao,
         atendPipa,
         outroAtendPipa,
-        respAtendPipa,
+        isChRespAtPipaDefesaCivil,
+        isChRespAtPipaExercito,
+        isChRespAtPipaParticular,
+        isChRespAtPipaPrefeitura,
+        isChRespAtPipaOutros,
         outrObs,
         nomeAgente,
         cpfAgente,
@@ -302,6 +370,27 @@ export default function () {
     }
   }
 
+  function setListComunidade(municipio: string) {
+    for (let comunidade of dropComunidade) {
+      if (comunidade['cod'] === municipio) {
+        setComunidades(comunidade['comunidades']);
+      } else {
+      }
+    }
+  }
+
+
+  function calcAreaTotal(largura: string) {
+    const total = parseFloat(compTelhado) * parseFloat(largura)
+    setAreaTotalTelhado(total.toString())
+  }
+
+  function removerVirgula(valor: string) {
+    return valor.replaceAll(`,`, '.')
+
+  }
+
+
   function valida() {
 
     // if ((municipio === undefined) || (municipio =="") ) {
@@ -317,65 +406,78 @@ export default function () {
     //   Alert.alert("O Campo CPF é Obrigatório !");
 
     // } else if ((dtNasc === undefined) || (dtNasc =="") ) {
-    //   Alert.alert("O Campo Data Nascé Obrigatório !");
+    //   Alert.alert("O Campo Data Nasc. Obrigatório !");
+
+    // } else if ((tel === undefined) || (tel =="") ) {
+    //   Alert.alert("O Campo Data Telefone Obrigatório !");
 
     // } else if ((qtdPessoa === undefined) || (qtdPessoa =="") ) {
     //   Alert.alert("O Campo Quant Pessoas é Obrigatório !");
 
     // } else */
-    if ((renda === undefined) || (renda =="") ) {
+    if ((renda === undefined) || (renda == "")) {
       Alert.alert("O Campo Renda é Obrigatório !");
 
-    // } else if ((moradia === undefined) || (moradia =="") ) {
-    //   Alert.alert("O Campo Moradia é Obrigatório !");
+      // } else if ((moradia === undefined) || (moradia =="") ) {
+      //   Alert.alert("O Campo Moradia é Obrigatório !");
 
-    // } else if ((compTelhado === undefined) || (compTelhado =="") ) {
-    //   Alert.alert("O Campo Comprimento Telhado é Obrigatório !");
+      // } else if ((compTelhado === undefined) || (compTelhado =="") ) {
+      //   Alert.alert("O Campo Comprimento Telhado é Obrigatório !");
 
-    // } else if ((larguracompTelhado === undefined) || (larguracompTelhado =="") ) {
-    //   Alert.alert("O Campo Largura Comp. Telhado é Obrigatório !");
+      // } else if ((larguracompTelhado === undefined) || (larguracompTelhado =="") ) {
+      //   Alert.alert("O Campo Largura Comp. Telhado é Obrigatório !");
 
-    // } else if ((areaTotalTelhado === undefined) || (areaTotalTelhado =="") ) {
-    //   Alert.alert("O Campo Area Total Telhado é Obrigatório !");
+      // } else if ((areaTotalTelhado === undefined) || (areaTotalTelhado =="") ) {
+      //   Alert.alert("O Campo Area Total Telhado é Obrigatório !");
 
-    // } else if ((compTestada === undefined) || (compTestada =="") ) {
-    //   Alert.alert("O Campo Comp. Testada é Obrigatório !");
+      // } else if ((compTestada === undefined) || (compTestada =="") ) {
+      //   Alert.alert("O Campo Comp. Testada é Obrigatório !");
 
-    // } else if ((numCaidaTelhado === undefined) || (numCaidaTelhado =="") ) {
-    //   Alert.alert("O Campo Num Caida Telhado é Obrigatório !");
+      // } else if ((numCaidaTelhado === undefined) || (numCaidaTelhado =="") ) {
+      //   Alert.alert("O Campo Num Caida Telhado é Obrigatório !");
 
-    // } else if ((existeFogaoLenha === undefined) || (existeFogaoLenha =="") ) {
-    //   Alert.alert("O Campo Existe Fogao Lenha é Obrigatório !");
+      // } else if ((existeFogaoLenha === undefined) || (existeFogaoLenha =="") ) {
+      //   Alert.alert("O Campo Existe Fogao Lenha é Obrigatório !");
 
-    // } else if ((medidaTelhadoAreaFogao === undefined) || (medidaTelhadoAreaFogao =="") ) {
-    //   Alert.alert("O Campo Medida Telhado AreaFogao é Obrigatório !");
+      // } else if ((medidaTelhadoAreaFogao === undefined) || (medidaTelhadoAreaFogao =="") ) {
+      //   Alert.alert("O Campo Medida Telhado AreaFogao é Obrigatório !");
 
-    // } else if ((atendPipa === undefined) || (atendPipa =="") ) {
-    //   Alert.alert("O Campo AtendPipa é Obrigatório !");
+      // } else if ((testadaDispParteFogao === undefined) || (testadaDispParteFogao =="") ) {
+      //   Alert.alert("O Campo Testada Desconsiderando parte Fogão é Obrigatório !");
 
-    // } else if ((nomeAgente === undefined) || (nomeAgente =="") ) {
-    //   Alert.alert("O Campo Nome Agente é Obrigatório !");
+      // } else if ((atendPipa === undefined) || (atendPipa =="") ) {
+      //   Alert.alert("O Campo AtendPipa é Obrigatório !");
 
-    // } else if ((cpfAgente === undefined) || (cpfAgente =="") ) {
-    //   Alert.alert("O Campo Cpf Agente é Obrigatório !");
+      // } else if ((nomeAgente === undefined) || (nomeAgente =="") ) {
+      //   Alert.alert("O Campo Nome Agente é Obrigatório !");
 
-    // } else if ((nomeEng === undefined) || (nomeEng =="") ) {
-    //   Alert.alert("O Campo Nome Eng é Obrigatório !");
+      // } else if ((cpfAgente === undefined) || (cpfAgente =="") ) {
+      //   Alert.alert("O Campo Cpf Agente é Obrigatório !");
 
-    // } else if ((creaEng === undefined) || (creaEng == "")) {
-    //   Alert.alert("O Campo Crea Eng é Obrigatório !")
+      // } else if ((nomeEng === undefined) || (nomeEng =="") ) {
+      //   Alert.alert("O Campo Nome Eng é Obrigatório !");
 
-     } else {
+      // } else if ((creaEng === undefined) || (creaEng == "")) {
+      //   Alert.alert("O Campo Crea Eng é Obrigatório !")
 
-    if (param_id) {
-      atualiza();
     } else {
-      create();
-    }
+
+      if (param_id) {
+        atualiza();
+      } else {
+        create();
+      }
 
 
     }
   }
+
+
+
+  // const onValueChange = (value) => {
+  //   setSelectedComunidade(value);
+
+  // };
 
   //console.log(LocationComponent.toString())
   return (
@@ -400,7 +502,11 @@ export default function () {
           <Text style={styles1.label}>Município : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
-              onValueChange={(value) => setMunicipio(value)}
+              onValueChange={(value) => {
+                setMunicipio(value)
+                setListComunidade(value)
+              }
+            }
               value={municipio}
               items={dropMunicipio}
               placeholder={{ label: 'Select o Município..', value: '' }}
@@ -410,9 +516,12 @@ export default function () {
           <Text style={styles1.label}>Comunidade : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
-              onValueChange={(value) => setComunidade(value)}
+              onValueChange={(value) => {
+                  setComunidade(value)
+                }
+              }
               value={comunidade}
-              items={dropComunidade}
+              items={comunidades}
               placeholder={{ label: 'Select o Comunidade..', value: '' }}
             />
           </View>
@@ -422,7 +531,12 @@ export default function () {
             maxLength={50} value={endereco} />
 
           <Text style={styles1.label}>Localização :</Text>
-          <Text style={styles1.label} >Latitude/Longitude :{<LocationComponent />}</Text>
+          <TextInput style={styles1.inputRo} value={localiza} onChangeText={setLocaliza}/>
+          <TouchableOpacity
+            style={styles1.button}
+            onPress={toggleModal}>
+            <Text style={styles1.buttonText}>Atualizar Localização</Text>
+          </TouchableOpacity>
 
 
 
@@ -430,11 +544,12 @@ export default function () {
 
 
           <Text style={styles1.label}>Nome Morador : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="Nome" keyboardType={'default'} clearButtonMode="always"
+          <TextInput style={styles1.input}  keyboardType={'default'} clearButtonMode="always"
             onChangeText={setNome} value={nome} maxLength={40} />
 
           <Text style={styles1.label}>CPF - do Morador : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
+          style={styles1.input}
             value={cpf}
             onChangeText={(masked, unmasked) => {
               setCpf(masked); // you can use the unmasked value as well
@@ -445,12 +560,25 @@ export default function () {
 
           <Text style={styles1.label}>Data Nascimento : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
+          style={styles1.input}
             value={dtNasc}
             onChangeText={(masked, unmasked) => {
               setDtNasc(masked); // you can use the unmasked value as well
 
             }}
             mask={Masks.DATE_DDMMYYYY}
+          />
+
+          {/* Telefone */}
+          <Text style={styles1.label}>Telefone : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
+          <MaskInput
+          style={styles1.input}
+            value={tel}
+            onChangeText={(masked, unmasked) => {
+              setTel(masked); // you can use the unmasked value as well
+
+            }}
+            mask={Masks.BRL_PHONE}
           />
 
           <Text style={styles1.label}>N Cad Único:</Text>
@@ -466,6 +594,7 @@ export default function () {
 
           <Text style={styles1.label} >Renda familiar : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
+          style={styles1.input}
             value={String(renda)}
             onChangeText={(masked, unmasked) => {
               setRenda(masked); // you can use the unmasked value as well
@@ -494,18 +623,27 @@ export default function () {
 
           <Text style={styles1.label}>Comprimento Total do Telhado (m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
-            onChangeText={setCompTelhado} keyboardType={'decimal-pad'}
+            onChangeText={(value) => { [, setCompTelhado(removerVirgula(value))] }}
+            keyboardType={'decimal-pad'}
             value={compTelhado} maxLength={5} />
 
           <Text style={styles1.label}>Largura do Telhado (m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
-            onChangeText={setLarguraCompTelhado} keyboardType={'decimal-pad'}
+            onChangeText={(value) => {
+              [
+                setLarguraCompTelhado(removerVirgula(value)),
+                calcAreaTotal(value)]
+            }
+            }
+            keyboardType={'decimal-pad'}
             value={String(larguracompTelhado)} maxLength={5} />
 
+
+          {/* Area total do Telhado */}
           <Text style={styles1.label}>Área total do telhado (m2) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
+          <TextInput style={styles1.inputRo} placeholder="" clearButtonMode="always"
             onChangeText={setAreaTotalTelhado} keyboardType={'decimal-pad'}
-            value={String(areaTotalTelhado)} maxLength={5} />
+            value={String(areaTotalTelhado)} maxLength={5} editable={false} />
 
           <Text style={styles1.label}>Comprimeto da testada (m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
@@ -549,7 +687,7 @@ export default function () {
                 "label": "Sim",
                 "value": "1"
               }]}
-              placeholder={{ label: 'Selecione uma Opção', value: '' }}
+            //placeholder={{ label: 'Selecione uma Opção', value: '' }}
             />
           </View>
 
@@ -558,7 +696,7 @@ export default function () {
             clearButtonMode="always" onChangeText={setMedidaTelhadoAreaFogao} maxLength={5}
             value={medidaTelhadoAreaFogao} />
 
-          <Text style={styles1.label}>Testada disponível, desconsiderando a parte do fogão à lenha(m) :</Text>
+          <Text style={styles1.label}>Testada disponível, desconsiderando a parte do fogão à lenha(m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'}
             clearButtonMode="always" onChangeText={setTestadaDispParteFogao} maxLength={5}
             value={testadaDispParteFogao} />
@@ -583,12 +721,35 @@ export default function () {
 
           <Text style={styles1.label}>Órgão responsável pelo atendimento com caminhão Pipa : *</Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
-            <RNPickerSelect
-              onValueChange={(value) => [setSelectedValue(value), setRespAtendPipa(value)]}
-              value={respAtendPipa}
-              items={fornecimento}
-              placeholder={{ label: 'Selecione uma Opção', value: '' }}
-            />
+
+            {/* Item CK Defesa Civil */}
+            <View style={styles1.section}>
+              <Checkbox style={styles1.checkbox} value={isChRespAtPipaDefesaCivil} onValueChange={setChRespAtPipaDefesaCivil} />
+              <Text style={styles1.paragraph}>Defesa Civil</Text>
+            </View>
+            {/* Item CK Exercito */}
+            <View style={styles1.section}>
+              <Checkbox style={styles1.checkbox} value={isChRespAtPipaExercito} onValueChange={setChRespAtPipaExercito} />
+              <Text style={styles1.paragraph}>Exército</Text>
+            </View>
+
+            {/* Item CK Particular */}
+            <View style={styles1.section}>
+              <Checkbox style={styles1.checkbox} value={isChRespAtPipaParticular} onValueChange={setChRespAtPipaParticular} />
+              <Text style={styles1.paragraph}>Particular</Text>
+            </View>
+
+            {/* Item CK Prefeitura */}
+            <View style={styles1.section}>
+              <Checkbox style={styles1.checkbox} value={isChRespAtPipaPrefeitura} onValueChange={setChRespAtPipaPrefeitura} />
+              <Text style={styles1.paragraph}>Prefeitura</Text>
+            </View>
+
+            {/* Item CK Outros */}
+            <View style={styles1.section}>
+              <Checkbox style={styles1.checkbox} value={isChRespAtPipaOutros} onValueChange={setChRespAtPipaOutros} />
+              <Text style={styles1.paragraph}>Outros</Text>
+            </View>
           </View>
 
           <Text style={styles1.label}>Outros Descrever:</Text>
@@ -601,10 +762,14 @@ export default function () {
           <Text style={styles1.label}>Nome do Agente : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
             onChangeText={setNomeAgente} maxLength={50}
-            value={nomeAgente} />
+            value={() => {
+              (nomeAgente) ? nomeAgente : getUserData1[0].length == 0}
+             }
+              />
 
           <Text style={styles1.label}>CPF do Agente : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
+          style={styles1.input}
             value={cpfAgente}
             onChangeText={(masked, unmasked) => {
               setCpfAgente(masked); // you can use the unmasked value as well
@@ -633,12 +798,22 @@ export default function () {
             onPress={valida}>
             <Text style={styles1.buttonText}>{funcBotao}</Text>
           </TouchableOpacity>
+        
+        
         </View>
 
-
-
-
         <StatusBar style="light" />
+
+      {/* Modal renovar Lat Long */}
+      <Modal isVisible={isModalVisible}>
+        <View style={styles1.modalContent}>
+          <Text>Are you sure you want to proceed?</Text>
+          <Button title="Confirm" onPress={handleConfirm} />
+          <Button title="Cancel" onPress={handleCancel} />
+        </View>
+      </Modal>
+
+
       </View>
 
     </ParallaxScrollView >
@@ -678,6 +853,7 @@ const styles = StyleSheet.create({
 const styles1 = StyleSheet.create({
   container: {
     margin: 0,
+    backgroundColor: {background},
 
     // flex: 2,
     // backgroundColor: '#D93600',
@@ -702,12 +878,24 @@ const styles1 = StyleSheet.create({
   input: {
     marginTop: 10,
     height: 60,
-    backgroundColor: '#fff',
+    backgroundColor: '#ADD8E6',
+    borderRadius: 5,
+    paddingHorizontal: 0,
+    fontSize: 16,
+    alignItems: 'stretch',
+    // borderBottomWidth: 1.0,
+  },
+  inputRo: {
+    marginTop: 10,
+    height: 60,
+    backgroundColor: '#A9A9A9',
+    color: '#ffffff',
     borderRadius: 10,
     paddingHorizontal: 0,
     fontSize: 16,
     alignItems: 'stretch',
-    borderBottomWidth: 1.0,
+    // borderBottomWidth: 1.0,
+
   },
   label: {
     backgroundColor: '#fff',
@@ -805,7 +993,26 @@ const styles1 = StyleSheet.create({
   },
   label_info: {
     fontWeight: 'bold',
-  }
+  },
+  section: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  paragraph: {
+    fontSize: 15,
+  },
+  checkbox: {
+    margin: 8,
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
 
 });

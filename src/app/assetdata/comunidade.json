@@ -1,86 +1,2849 @@
 [
     {
-    "value": "DA PRATINHA",
-    "label": "DA PRATINHA"
+        "municipio": "ALMENARA",
+        "cod": "3101706",
+        "comunidades": [
+            {
+                "label": "COMUNIDADE DA PRATINHA",
+                "value": "COMUNIDADE DA PRATINHA"
+            },
+            {
+                "label": "COMUNIDADE PRATA",
+                "value": "COMUNIDADE PRATA"
+            },
+            {
+                "label": "COMUNIDADE CRAQUIMOR",
+                "value": "COMUNIDADE CRAQUIMOR"
+            },
+            {
+                "label": "COMUNIDADE PALESTINA",
+                "value": "COMUNIDADE PALESTINA"
+            },
+            {
+                "label": "COMUNIDADE VILA RICA",
+                "value": "COMUNIDADE VILA RICA"
+            },
+            {
+                "label": "COMUNIDADE GENIPAPO",
+                "value": "COMUNIDADE GENIPAPO"
+            },
+            {
+                "label": "COMUNIDADE MACUCO",
+                "value": "COMUNIDADE MACUCO"
+            },
+            {
+                "label": "COMUNIDADE SANTA HELENA",
+                "value": "COMUNIDADE SANTA HELENA"
+            },
+            {
+                "label": "COMUNIDADE BARRAÇAO",
+                "value": "COMUNIDADE BARRAÇAO"
+            },
+            {
+                "label": "COMUNIDADE CALDEIROES",
+                "value": "COMUNIDADE CALDEIROES"
+            },
+            {
+                "label": "COMUNIDADE CORREGO DO LAJEDO",
+                "value": "COMUNIDADE CORREGO DO LAJEDO"
+            },
+            {
+                "label": "COMUNIDADE CORREGO DO VIGIA",
+                "value": "COMUNIDADE CORREGO DO VIGIA"
+            },
+            {
+                "label": "COMUNIDADE MUMBUCA",
+                "value": "COMUNIDADE MUMBUCA"
+            },
+            {
+                "label": "COMUNIDADE QUILOMBOLA MAROBA DOS TEIXEIRAS",
+                "value": "COMUNIDADE QUILOMBOLA MAROBA DOS TEIXEIRAS"
+            },
+            {
+                "label": "COMUNIDADE PADRE VALDIR",
+                "value": "COMUNIDADE PADRE VALDIR"
+            },
+            {
+                "label": "COMUNIDADE TURVO",
+                "value": "COMUNIDADE TURVO"
+            },
+            {
+                "label": "COMUNIDADE VITORIA DA AMARALINA",
+                "value": "COMUNIDADE VITORIA DA AMARALINA"
+            },
+            {
+                "label": "COMUNIDADE CAJUEIRO",
+                "value": "COMUNIDADE CAJUEIRO"
+            },
+            {
+                "label": "COMUNIDADE GRAVATA",
+                "value": "COMUNIDADE GRAVATA"
+            },
+            {
+                "label": "COMUNIDADE PRINCESINHA DO VALE",
+                "value": "COMUNIDADE PRINCESINHA DO VALE"
+            },
+            {
+                "label": "COMUNIDADE CORREGO DE AREIA",
+                "value": "COMUNIDADE CORREGO DE AREIA"
+            }
+        ]
     },
     {
-    "value": "PRATA",
-    "label": "PRATA"
+        "municipio": "ARICANDUVA",
+        "cod": "3104452",
+        "comunidades": [
+            {
+                "label": "SAPUCAIA",
+                "value": "SAPUCAIA"
+            },
+            {
+                "label": "MUTAMBA",
+                "value": "MUTAMBA"
+            },
+            {
+                "label": "BARRA DO CAPUCHO",
+                "value": "BARRA DO CAPUCHO"
+            },
+            {
+                "label": "OURO FINO II",
+                "value": "OURO FINO II"
+            },
+            {
+                "label": "PACA",
+                "value": "PACA"
+            },
+            {
+                "label": "SANTO ANTONIO DE ARICANDUVA",
+                "value": "SANTO ANTONIO DE ARICANDUVA"
+            },
+            {
+                "label": "SAO LOURENCO",
+                "value": "SAO LOURENCO"
+            },
+            {
+                "label": "BELA VISTA",
+                "value": "BELA VISTA"
+            },
+            {
+                "label": "BOM JESUS",
+                "value": "BOM JESUS"
+            },
+            {
+                "label": "JUAZEIRO",
+                "value": "JUAZEIRO"
+            },
+            {
+                "label": "QUEBRABO",
+                "value": "QUEBRABO"
+            },
+            {
+                "label": "SERRA DA NORUEGA",
+                "value": "SERRA DA NORUEGA"
+            },
+            {
+                "label": "CAPUCHO",
+                "value": "CAPUCHO"
+            },
+            {
+                "label": "COMUNIDADE BEM VIVER",
+                "value": "COMUNIDADE BEM VIVER"
+            },
+            {
+                "label": "OURO FINO I",
+                "value": "OURO FINO I"
+            },
+            {
+                "label": "SANTO ANTONIO DOS MONTEIROS",
+                "value": "SANTO ANTONIO DOS MONTEIROS"
+            },
+            {
+                "label": "SAO PEDRO",
+                "value": "SAO PEDRO"
+            }
+        ]
     },
     {
-    "value": "CRAQUIMOR",
-    "label": "CRAQUIMOR"
+        "municipio": "ARINOS",
+        "cod": "3104502",
+        "comunidades": [
+            {
+                "label": "PA SANTO ANTONIO DO GERAIS",
+                "value": "PA SANTO ANTONIO DO GERAIS"
+            },
+            {
+                "label": "IPUEIRA",
+                "value": "IPUEIRA"
+            },
+            {
+                "label": "PA CAI SARA",
+                "value": "PA CAI SARA"
+            },
+            {
+                "label": "PA RIACHO CLARO",
+                "value": "PA RIACHO CLARO"
+            },
+            {
+                "label": "PA ROÇA",
+                "value": "PA ROÇA"
+            },
+            {
+                "label": "PA SANTA TEREZINHA",
+                "value": "PA SANTA TEREZINHA"
+            },
+            {
+                "label": "PA CARLOS LAMARCA",
+                "value": "PA CARLOS LAMARCA"
+            },
+            {
+                "label": "PA CARRO QUEBRADO",
+                "value": "PA CARRO QUEBRADO"
+            },
+            {
+                "label": "PA ELOIS FERREIRA",
+                "value": "PA ELOIS FERREIRA"
+            },
+            {
+                "label": "PA MIMOSO",
+                "value": "PA MIMOSO"
+            },
+            {
+                "label": "PA PAULO FREIRE",
+                "value": "PA PAULO FREIRE"
+            },
+            {
+                "label": "APROCONVE-BREJO",
+                "value": "APROCONVE-BREJO"
+            },
+            {
+                "label": "ASSOCIAÇAO SANTA MARIA 2",
+                "value": "ASSOCIAÇAO SANTA MARIA 2"
+            }
+        ]
     },
     {
-    "value": "PALESTINA",
-    "label": "PALESTINA"
+        "municipio": "BERILO",
+        "cod": "3106507",
+        "comunidades": [
+            {
+                "label": "VEREDAS",
+                "value": "VEREDAS"
+            },
+            {
+                "label": "ABREU",
+                "value": "ABREU"
+            },
+            {
+                "label": "ITACAMBIRA",
+                "value": "ITACAMBIRA"
+            },
+            {
+                "label": "CAETETU DO MEIO",
+                "value": "CAETETU DO MEIO"
+            },
+            {
+                "label": "DATAS",
+                "value": "DATAS"
+            },
+            {
+                "label": "VAI LAVANDO",
+                "value": "VAI LAVANDO"
+            }
+        ]
     },
     {
-    "value": "VILA RICA",
-    "label": "VILA RICA"
+        "municipio": "BERIZAL",
+        "cod": "3106655",
+        "comunidades": [
+            {
+                "label": "PE DO MORRO",
+                "value": "PE DO MORRO"
+            },
+            {
+                "label": "TABATINGA",
+                "value": "TABATINGA"
+            },
+            {
+                "label": "AGUA BRANCA",
+                "value": "AGUA BRANCA"
+            },
+            {
+                "label": "CAPIM DE CHEIRO",
+                "value": "CAPIM DE CHEIRO"
+            },
+            {
+                "label": "MORRO AGUDO",
+                "value": "MORRO AGUDO"
+            },
+            {
+                "label": "CALDEIRAO",
+                "value": "CALDEIRAO"
+            },
+            {
+                "label": "ITABERABA",
+                "value": "ITABERABA"
+            },
+            {
+                "label": "TAPERINHA",
+                "value": "TAPERINHA"
+            },
+            {
+                "label": "ILHA",
+                "value": "ILHA"
+            }
+        ]
     },
     {
-    "value": "GENIPAPO",
-    "label": "GENIPAPO"
+        "municipio": "BOCAIUVA",
+        "cod": "3107307",
+        "comunidades": [
+            {
+                "label": "CURRAL DE VARAS (FAZ ONÇA)",
+                "value": "CURRAL DE VARAS (FAZ ONÇA)"
+            },
+            {
+                "label": "FORQUILHA",
+                "value": "FORQUILHA"
+            },
+            {
+                "label": "OLHO DAGUA SIMAO",
+                "value": "OLHO DAGUA SIMAO"
+            },
+            {
+                "label": "POCOES",
+                "value": "POCOES"
+            },
+            {
+                "label": "CABECEIRA FAZENDA ONÇA",
+                "value": "CABECEIRA FAZENDA ONÇA"
+            },
+            {
+                "label": "MORRINHOS I",
+                "value": "MORRINHOS I"
+            },
+            {
+                "label": "RETA GRANDE I",
+                "value": "RETA GRANDE I"
+            },
+            {
+                "label": "RETA GRANDE II",
+                "value": "RETA GRANDE II"
+            },
+            {
+                "label": "TRACADAL",
+                "value": "TRACADAL"
+            },
+            {
+                "label": "ASS, BARRAGEM CAATINGA",
+                "value": "ASS, BARRAGEM CAATINGA"
+            },
+            {
+                "label": "CABECEIRA CURRAL DE VARAS",
+                "value": "CABECEIRA CURRAL DE VARAS"
+            },
+            {
+                "label": "RETA GRANDE III",
+                "value": "RETA GRANDE III"
+            },
+            {
+                "label": "LAGOA GRANDE",
+                "value": "LAGOA GRANDE"
+            },
+            {
+                "label": "ANGICO",
+                "value": "ANGICO"
+            },
+            {
+                "label": "BARRAGEM DO BAMBU",
+                "value": "BARRAGEM DO BAMBU"
+            },
+            {
+                "label": "FAZ, JACARE - ASSENT, PROFESSOR MAZAN",
+                "value": "FAZ, JACARE - ASSENT, PROFESSOR MAZAN"
+            },
+            {
+                "label": "GARROTE I & ASSENT,GARROTE",
+                "value": "GARROTE I & ASSENT,GARROTE"
+            },
+            {
+                "label": "POCO BENTO",
+                "value": "POCO BENTO"
+            },
+            {
+                "label": "TABOQUINHA",
+                "value": "TABOQUINHA"
+            },
+            {
+                "label": "TRIUNFO",
+                "value": "TRIUNFO"
+            }
+        ]
+        
     },
     {
-    "value": "MACUCO",
-    "label": "MACUCO"
+        "municipio": "BOTUMIRIM",
+        "cod": "3108503",
+        "comunidades": [
+            {
+                "label": "ATALHO",
+                "value": "ATALHO"
+            },
+            {
+                "label": "COMUNIDADE BONITO",
+                "value": "COMUNIDADE BONITO"
+            },
+            {
+                "label": "ROCINHA",
+                "value": "ROCINHA"
+            },
+            {
+                "label": "PARA TERRA MARAVILHA",
+                "value": "PARA TERRA MARAVILHA"
+            },
+            {
+                "label": "TRAÇADAL",
+                "value": "TRAÇADAL"
+            }
+        ]
     },
     {
-    "value": "SANTA HELENA",
-    "label": "SANTA HELENA"
+        "municipio": "BURITIZEIRO",
+        "cod": "3109402",
+        "comunidades": [
+            {
+                "label": "COMUNIDADE LAGES",
+                "value": "COMUNIDADE LAGES"
+            },
+            {
+                "label": "COMUNIDADE TRIANGULO FORMOSO",
+                "value": "COMUNIDADE TRIANGULO FORMOSO"
+            },
+            {
+                "label": "COMUNIDADE RIBEIRAO",
+                "value": "COMUNIDADE RIBEIRAO"
+            },
+            {
+                "label": "COMUNIDADE TATAIRA",
+                "value": "COMUNIDADE TATAIRA"
+            },
+            {
+                "label": "SANTA HELENA",
+                "value": "SANTA HELENA"
+            },
+            {
+                "label": "ASSENTAMENTO 1 DE MAIO",
+                "value": "ASSENTAMENTO 1 DE MAIO"
+            },
+            {
+                "label": "QUATIS",
+                "value": "QUATIS"
+            },
+            {
+                "label": "VARGINHA",
+                "value": "VARGINHA"
+            }
+        ]
     },
     {
-    "value": "BARRAÇAO",
-    "label": "BARRAÇAO"
+        "municipio": "CAPITÃO ENÉAS",
+        "cod": "3112703",
+        "comunidades": [
+            {
+                "label": "CACAREMA",
+                "value": "CACAREMA"
+            },
+            {
+                "label": "VIRGILANDIA",
+                "value": "VIRGILANDIA"
+            },
+            {
+                "label": "SERROTE",
+                "value": "SERROTE"
+            },
+            {
+                "label": "POCO DOCE",
+                "value": "POCO DOCE"
+            },
+            {
+                "label": "MALHADA REAL",
+                "value": "MALHADA REAL"
+            },
+            {
+                "label": "ORION",
+                "value": "ORION"
+            }
+        ]
     },
     {
-    "value": "CALDEIROES",
-    "label": "CALDEIROES"
+        "municipio": "CARBONITA",
+        "cod": "3113503",
+        "comunidades": [
+            {
+                "label": "MERCADINHO",
+                "value": "MERCADINHO"
+            },
+            {
+                "label": "BERNARDOS",
+                "value": "BERNARDOS"
+            },
+            {
+                "label": "CAPIM PUBO",
+                "value": "CAPIM PUBO"
+            },
+            {
+                "label": "CAPOEIRAO",
+                "value": "CAPOEIRAO"
+            },
+            {
+                "label": "LAJES",
+                "value": "LAJES"
+            },
+            {
+                "label": "MONTE BELO",
+                "value": "MONTE BELO"
+            },
+            {
+                "label": "SANTANA",
+                "value": "SANTANA"
+            }
+        ]
     },
     {
-    "value": "CORREGO DO LAJEDO",
-    "label": "CORREGO DO LAJEDO"
+        "municipio": "CATUTI",
+        "cod": "3115474",
+        "comunidades": [
+            {
+                "label": "TABULEIRO",
+                "value": "TABULEIRO"
+            },
+            {
+                "label": "POÇOES",
+                "value": "POÇOES"
+            },
+            {
+                "label": "VILA SANTOS REIS",
+                "value": "VILA SANTOS REIS"
+            },
+            {
+                "label": "SAMBAIBA",
+                "value": "SAMBAIBA"
+            },
+            {
+                "label": "SANTA RITA",
+                "value": "SANTA RITA"
+            },
+            {
+                "label": "FERRAZ",
+                "value": "FERRAZ"
+            },
+            {
+                "label": "MALHADA GRANDE",
+                "value": "MALHADA GRANDE"
+            },
+            {
+                "label": "PAU A PIQUE I",
+                "value": "PAU A PIQUE I"
+            },
+            {
+                "label": "TAMANDUA",
+                "value": "TAMANDUA"
+            },
+            {
+                "label": "BARREIRO BRANCO",
+                "value": "BARREIRO BRANCO"
+            },
+            {
+                "label": "LINGUA DAGUA",
+                "value": "LINGUA DAGUA"
+            },
+            {
+                "label": "MALHADINHA",
+                "value": "MALHADINHA"
+            },
+            {
+                "label": "PAU A PIQUE II",
+                "value": "PAU A PIQUE II"
+            },
+            {
+                "label": "SALININHAS",
+                "value": "SALININHAS"
+            },
+            {
+                "label": "ILHA GRANDE I",
+                "value": "ILHA GRANDE I"
+            },
+            {
+                "label": "ILHA GRANDE II",
+                "value": "ILHA GRANDE II"
+            }
+        ]
     },
     {
-    "value": "CORREGO DO VIGIA",
-    "label": "CORREGO DO VIGIA"
+        "municipio": "CHAPADA DO NORTE",
+        "cod": "3116100",
+        "comunidades": [
+            {
+                "label": "CORREGO DAS ALMAS",
+                "value": "CORREGO DAS ALMAS"
+            },
+            {
+                "label": "CORREGO DO ROCHA",
+                "value": "CORREGO DO ROCHA"
+            },
+            {
+                "label": "AGUA SUJA",
+                "value": "AGUA SUJA"
+            },
+            {
+                "label": "TOLDA",
+                "value": "TOLDA"
+            },
+            {
+                "label": "FERREIRAS",
+                "value": "FERREIRAS"
+            }
+        ]
     },
     {
-    "value": "MUMBUCA",
-    "label": "MUMBUCA"
+        "municipio": "CÔNEGO MARINHO",
+        "cod": "3117836",
+        "comunidades": [
+            {
+                "label": "BARREIRO DO BORRACHUDO",
+                "value": "BARREIRO DO BORRACHUDO"
+            },
+            {
+                "label": "CRUZ ARAUJO",
+                "value": "CRUZ ARAUJO"
+            },
+            {
+                "label": "CURRAL VELHO",
+                "value": "CURRAL VELHO"
+            },
+            {
+                "label": "FORQUILHA MARINHO",
+                "value": "FORQUILHA MARINHO"
+            },
+            {
+                "label": "LAPINHA",
+                "value": "LAPINHA"
+            },
+            {
+                "label": "CORREDOR",
+                "value": "CORREDOR"
+            },
+            {
+                "label": "QUEIMADA GRANDE",
+                "value": "QUEIMADA GRANDE"
+            },
+            {
+                "label": "BEIRA DA CRUZ",
+                "value": "BEIRA DA CRUZ"
+            },
+            {
+                "label": "CABECEIRA DO POÇAO",
+                "value": "CABECEIRA DO POÇAO"
+            },
+            {
+                "label": "CANDEAL BANDEIRAS",
+                "value": "CANDEAL BANDEIRAS"
+            },
+            {
+                "label": "CANDEAL OLARIA CUPIM",
+                "value": "CANDEAL OLARIA CUPIM"
+            },
+            {
+                "label": "COMUNIDADE DE SAPE",
+                "value": "COMUNIDADE DE SAPE"
+            }
+        ]
     },
     {
-    "value": "QUILOMBOLA MAROBA DOS TEIXEIRAS",
-    "label": "QUILOMBOLA MAROBA DOS TEIXEIRAS"
+        "municipio": "CORONEL MURTA",
+        "cod": "3119500",
+        "comunidades": [
+            {
+                "label": "MUTUCA",
+                "value": "MUTUCA"
+            },
+            {
+                "label": "VEREDA",
+                "value": "VEREDA"
+            },
+            {
+                "label": "OLHO DAGUA DE CIMA",
+                "value": "OLHO DAGUA DE CIMA"
+            },
+            {
+                "label": "TERRA VERMELHA",
+                "value": "TERRA VERMELHA"
+            },
+            {
+                "label": "ALTO MORRO REDONDO",
+                "value": "ALTO MORRO REDONDO"
+            },
+            {
+                "label": "BELA VISTA",
+                "value": "BELA VISTA"
+            },
+            {
+                "label": "JACÚ",
+                "value": "JACÚ"
+            },
+            {
+                "label": "ÁGUA BRANCA",
+                "value": "ÁGUA BRANCA"
+            },
+            {
+                "label": "BAIXÃO",
+                "value": "BAIXÃO"
+            },
+            {
+                "label": "CAPOEIRINHA",
+                "value": "CAPOEIRINHA"
+            },
+            {
+                "label": "LAGINHA",
+                "value": "LAGINHA"
+            },
+            {
+                "label": "OLHO DAGUA DE BAIXO",
+                "value": "OLHO DAGUA DE BAIXO"
+            },
+            {
+                "label": "PACHECO",
+                "value": "PACHECO"
+            },
+            {
+                "label": "ITACAMBIRA",
+                "value": "ITACAMBIRA"
+            },
+            {
+                "label": "LAGE",
+                "value": "LAGE"
+            },
+            {
+                "label": "MORRO REDONDO",
+                "value": "MORRO REDONDO"
+            },
+            {
+                "label": "PALMEIRAS",
+                "value": "PALMEIRAS"
+            },
+            {
+                "label": "JATOBÁ",
+                "value": "JATOBÁ"
+            },
+            {
+                "label": "SÃO JOSÉ",
+                "value": "SÃO JOSÉ"
+            }
+        ]
     },
     {
-    "value": "PADRE VALDIR",
-    "label": "PADRE VALDIR"
+        "municipio": "CRISTÁLIA",
+        "cod": "3120300",
+        "comunidades": [
+            {
+                "label": "MADALENA",
+                "value": "MADALENA"
+            },
+            {
+                "label": "SAO JOAO",
+                "value": "SAO JOAO"
+            },
+            {
+                "label": "SANTA ROSA",
+                "value": "SANTA ROSA"
+            },
+            {
+                "label": "BARREIRO DA CRUZ TABOA",
+                "value": "BARREIRO DA CRUZ TABOA"
+            },
+            {
+                "label": "BURITI",
+                "value": "BURITI"
+            },
+            {
+                "label": "CLAUDIO",
+                "value": "CLAUDIO"
+            },
+            {
+                "label": "PIABANHA",
+                "value": "PIABANHA"
+            },
+            {
+                "label": "AROEIRA",
+                "value": "AROEIRA"
+            },
+            {
+                "label": "CAMARGO",
+                "value": "CAMARGO"
+            },
+            {
+                "label": "TAMBURIL",
+                "value": "TAMBURIL"
+            },
+            {
+                "label": "BATEEIRO",
+                "value": "BATEEIRO"
+            },
+            {
+                "label": "BOA VISTA DO BANANAL",
+                "value": "BOA VISTA DO BANANAL"
+            },
+            {
+                "label": "CORREGO DANTAS",
+                "value": "CORREGO DANTAS"
+            },
+            {
+                "label": "PAIOL",
+                "value": "PAIOL"
+            },
+            {
+                "label": "PIEDADE",
+                "value": "PIEDADE"
+            },
+            {
+                "label": "SANTA CRUZ",
+                "value": "SANTA CRUZ"
+            }
+        ]
     },
     {
-    "value": "TURVO",
-    "label": "TURVO"
+        "municipio": "CURRAL DE DENTRO",
+        "cod": "3120870",
+        "comunidades": [
+            {
+                "label": "LARANJAO",
+                "value": "LARANJAO"
+            }
+        ]
     },
     {
-    "value": "VITORIA DA AMARALINA",
-    "label": "VITORIA DA AMARALINA"
+        "municipio": "FELISBURGO",
+        "cod": "3125606",
+        "comunidades": [
+            {
+                "label": "ASSENTAMENTO TERRA PROMETIDA",
+                "value": "ASSENTAMENTO TERRA PROMETIDA"
+            }
+        ]
     },
     {
-    "value": "CAJUEIRO",
-    "label": "CAJUEIRO"
+        "municipio": "FRANCISCO DUMONT",
+        "cod": "3126604",
+        "comunidades": [
+            {
+                "label": "COVANCAS",
+                "value": "COVANCAS"
+            },
+            {
+                "label": "VILA UNIDA",
+                "value": "VILA UNIDA"
+            },
+            {
+                "label": "CIPO",
+                "value": "CIPO"
+            },
+            {
+                "label": "AGUA BRANCA",
+                "value": "AGUA BRANCA"
+            }
+        ]
     },
     {
-    "value": "GRAVATA",
-    "label": "GRAVATA"
+        "municipio": "GAMELEIRAS",
+        "cod": "3127339",
+        "comunidades": [
+            {
+                "label": "ASSENTAMENTO AGRONORTE",
+                "value": "ASSENTAMENTO AGRONORTE"
+            },
+            {
+                "label": "RAPOSA",
+                "value": "RAPOSA"
+            },
+            {
+                "label": "GORUTUBA (REGIAO)",
+                "value": "GORUTUBA (REGIAO)"
+            },
+            {
+                "label": "VEREDA DE GAMELEIRA",
+                "value": "VEREDA DE GAMELEIRA"
+            },
+            {
+                "label": "VILA DO JACU",
+                "value": "VILA DO JACU"
+            },
+            {
+                "label": "VEREDA DO BREJO",
+                "value": "VEREDA DO BREJO"
+            },
+            {
+                "label": "BREJO DOS MARTIRES",
+                "value": "BREJO DOS MARTIRES"
+            }
+        ]
     },
     {
-    "value": "PRINCESINHA DO VALE",
-    "label": "PRINCESINHA DO VALE"
+        "municipio": "GRÃO MOGOL",
+        "cod": "3127800",
+        "comunidades": [
+            {
+                "label": "CAMPO ALTO",
+                "value": "CAMPO ALTO"
+            },
+            {
+                "label": "PEDRINHA",
+                "value": "PEDRINHA"
+            },
+            {
+                "label": "BONITO CANCELA",
+                "value": "BONITO CANCELA"
+            },
+            {
+                "label": "CORREGO DO MATO",
+                "value": "CORREGO DO MATO"
+            },
+            {
+                "label": "SAO JOSE",
+                "value": "SAO JOSE"
+            },
+            {
+                "label": "ACAMPAMENTO AVILMAR",
+                "value": "ACAMPAMENTO AVILMAR"
+            },
+            {
+                "label": "ANGICO GANGORRA",
+                "value": "ANGICO GANGORRA"
+            },
+            {
+                "label": "VENTANIA",
+                "value": "VENTANIA"
+            },
+            {
+                "label": "CAPIVARA",
+                "value": "CAPIVARA"
+            },
+            {
+                "label": "LAGES PONTE ALTA",
+                "value": "LAGES PONTE ALTA"
+            },
+            {
+                "label": "PORTEIRAS",
+                "value": "PORTEIRAS"
+            },
+            {
+                "label": "CABEÇADA",
+                "value": "CABEÇADA"
+            },
+            {
+                "label": "TINGUI",
+                "value": "TINGUI"
+            },
+            {
+                "label": "VARZEA DA CANA",
+                "value": "VARZEA DA CANA"
+            }
+        ]
     },
     {
-    "value": "CORREGO DE AREIA",
-    "label": "CORREGO DE AREIA"
+        "municipio": "GUARACIAMA",
+        "cod": "3128253",
+        "comunidades": [
+            {
+                "label": "BURITIZAL",
+                "value": "BURITIZAL"
+            },
+            {
+                "label": "MAE DOMINGA",
+                "value": "MAE DOMINGA"
+            },
+            {
+                "label": "CABECEIRA DO RIO DAS PEDRAS",
+                "value": "CABECEIRA DO RIO DAS PEDRAS"
+            },
+            {
+                "label": "CABECEIRA DO RIO DO FELIX",
+                "value": "CABECEIRA DO RIO DO FELIX"
+            },
+            {
+                "label": "CANA BRAVA",
+                "value": "CANA BRAVA"
+            },
+            {
+                "label": "COMUNIDADE DE VARGEM MIMOSA",
+                "value": "COMUNIDADE DE VARGEM MIMOSA"
+            },
+            {
+                "label": "COMUNIDADE DE RIO DAS PEDRAS II",
+                "value": "COMUNIDADE DE RIO DAS PEDRAS II"
+            },
+            {
+                "label": "BARREIRO DO CAMPO",
+                "value": "BARREIRO DO CAMPO"
+            },
+            {
+                "label": "COMUNIDADE DE SOBRAINHO",
+                "value": "COMUNIDADE DE SOBRAINHO"
+            },
+            {
+                "label": "ESTIVA",
+                "value": "ESTIVA"
+            },
+            {
+                "label": "BREJINHO",
+                "value": "BREJINHO"
+            }
+        ]
+    },
+    {
+        "municipio": "IBIAÍ",
+        "cod": "3129608",
+        "comunidades": [
+            {
+                "label": "CAPIM BRANCO",
+                "value": "CAPIM BRANCO"
+            },
+            {
+                "label": "SABOES - BREJINHO",
+                "value": "SABOES - BREJINHO"
+            },
+            {
+                "label": "PONTE",
+                "value": "PONTE"
+            },
+            {
+                "label": "RETIRO",
+                "value": "RETIRO"
+            },
+            {
+                "label": "SANTA CRUZ - TOCANTINS",
+                "value": "SANTA CRUZ - TOCANTINS"
+            },
+            {
+                "label": "BURITIZINHO",
+                "value": "BURITIZINHO"
+            },
+            {
+                "label": "MORRO DOS PORCOS",
+                "value": "MORRO DOS PORCOS"
+            },
+            {
+                "label": "BARREIRO DO CAMPO",
+                "value": "BARREIRO DO CAMPO"
+            },
+            {
+                "label": "CAATINGA",
+                "value": "CAATINGA"
+            }
+        ]
+    },
+    {
+        "municipio": "IBIRACATU",
+        "cod": "3129657",
+        "comunidades": [
+            {
+                "label": "SAO FELIPE",
+                "value": "SAO FELIPE"
+            },
+            {
+                "label": "BURITI",
+                "value": "BURITI"
+            },
+            {
+                "label": "JATOBA",
+                "value": "JATOBA"
+            },
+            {
+                "label": "SAO JOAO",
+                "value": "SAO JOAO"
+            },
+            {
+                "label": "CAPEBA",
+                "value": "CAPEBA"
+            },
+            {
+                "label": "BURITI II",
+                "value": "BURITI II"
+            },
+            {
+                "label": "TABOQUINHAS",
+                "value": "TABOQUINHAS"
+            }
+        ]
+    },
+    {
+        "municipio": "INDAIABIRA",
+        "cod": "3130655",
+        "comunidades": [
+            {
+                "label": "CURRAL NOVO",
+                "value": "CURRAL NOVO"
+            },
+            {
+                "label": "FAZENDA CAVADA",
+                "value": "FAZENDA CAVADA"
+            },
+            {
+                "label": "GAMELEIRA",
+                "value": "GAMELEIRA"
+            },
+            {
+                "label": "MUZELO",
+                "value": "MUZELO"
+            },
+            {
+                "label": "TAQUARIL",
+                "value": "TAQUARIL"
+            },
+            {
+                "label": "CANABRAVA I",
+                "value": "CANABRAVA I"
+            },
+            {
+                "label": "FAZENDA GRANDE",
+                "value": "FAZENDA GRANDE"
+            },
+            {
+                "label": "VEREDA DO ATOLEIRO",
+                "value": "VEREDA DO ATOLEIRO"
+            },
+            {
+                "label": "BARRA DE AREIA",
+                "value": "BARRA DE AREIA"
+            },
+            {
+                "label": "CAICARA",
+                "value": "CAICARA"
+            },
+            {
+                "label": "CANABRAVA",
+                "value": "CANABRAVA"
+            },
+            {
+                "label": "CATULE",
+                "value": "CATULE"
+            },
+            {
+                "label": "FAZENDA AREIA",
+                "value": "FAZENDA AREIA"
+            },
+            {
+                "label": "FAZENDA GADO BRAVO E LOBEIRO",
+                "value": "FAZENDA GADO BRAVO E LOBEIRO"
+            },
+            {
+                "label": "FAZENDA TOMBADOR",
+                "value": "FAZENDA TOMBADOR"
+            },
+            {
+                "label": "GAMELAS",
+                "value": "GAMELAS"
+            },
+            {
+                "label": "LAGOA DA PEDRA",
+                "value": "LAGOA DA PEDRA"
+            },
+            {
+                "label": "MARAVILHA",
+                "value": "MARAVILHA"
+            },
+            {
+                "label": "MOCAMBO",
+                "value": "MOCAMBO"
+            }
+        ]
+    },
+    {
+        "municipio": "ITACAMBIRA",
+        "cod": "3132008",
+        "comunidades": [
+            {
+                "label": "AREAO",
+                "value": "AREAO"
+            },
+            {
+                "label": "BOA SORTE",
+                "value": "BOA SORTE"
+            },
+            {
+                "label": "BARRA DO RIO PRETO",
+                "value": "BARRA DO RIO PRETO"
+            },
+            {
+                "label": "CRISPIM",
+                "value": "CRISPIM"
+            },
+            {
+                "label": "NOVA ESPERANCA",
+                "value": "NOVA ESPERANCA"
+            },
+            {
+                "label": "BOA VISTA",
+                "value": "BOA VISTA"
+            },
+            {
+                "label": "CORREGO DA ONCA",
+                "value": "CORREGO DA ONCA"
+            },
+            {
+                "label": "TOCOIOS",
+                "value": "TOCOIOS"
+            }
+        ]
+    },
+    {
+        "municipio": "ITACARAMBI",
+        "cod": "3132107",
+        "comunidades": [
+            {
+                "label": "ACAMPAMENTO SAO FRANCISCO",
+                "value": "ACAMPAMENTO SAO FRANCISCO"
+            },
+            {
+                "label": "SERRARIA",
+                "value": "SERRARIA"
+            },
+            {
+                "label": "VARZEA GRANDE",
+                "value": "VARZEA GRANDE"
+            },
+            {
+                "label": "RIACHO PAJEU - LOCALIDADE POÇO VERDE",
+                "value": "RIACHO PAJEU - LOCALIDADE POÇO VERDE"
+            },
+            {
+                "label": "SERIEMA",
+                "value": "SERIEMA"
+            },
+            {
+                "label": "ACAMPAMENTO CAMPOS",
+                "value": "ACAMPAMENTO CAMPOS"
+            }
+        ]
+    },
+    {
+        "municipio": "ITINGA",
+        "cod": "3134004",
+        "comunidades": [
+            {
+                "label": "CARRAPATO",
+                "value": "CARRAPATO"
+            },
+            {
+                "label": "SAO VICENTE",
+                "value": "SAO VICENTE"
+            },
+            {
+                "label": "CAMPINS",
+                "value": "CAMPINS"
+            },
+            {
+                "label": "CAMPO BELO",
+                "value": "CAMPO BELO"
+            },
+            {
+                "label": "HUMAITA",
+                "value": "HUMAITA"
+            },
+            {
+                "label": "PALMITO",
+                "value": "PALMITO"
+            },
+            {
+                "label": "PASMADO VENDINHA",
+                "value": "PASMADO VENDINHA"
+            },
+            {
+                "label": "AGUA BRANCA",
+                "value": "AGUA BRANCA"
+            },
+            {
+                "label": "AGUA FRIA",
+                "value": "AGUA FRIA"
+            },
+            {
+                "label": "CAMPO QUEIMADO",
+                "value": "CAMPO QUEIMADO"
+            },
+            {
+                "label": "JENIPAPO",
+                "value": "JENIPAPO"
+            },
+            {
+                "label": "LAGOA ESCURA",
+                "value": "LAGOA ESCURA"
+            },
+            {
+                "label": "LARANJEIRAS",
+                "value": "LARANJEIRAS"
+            },
+            {
+                "label": "MARIA PEREIRA",
+                "value": "MARIA PEREIRA"
+            },
+            {
+                "label": "CORREGO DOS VEADOS",
+                "value": "CORREGO DOS VEADOS"
+            },
+            {
+                "label": "PIAUI",
+                "value": "PIAUI"
+            },
+            {
+                "label": "TEIXEIRINHA",
+                "value": "TEIXEIRINHA"
+            },
+            {
+                "label": "ITINGUINHA",
+                "value": "ITINGUINHA"
+            }
+        ]
+    },
+    {
+        "municipio": "JANAÚBA",
+        "cod": "3135100",
+        "comunidades": [
+            {
+                "label": "JACARE GRANDE",
+                "value": "JACARE GRANDE"
+            },
+            {
+                "label": "ANGICO",
+                "value": "ANGICO"
+            },
+            {
+                "label": "BAIXA DA CANA",
+                "value": "BAIXA DA CANA"
+            },
+            {
+                "label": "MUQUEM",
+                "value": "MUQUEM"
+            },
+            {
+                "label": "SIMPLICIO",
+                "value": "SIMPLICIO"
+            },
+            {
+                "label": "BARREIRO DE DENTRO",
+                "value": "BARREIRO DE DENTRO"
+            },
+            {
+                "label": "BARRERAO",
+                "value": "BARRERAO"
+            },
+            {
+                "label": "MAROMBA",
+                "value": "MAROMBA"
+            },
+            {
+                "label": "BARROQUINHA",
+                "value": "BARROQUINHA"
+            }
+        ]
+    },
+    {
+        "municipio": "JANUÁRIA",
+        "cod": "3135209",
+        "comunidades": [
+            {
+                "label": "CATANDUVA",
+                "value": "CATANDUVA"
+            },
+            {
+                "label": "MARRECA",
+                "value": "MARRECA"
+            },
+            {
+                "label": "UMBURANA",
+                "value": "UMBURANA"
+            },
+            {
+                "label": "VARZEA DA CRUZ",
+                "value": "VARZEA DA CRUZ"
+            }
+        ]
+    },
+    {
+        "municipio": "JEQUITAÍ",
+        "cod": "3135605",
+        "comunidades": [
+            {
+                "label": "AGUA SUJA",
+                "value": "AGUA SUJA"
+            },
+            {
+                "label": "BURITI DE BAIXO",
+                "value": "BURITI DE BAIXO"
+            },
+            {
+                "label": "ESPIGAO DO BREJO",
+                "value": "ESPIGAO DO BREJO"
+            },
+            {
+                "label": "QUATIS",
+                "value": "QUATIS"
+            },
+            {
+                "label": "BOQUEIRAO",
+                "value": "BOQUEIRAO"
+            },
+            {
+                "label": "BURITI DO SANTANA",
+                "value": "BURITI DO SANTANA"
+            },
+            {
+                "label": "TERRA VERMELHA",
+                "value": "TERRA VERMELHA"
+            },
+            {
+                "label": "PALMEIRA",
+                "value": "PALMEIRA"
+            },
+            {
+                "label": "PAU DE FRUTA",
+                "value": "PAU DE FRUTA"
+            }
+        ]
+    },
+    {
+        "municipio": "JOSÉ GONÇALVES DE MINAS",
+        "cod": "3136520",
+        "comunidades": [
+            {
+                "label": "BARREIRO",
+                "value": "BARREIRO"
+            },
+            {
+                "label": "FARINHA SECA /DEPOSITO COMUNITARIO",
+                "value": "FARINHA SECA /DEPOSITO COMUNITARIO"
+            },
+            {
+                "label": "LIMEIRA /DEPOSITO COMUNITARIO",
+                "value": "LIMEIRA /DEPOSITO COMUNITARIO"
+            },
+            {
+                "label": "CATUTIBA /DEPOSITO COMUNITARIO",
+                "value": "CATUTIBA /DEPOSITO COMUNITARIO"
+            },
+            {
+                "label": "CONTENDAS /DEPOSITO COMINITARIO",
+                "value": "CONTENDAS /DEPOSITO COMINITARIO"
+            },
+            {
+                "label": "LIMEIRA /CAMPO",
+                "value": "LIMEIRA /CAMPO"
+            },
+            {
+                "label": "SAMAMBAIAS",
+                "value": "SAMAMBAIAS"
+            },
+            {
+                "label": "SAO BENTO / LAPINHA",
+                "value": "SAO BENTO / LAPINHA"
+            },
+            {
+                "label": "PAULINOS",
+                "value": "PAULINOS"
+            }
+        ]
+    },
+    {
+        "municipio": "JURAMENTO",
+        "cod": "3136801",
+        "comunidades": [
+            {
+                "label": "BARREIRINHO",
+                "value": "BARREIRINHO"
+            },
+            {
+                "label": "BOA VISTA",
+                "value": "BOA VISTA"
+            },
+            {
+                "label": "MANDURI",
+                "value": "MANDURI"
+            },
+            {
+                "label": "PRATA",
+                "value": "PRATA"
+            },
+            {
+                "label": "CAVA DO CURRAL",
+                "value": "CAVA DO CURRAL"
+            },
+            {
+                "label": "SANTANA MUNDO NOVO",
+                "value": "SANTANA MUNDO NOVO"
+            },
+            {
+                "label": "CAMPO GRANDE",
+                "value": "CAMPO GRANDE"
+            },
+            {
+                "label": "PAU DOLEO",
+                "value": "PAU DOLEO"
+            }
+        ]
+    },
+    {
+        "municipio": "JUVENÍLIA",
+        "cod": "3136959",
+        "comunidades": [
+            {
+                "label": "PROJETO DE ASSENTAMENTO OURO VERDE",
+                "value": "PROJETO DE ASSENTAMENTO OURO VERDE"
+            },
+            {
+                "label": "ASSENTAMENTO PARA TERRA",
+                "value": "ASSENTAMENTO PARA TERRA"
+            },
+            {
+                "label": "PROJ, ASSENTAMENTO TREVO",
+                "value": "PROJ, ASSENTAMENTO TREVO"
+            },
+            {
+                "label": "PROJ,ASSENTAMENTO GROTA DO ESCURO",
+                "value": "PROJ,ASSENTAMENTO GROTA DO ESCURO"
+            },
+            {
+                "label": "COMUNIDADE DE BANANEIRA",
+                "value": "COMUNIDADE DE BANANEIRA"
+            },
+            {
+                "label": "PROJ, ASSENTAMENTO DIVIDIDA / TABOLEIRINH",
+                "value": "PROJ, ASSENTAMENTO DIVIDIDA / TABOLEIRINH"
+            }
+        ]
+    },
+    {
+        "munipicipio": "Mamonas",
+        "cod": "3139250",
+        "comunidades": [
+            {
+                "label": "BARRA DO SITIO",
+                "value": "BARRA DO SITIO"
+            },
+            {
+                "label": "BARREIRO DO MATO",
+                "value": "BARREIRO DO MATO"
+            },
+            {
+                "label": "CABECEIRAS",
+                "value": "CABECEIRAS"
+            },
+            {
+                "label": "JUNCO",
+                "value": "JUNCO"
+            },
+            {
+                "label": "PAUS PRETO",
+                "value": "PAUS PRETO"
+            },
+            {
+                "label": "PINHAO",
+                "value": "PINHAO"
+            },
+            {
+                "label": "RIACHO FUNDO",
+                "value": "RIACHO FUNDO"
+            },
+            {
+                "label": "VARZEA DA CONCEIÇAO",
+                "value": "VARZEA DA CONCEIÇAO"
+            },
+            {
+                "label": "CAETANO",
+                "value": "CAETANO"
+            },
+            {
+                "label": "CARAIBAS DE CIMA",
+                "value": "CARAIBAS DE CIMA"
+            },
+            {
+                "label": "PEDRA REDONDA",
+                "value": "PEDRA REDONDA"
+            },
+            {
+                "label": "BARREIRO DA CRUZ",
+                "value": "BARREIRO DA CRUZ"
+            },
+            {
+                "label": "HAVANA",
+                "value": "HAVANA"
+            },
+            {
+                "label": "LIMOEIRO",
+                "value": "LIMOEIRO"
+            },
+            {
+                "label": "MELADA",
+                "value": "MELADA"
+            },
+            {
+                "label": "RIACHO DE AREIA",
+                "value": "RIACHO DE AREIA"
+            }
+        ]
+    },
+    {
+        "municipio": "MATO VERDE",
+        "cod": "3141009",
+        "comunidades": [
+            {
+                "label": "CORREGO FUNDO",
+                "value": "CORREGO FUNDO"
+            },
+            {
+                "label": "BARRA",
+                "value": "BARRA"
+            },
+            {
+                "label": "JUREMA",
+                "value": "JUREMA"
+            },
+            {
+                "label": "OLHOS D- AGUA 2",
+                "value": "OLHOS D- AGUA 2"
+            },
+            {
+                "label": "TANQUINHO",
+                "value": "TANQUINHO"
+            },
+            {
+                "label": "CRISTINO II",
+                "value": "CRISTINO II"
+            },
+            {
+                "label": "MELANCIAS",
+                "value": "MELANCIAS"
+            },
+            {
+                "label": "PAU BRANCO-ALAGADIÇO",
+                "value": "PAU BRANCO-ALAGADIÇO"
+            },
+            {
+                "label": "SITIO NOVO",
+                "value": "SITIO NOVO"
+            }
+        ]
+    },
+    {
+        "municipio": "MINAS NOVAS",
+        "cod": "3141801",
+        "comunidades": [
+            {
+                "label": "ESTIVA CAMPOS",
+                "value": "ESTIVA CAMPOS"
+            },
+            {
+                "label": "CORREGO CATUA",
+                "value": "CORREGO CATUA"
+            },
+            {
+                "label": "NOVA ESPERANÇA",
+                "value": "NOVA ESPERANÇA"
+            },
+            {
+                "label": "ANGICOS",
+                "value": "ANGICOS"
+            },
+            {
+                "label": "CURRAL VELHO",
+                "value": "CURRAL VELHO"
+            },
+            {
+                "label": "CURRALINHO",
+                "value": "CURRALINHO"
+            },
+            {
+                "label": "SAO JOSE DO CAPIVARI",
+                "value": "SAO JOSE DO CAPIVARI"
+            },
+            {
+                "label": "TAMANDUA",
+                "value": "TAMANDUA"
+            },
+            {
+                "label": "BEM POSTA DO IMBIRUÇU",
+                "value": "BEM POSTA DO IMBIRUÇU"
+            },
+            {
+                "label": "CANSANCAO",
+                "value": "CANSANCAO"
+            },
+            {
+                "label": "LAGOINHA",
+                "value": "LAGOINHA"
+            },
+            {
+                "label": "BURITI BOA VISTA",
+                "value": "BURITI BOA VISTA"
+            },
+            {
+                "label": "CAPELA",
+                "value": "CAPELA"
+            },
+            {
+                "label": "GROTA DO RANCHO",
+                "value": "GROTA DO RANCHO"
+            },
+            {
+                "label": "MACUCO",
+                "value": "MACUCO"
+            },
+            {
+                "label": "PINHEIRO",
+                "value": "PINHEIRO"
+            },
+            {
+                "label": "ARAUJO",
+                "value": "ARAUJO"
+            },
+            {
+                "label": "FORQUILHA",
+                "value": "FORQUILHA"
+            },
+            {
+                "label": "AREIAO",
+                "value": "AREIAO"
+            },
+            {
+                "label": "CORREGO DA HELENA",
+                "value": "CORREGO DA HELENA"
+            },
+            {
+                "label": "INACIO FELIX",
+                "value": "INACIO FELIX"
+            }
+        ]
+    },
+    {
+        "municipio": "MONTALVÂNIA",
+        "cod": "3142700",
+        "comunidades": [
+            {
+                "label": "AGUA BRANCA II",
+                "value": "AGUA BRANCA II"
+            },
+            {
+                "label": "JACARE",
+                "value": "JACARE"
+            },
+            {
+                "label": "CANOAS I E II",
+                "value": "CANOAS I E II"
+            }
+        ]
+    },
+    {
+        "municipio": "MONTE AZUL",
+        "cod": "3142908",
+        "comunidades": [
+            {
+                "label": "CACIMBAS",
+                "value": "CACIMBAS"
+            },
+            {
+                "label": "ANANAZEIRO",
+                "value": "ANANAZEIRO"
+            },
+            {
+                "label": "VALENTE",
+                "value": "VALENTE"
+            },
+            {
+                "label": "CAPOEIRA GRANDE",
+                "value": "CAPOEIRA GRANDE"
+            },
+            {
+                "label": "LAMDIM",
+                "value": "LAMDIM"
+            },
+            {
+                "label": "PAUS PRETRO DE MAMONAS",
+                "value": "PAUS PRETRO DE MAMONAS"
+            },
+            {
+                "label": "SAO PEDRO",
+                "value": "SAO PEDRO"
+            }
+        ]
+    },
+    {
+        "municipio": "MONTEZUMA",
+        "cod": "3143450",
+        "comunidades": [
+            {
+                "label": "BARREIRO",
+                "value": "BARREIRO"
+            },
+            {
+                "label": "LEDRO",
+                "value": "LEDRO"
+            },
+            {
+                "label": "VARGEM DAS SALINAS",
+                "value": "VARGEM DAS SALINAS"
+            },
+            {
+                "label": "VOLTA DO MORRO",
+                "value": "VOLTA DO MORRO"
+            },
+            {
+                "label": "AREIAO",
+                "value": "AREIAO"
+            },
+            {
+                "label": "BREJO",
+                "value": "BREJO"
+            },
+            {
+                "label": "MARACAIA 2",
+                "value": "MARACAIA 2"
+            },
+            {
+                "label": "SAO MODESTO",
+                "value": "SAO MODESTO"
+            },
+            {
+                "label": "TABUA",
+                "value": "TABUA"
+            },
+            {
+                "label": "CERCADO",
+                "value": "CERCADO"
+            },
+            {
+                "label": "ESTIVA",
+                "value": "ESTIVA"
+            },
+            {
+                "label": "MANDACARU",
+                "value": "MANDACARU"
+            },
+            {
+                "label": "MARACAIA 1",
+                "value": "MARACAIA 1"
+            },
+            {
+                "label": "SAO BARTOLOMEU 1",
+                "value": "SAO BARTOLOMEU 1"
+            },
+            {
+                "label": "SAO BARTOLOMEU 2",
+                "value": "SAO BARTOLOMEU 2"
+            }
+        ]
+    },
+    {
+        "municipio": "NINHEIRA",
+        "cod": "3144656",
+        "comunidades": [
+            {
+                "label": "BOA VISTA",
+                "value": "BOA VISTA"
+            },
+            {
+                "label": "LAGOINHA",
+                "value": "LAGOINHA"
+            },
+            {
+                "label": "SOSSEGO",
+                "value": "SOSSEGO"
+            },
+            {
+                "label": "BAIXA NOVA",
+                "value": "BAIXA NOVA"
+            },
+            {
+                "label": "MORRO DO OURO",
+                "value": "MORRO DO OURO"
+            },
+            {
+                "label": "BAIXAO",
+                "value": "BAIXAO"
+            },
+            {
+                "label": "LAGOA DE FORA",
+                "value": "LAGOA DE FORA"
+            },
+            {
+                "label": "ALAGADIÇO",
+                "value": "ALAGADIÇO"
+            },
+            {
+                "label": "LAGOA DO CEDRO",
+                "value": "LAGOA DO CEDRO"
+            }
+        ]
+    },
+    {
+        "municipio": "PAI PEDRO",
+        "cod": "3146552",
+        "comunidades": [
+            {
+                "label": "BARRA DO PACUI",
+                "value": "BARRA DO PACUI"
+            },
+            {
+                "label": "PICADA",
+                "value": "PICADA"
+            },
+            {
+                "label": "P,A,SANTA CLAUDIA",
+                "value": "P,A,SANTA CLAUDIA"
+            },
+            {
+                "label": "SALINAS V",
+                "value": "SALINAS V"
+            },
+            {
+                "label": "BELA VISTA",
+                "value": "BELA VISTA"
+            },
+            {
+                "label": "TAPERINHA",
+                "value": "TAPERINHA"
+            },
+            {
+                "label": "CANA BOLSA",
+                "value": "CANA BOLSA"
+            },
+            {
+                "label": "LAGOA VERDE",
+                "value": "LAGOA VERDE"
+            },
+            {
+                "label": "SALINAS BEIRA RIO",
+                "value": "SALINAS BEIRA RIO"
+            },
+            {
+                "label": "ATRAS DOS MORROS",
+                "value": "ATRAS DOS MORROS"
+            },
+            {
+                "label": "TABUA II",
+                "value": "TABUA II"
+            },
+            {
+                "label": "SERRA GRANDE",
+                "value": "SERRA GRANDE"
+            },
+            {
+                "label": "TABUA I",
+                "value": "TABUA I"
+            },
+            {
+                "label": "VARZEA DAS PEDRAS",
+                "value": "VARZEA DAS PEDRAS"
+            }
+        ]
+    },
+    {
+        "municipio": "PEDRAS DE MARIA DA CRUZ",
+        "cod": "3149150",
+        "comunidades": [
+            {
+                "label": "BOI MATEUS",
+                "value": "BOI MATEUS"
+            },
+            {
+                "label": "EXTREMA",
+                "value": "EXTREMA"
+            },
+            {
+                "label": "POÇAOZINHO",
+                "value": "POÇAOZINHO"
+            },
+            {
+                "label": "CORCUNDO",
+                "value": "CORCUNDO"
+            },
+            {
+                "label": "MANGAI",
+                "value": "MANGAI"
+            },
+            {
+                "label": "MORRO DO CHAPEU",
+                "value": "MORRO DO CHAPEU"
+            },
+            {
+                "label": "BARREIRO CERCADO",
+                "value": "BARREIRO CERCADO"
+            },
+            {
+                "label": "COM,DEUS VENCEREMOS",
+                "value": "COM,DEUS VENCEREMOS"
+            },
+            {
+                "label": "LAGOINHA",
+                "value": "LAGOINHA"
+            },
+            {
+                "label": "RIACHO DO BURITI",
+                "value": "RIACHO DO BURITI"
+            },
+            {
+                "label": "TORROES",
+                "value": "TORROES"
+            },
+            {
+                "label": "BAIXA D AGUA",
+                "value": "BAIXA D AGUA"
+            },
+            {
+                "label": "BOM SUCESSO",
+                "value": "BOM SUCESSO"
+            },
+            {
+                "label": "ARAME LISO",
+                "value": "ARAME LISO"
+            },
+            {
+                "label": "PADILHO",
+                "value": "PADILHO"
+            },
+            {
+                "label": "PALMEIRINHA",
+                "value": "PALMEIRINHA"
+            }
+        ]
+    },
+    {
+        "municipio": "PINTÓPOLIS",
+        "cod": "3150570",
+        "comunidades": [
+            {
+                "label": "BARREIRINHO",
+                "value": "BARREIRINHO"
+            },
+            {
+                "label": "ACARI",
+                "value": "ACARI"
+            },
+            {
+                "label": "ALEGRE",
+                "value": "ALEGRE"
+            },
+            {
+                "label": "ALVORADA",
+                "value": "ALVORADA"
+            },
+            {
+                "label": "JATOBA",
+                "value": "JATOBA"
+            },
+            {
+                "label": "LAVANDEIRA",
+                "value": "LAVANDEIRA"
+            },
+            {
+                "label": "PARA TERRA II",
+                "value": "PARA TERRA II"
+            },
+            {
+                "label": "PARA TERRA III",
+                "value": "PARA TERRA III"
+            },
+            {
+                "label": "SUSSUARANA",
+                "value": "SUSSUARANA"
+            },
+            {
+                "label": "VARGEM DE CANOAS",
+                "value": "VARGEM DE CANOAS"
+            },
+            {
+                "label": "VIEIRA",
+                "value": "VIEIRA"
+            },
+            {
+                "label": "CAPIM PUBO",
+                "value": "CAPIM PUBO"
+            },
+            {
+                "label": "QUATIS",
+                "value": "QUATIS"
+            }
+        ]
+    },
+    {
+        "municipio": "PIRAPORA",
+        "cod": "3151206",
+        "comunidades": [
+            {
+                "label": "ASSENTAMENTO JOSE BANDEIRA",
+                "value": "ASSENTAMENTO JOSE BANDEIRA"
+            }
+        ]
+    },
+    {
+        "municipio": "PONTO CHIQUE",
+        "cod": "3152131",
+        "comunidades": [
+            {
+                "label": "CARAIBAS",
+                "value": "CARAIBAS"
+            },
+            {
+                "label": "RUSSAO",
+                "value": "RUSSAO"
+            },
+            {
+                "label": "TANQUE",
+                "value": "TANQUE"
+            },
+            {
+                "label": "BOM JARDIM",
+                "value": "BOM JARDIM"
+            }
+        ]
+    },
+    {
+        "municipio": "PORTEIRINHA",
+        "cod": "3152204",
+        "comunidades": [
+            {
+                "label": "BARREIRO I",
+                "value": "BARREIRO I"
+            },
+            {
+                "label": "GERAISINHO",
+                "value": "GERAISINHO"
+            },
+            {
+                "label": "POCO GRANDE",
+                "value": "POCO GRANDE"
+            },
+            {
+                "label": "GANGORRA",
+                "value": "GANGORRA"
+            },
+            {
+                "label": "EXTREMA",
+                "value": "EXTREMA"
+            },
+            {
+                "label": "OLHOS DÁGUA DE CIMA",
+                "value": "OLHOS DÁGUA DE CIMA"
+            },
+            {
+                "label": "POCO DANTAS",
+                "value": "POCO DANTAS"
+            },
+            {
+                "label": "CALDEIRAOZINHO",
+                "value": "CALDEIRAOZINHO"
+            },
+            {
+                "label": "CEDRO",
+                "value": "CEDRO"
+            },
+            {
+                "label": "COCOS (RIO DOS COCOS)",
+                "value": "COCOS (RIO DOS COCOS)"
+            },
+            {
+                "label": "LAGOINHA",
+                "value": "LAGOINHA"
+            },
+            {
+                "label": "MALHADA DOS BOIS",
+                "value": "MALHADA DOS BOIS"
+            },
+            {
+                "label": "PAJEU I",
+                "value": "PAJEU I"
+            },
+            {
+                "label": "PARA I",
+                "value": "PARA I"
+            },
+            {
+                "label": "CARRASCAO",
+                "value": "CARRASCAO"
+            },
+            {
+                "label": "MALHADA BONITA",
+                "value": "MALHADA BONITA"
+            },
+            {
+                "label": "MUGANGA",
+                "value": "MUGANGA"
+            },
+            {
+                "label": "MUMBUCA",
+                "value": "MUMBUCA"
+            },
+            {
+                "label": "NOVO TANQUE",
+                "value": "NOVO TANQUE"
+            }
+        ]
+    },
+    {
+        "municipio": "RUBIM",
+        "cod": "3156601",
+        "comunidades": [
+            {
+                "label": "DUAS BARRAS",
+                "value": "DUAS BARRAS"
+            },
+            {
+                "label": "MIRANTES",
+                "value": "MIRANTES"
+            },
+            {
+                "label": "REVOLTA",
+                "value": "REVOLTA"
+            },
+            {
+                "label": "PEDRA PARDA",
+                "value": "PEDRA PARDA"
+            },
+            {
+                "label": "ASSENTAMENTO JERUSALEM",
+                "value": "ASSENTAMENTO JERUSALEM"
+            }
+        ]
+    },
+    {
+        "municipio": "SANTA CRUZ DE SALINAS",
+        "cod": "3157377",
+        "comunidades": [
+            {
+                "label": "CORREGO DO MEIO",
+                "value": "CORREGO DO MEIO"
+            },
+            {
+                "label": "CORREGO DOS BREJOS",
+                "value": "CORREGO DOS BREJOS"
+            },
+            {
+                "label": "ITINGUINHA E BARRA DA VEREDA",
+                "value": "ITINGUINHA E BARRA DA VEREDA"
+            },
+            {
+                "label": "PINDAIBA",
+                "value": "PINDAIBA"
+            },
+            {
+                "label": "SAO JOSE DA BOA VISTA",
+                "value": "SAO JOSE DA BOA VISTA"
+            },
+            {
+                "label": "BRASAMUNDO II",
+                "value": "BRASAMUNDO II"
+            },
+            {
+                "label": "BREJINHO",
+                "value": "BREJINHO"
+            },
+            {
+                "label": "CURRAL VELHO",
+                "value": "CURRAL VELHO"
+            },
+            {
+                "label": "TOME",
+                "value": "TOME"
+            },
+            {
+                "label": "TRACADAL",
+                "value": "TRACADAL"
+            },
+            {
+                "label": "BRASAMUNDO I",
+                "value": "BRASAMUNDO I"
+            },
+            {
+                "label": "CARRETAO",
+                "value": "CARRETAO"
+            },
+            {
+                "label": "SAO FELIX",
+                "value": "SAO FELIX"
+            },
+            {
+                "label": "VEREDA",
+                "value": "VEREDA"
+            },
+            {
+                "label": "PEDRA REDONDA I E II",
+                "value": "PEDRA REDONDA I E II"
+            }
+        ]
+    },
+    {
+        "municipio": "SANTA FÉ DE MINAS",
+        "cod": "3157609",
+        "comunidades": [
+            {
+                "label": "LAVADO",
+                "value": "LAVADO"
+            },
+            {
+                "label": "P,A, TAMBORIL",
+                "value": "P,A, TAMBORIL"
+            },
+            {
+                "label": "VARZEA ALEGRE",
+                "value": "VARZEA ALEGRE"
+            }
+        ]
+    },
+    {
+        "municipio": "SÃO JOÃO DAS MISSÕES",
+        "cod": "3162450",
+        "comunidades": [
+            {
+                "label": "ALDEIA PINDAIBA",
+                "value": "ALDEIA PINDAIBA"
+            },
+            {
+                "label": "ALDEIA RIACHO DOS BURITIS",
+                "value": "ALDEIA RIACHO DOS BURITIS"
+            },
+            {
+                "label": "ALDEIA BARREIRO PRETO",
+                "value": "ALDEIA BARREIRO PRETO"
+            },
+            {
+                "label": "ALDEIA SANTA CRUZ",
+                "value": "ALDEIA SANTA CRUZ"
+            },
+            {
+                "label": "ALDEIA RIACHO DO BREJO",
+                "value": "ALDEIA RIACHO DO BREJO"
+            },
+            {
+                "label": "ALDEIA SAO DOMINGOS",
+                "value": "ALDEIA SAO DOMINGOS"
+            },
+            {
+                "label": "ALDEIA TERRA PRETA",
+                "value": "ALDEIA TERRA PRETA"
+            },
+            {
+                "label": "ALDEIA CUSTODIO",
+                "value": "ALDEIA CUSTODIO"
+            },
+            {
+                "label": "ALDEIA PRATA",
+                "value": "ALDEIA PRATA"
+            }
+        ]
+    },
+    {
+        "municipio": "TAIOBEIRAS",
+        "cod": "3168002",
+        "comunidades": [
+            {
+                "label": "NOVATO",
+                "value": "NOVATO"
+            },
+            {
+                "label": "CERCADO",
+                "value": "CERCADO"
+            },
+            {
+                "label": "MARIANTE",
+                "value": "MARIANTE"
+            },
+            {
+                "label": "OLHOS DAGUA",
+                "value": "OLHOS DAGUA"
+            },
+            {
+                "label": "MANTEIGA",
+                "value": "MANTEIGA"
+            },
+            {
+                "label": "TABUA",
+                "value": "TABUA"
+            },
+            {
+                "label": "LAGOA DOURADA",
+                "value": "LAGOA DOURADA"
+            },
+            {
+                "label": "LAGOA GRANDE",
+                "value": "LAGOA GRANDE"
+            },
+            {
+                "label": "MARRUAZ",
+                "value": "MARRUAZ"
+            },
+            {
+                "label": "MATRONA",
+                "value": "MATRONA"
+            }
+        ]
+    },
+    {
+        "municipio": "UBAÍ",
+        "cod": "3170008",
+        "comunidades": [
+            {
+                "label": "TOURO",
+                "value": "TOURO"
+            },
+            {
+                "label": "AREIAO",
+                "value": "AREIAO"
+            },
+            {
+                "label": "CANOAS",
+                "value": "CANOAS"
+            },
+            {
+                "label": "ENGENHO",
+                "value": "ENGENHO"
+            },
+            {
+                "label": "SERRAGEM",
+                "value": "SERRAGEM"
+            },
+            {
+                "label": "VEREDA",
+                "value": "VEREDA"
+            },
+            {
+                "label": "CABECEIRA DA BANANEIRA",
+                "value": "CABECEIRA DA BANANEIRA"
+            },
+            {
+                "label": "SALTO",
+                "value": "SALTO"
+            },
+            {
+                "label": "BREJÃO",
+                "value": "BREJÃO"
+            },
+            {
+                "label": "BURITIS",
+                "value": "BURITIS"
+            },
+            {
+                "label": "COQUEIRO",
+                "value": "COQUEIRO"
+            },
+            {
+                "label": "ESBARRANCADO",
+                "value": "ESBARRANCADO"
+            },
+            {
+                "label": "GAMELEIRAS",
+                "value": "GAMELEIRAS"
+            },
+            {
+                "label": "PASSAGEM BRANCA",
+                "value": "PASSAGEM BRANCA"
+            },
+            {
+                "label": "AGROVILA",
+                "value": "AGROVILA"
+            }
+        ]
+    },
+    {
+        "municipio": "URUCUIA",
+        "cod": "3170529",
+        "comunidades": [
+            {
+                "label": "BOA SORTE",
+                "value": "BOA SORTE"
+            },
+            {
+                "label": "CACHOEIRA",
+                "value": "CACHOEIRA"
+            },
+            {
+                "label": "MORRINHOS",
+                "value": "MORRINHOS"
+            },
+            {
+                "label": "POÇOES",
+                "value": "POÇOES"
+            },
+            {
+                "label": "VEREDA GRANDE",
+                "value": "VEREDA GRANDE"
+            },
+            {
+                "label": "MATAO",
+                "value": "MATAO"
+            },
+            {
+                "label": "OLARIA",
+                "value": "OLARIA"
+            },
+            {
+                "label": "BONITO",
+                "value": "BONITO"
+            },
+            {
+                "label": "PEDRAS",
+                "value": "PEDRAS"
+            },
+            {
+                "label": "JUDAS",
+                "value": "JUDAS"
+            },
+            {
+                "label": "MIAO",
+                "value": "MIAO"
+            },
+            {
+                "label": "GAMELEIRA",
+                "value": "GAMELEIRA"
+            }
+        ]
+    },
+    {
+        "municipio": "VARGEM GRANDE DO RIO PARDO",
+        "cod": "3170651",
+        "comunidades": [
+            {
+                "label": "BRACO ESQUERDO",
+                "value": "BRACO ESQUERDO"
+            },
+            {
+                "label": "ENGENHO",
+                "value": "ENGENHO"
+            },
+            {
+                "label": "FAZENDA COCOS",
+                "value": "FAZENDA COCOS"
+            },
+            {
+                "label": "FAZENDA PAIAIA",
+                "value": "FAZENDA PAIAIA"
+            },
+            {
+                "label": "GAMELAS",
+                "value": "GAMELAS"
+            },
+            {
+                "label": "MATO ESCURO I",
+                "value": "MATO ESCURO I"
+            },
+            {
+                "label": "SITIO NOVO",
+                "value": "SITIO NOVO"
+            },
+            {
+                "label": "AGUA FRIA",
+                "value": "AGUA FRIA"
+            },
+            {
+                "label": "BURACOS",
+                "value": "BURACOS"
+            },
+            {
+                "label": "CACHOEIRA I",
+                "value": "CACHOEIRA I"
+            },
+            {
+                "label": "CACHOEIRA II",
+                "value": "CACHOEIRA II"
+            },
+            {
+                "label": "CANTINHO",
+                "value": "CANTINHO"
+            },
+            {
+                "label": "CATANDUVA",
+                "value": "CATANDUVA"
+            },
+            {
+                "label": "FAZENDA BREJO",
+                "value": "FAZENDA BREJO"
+            },
+            {
+                "label": "ASSENTAMENTO",
+                "value": "ASSENTAMENTO"
+            }
+        ]
+    },
+    {
+        "municipio": "VÁRZEA DA PALMA",
+        "cod": "3170800",
+        "comunidades": [
+            {
+                "label": "ASSENT, MAE D AGUA",
+                "value": "ASSENT, MAE D AGUA"
+            },
+            {
+                "label": "BANANAL DE CIMA",
+                "value": "BANANAL DE CIMA"
+            },
+            {
+                "label": "CACHOEIRA ANGICAL",
+                "value": "CACHOEIRA ANGICAL"
+            },
+            {
+                "label": "COMUNID, BOM JARDIM",
+                "value": "COMUNID, BOM JARDIM"
+            },
+            {
+                "label": "COMUNID,TAMBORIL",
+                "value": "COMUNID,TAMBORIL"
+            },
+            {
+                "label": "ASSENT, ROMPE DIA ",
+                "value": "ASSENT, ROMPE DIA"
+            }
+        ]
+    },
+    {
+        "municipio": "VARZELÂNDIA",
+        "cod": "3170909",
+        "comunidades": [
+            {
+                "label": "SERRA D AGUA",
+                "value": "SERRA D AGUA"
+            },
+            {
+                "label": "BARREIRO AZUL",
+                "value": "BARREIRO AZUL"
+            },
+            {
+                "label": "ORION",
+                "value": "ORION"
+            },
+            {
+                "label": "TABUAL DE BAIXO",
+                "value": "TABUAL DE BAIXO"
+            },
+            {
+                "label": "LAGOINHA I",
+                "value": "LAGOINHA I"
+            },
+            {
+                "label": "LAGOINHA II",
+                "value": "LAGOINHA II"
+            }
+        ]
+    },
+    {
+        "municipio": "VERDELÂNDIA",
+        "cod": "3171030",
+        "comunidades": [
+            {
+                "label": "RESSACA",
+                "value": "RESSACA"
+            },
+            {
+                "label": "BOM SUCESSO",
+                "value": "BOM SUCESSO"
+            },
+            {
+                "label": "CORGAO",
+                "value": "CORGAO"
+            },
+            {
+                "label": "MATA NOVA",
+                "value": "MATA NOVA"
+            },
+            {
+                "label": "BOM JARDIM",
+                "value": "BOM JARDIM"
+            },
+            {
+                "label": "LAGOA DE PEDRA",
+                "value": "LAGOA DE PEDRA"
+            },
+            {
+                "label": "LIMEIRA",
+                "value": "LIMEIRA"
+            },
+            {
+                "label": "SERRANA",
+                "value": "SERRANA"
+            },
+            {
+                "label": "VOLTA DA SERRA",
+                "value": "VOLTA DA SERRA"
+            },
+            {
+                "label": "SAPE",
+                "value": "SAPE"
+            },
+            {
+                "label": "AMARGOSO",
+                "value": "AMARGOSO"
+            },
+            {
+                "label": "VITORIA",
+                "value": "VITORIA"
+            }
+        ]
+    },
+    {
+        "municipio": "VEREDINHA",
+        "cod": "3171071",
+        "comunidades": [
+            {
+                "label": "SANTO ANTONIO",
+                "value": "SANTO ANTONIO"
+            },
+            {
+                "label": "SUCAVAO",
+                "value": "SUCAVAO"
+            },
+            {
+                "label": "GROTA DO ENGENHO",
+                "value": "GROTA DO ENGENHO"
+            },
+            {
+                "label": "LAJES",
+                "value": "LAJES"
+            },
+            {
+                "label": "MIRANTE",
+                "value": "MIRANTE"
+            },
+            {
+                "label": "BOIADA 2",
+                "value": "BOIADA 2"
+            },
+            {
+                "label": "CURTUME",
+                "value": "CURTUME"
+            },
+            {
+                "label": "MACAUBAS",
+                "value": "MACAUBAS"
+            },
+            {
+                "label": "MONTE ALEGRE",
+                "value": "MONTE ALEGRE"
+            },
+            {
+                "label": "CAQUENTE",
+                "value": "CAQUENTE"
+            },
+            {
+                "label": "CORREGO DO OURO",
+                "value": "CORREGO DO OURO"
+            },
+            {
+                "label": "TENDAS",
+                "value": "TENDAS"
+            },
+            {
+                "label": "RIBEIRAO VEREDINHA",
+                "value": "RIBEIRAO VEREDINHA"
+            },
+            {
+                "label": "ATOLEIRO",
+                "value": "ATOLEIRO"
+            },
+            {
+                "label": "GAMELEIRA",
+                "value": "GAMELEIRA"
+            },
+            {
+                "label": "RIBEIRAO DAS POSSES",
+                "value": "RIBEIRAO DAS POSSES"
+            }
+        ]
+    },
+    {
+        "municipio": "VIRGEM DA LAPA",
+        "cod": "3171600",
+        "comunidades": [
+            {
+                "label": "MORRINHOS",
+                "value": "MORRINHOS"
+            },
+            {
+                "label": "BUGRE",
+                "value": "BUGRE"
+            },
+            {
+                "label": "BELA VISTA (SANTANA)",
+                "value": "BELA VISTA (SANTANA)"
+            },
+            {
+                "label": "COQUEIROS",
+                "value": "COQUEIROS"
+            },
+            {
+                "label": "CURRAL NOVO",
+                "value": "CURRAL NOVO"
+            },
+            {
+                "label": "LAGOA DA MANGA",
+                "value": "LAGOA DA MANGA"
+            },
+            {
+                "label": "TAMANDUA",
+                "value": "TAMANDUA"
+            },
+            {
+                "label": "BURITI",
+                "value": "BURITI"
+            },
+            {
+                "label": "JEQUITIBA",
+                "value": "JEQUITIBA"
+            },
+            {
+                "label": "MALHADA BRANCA",
+                "value": "MALHADA BRANCA"
+            },
+            {
+                "label": "MASSACARA",
+                "value": "MASSACARA"
+            },
+            {
+                "label": "OURO FINO",
+                "value": "OURO FINO"
+            },
+            {
+                "label": "PAREDAO",
+                "value": "PAREDAO"
+            },
+            {
+                "label": "VAI VI",
+                "value": "VAI VI"
+            },
+            {
+                "label": "ALMAS",
+                "value": "ALMAS"
+            },
+            {
+                "label": "BARBOSA",
+                "value": "BARBOSA"
+            },
+            {
+                "label": "BURU",
+                "value": "BURU"
+            },
+            {
+                "label": "CHACARA",
+                "value": "CHACARA"
+            },
+            {
+                "label": "GRAVATA",
+                "value": "GRAVATA"
+            },
+            {
+                "label": "ONÇA",
+                "value": "ONÇA"
+            },
+            {
+                "label": "ROSARIO DE CIMA",
+                "value": "ROSARIO DE CIMA"
+            },
+            {
+                "label": "SAO JOSE",
+                "value": "SAO JOSE"
+            }
+        ]
     }
 ]

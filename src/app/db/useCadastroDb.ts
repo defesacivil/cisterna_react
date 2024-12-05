@@ -11,6 +11,7 @@ export type CadatroDB = {
     localiza: string
     cpf: string
     dtNasc: string
+    tel: string
     cadUnico: string
     qtdPessoa: string
     renda: string
@@ -28,7 +29,11 @@ export type CadatroDB = {
     testadaDispParteFogao: string
     atendPipa: string
     outroAtendPipa: string
-    respAtendPipa: string
+    respAtDefesaCivil:string
+    respAtExercito:string
+    respAtParticular:string
+    respAtPrefeitura:string
+    respAtOutros:string
     outrObs: string
     nomeAgente: string
     cpfAgente: string
@@ -59,6 +64,7 @@ export function useCadastroDb() {
                 localiza,
                 cpf,
                 dtNasc,
+                tel,
                 cadUnico,
                 qtdPessoa,
                 renda,
@@ -76,7 +82,11 @@ export function useCadastroDb() {
                 testadaDispParteFogao,
                 atendPipa,
                 outroAtendPipa,
-                respAtendPipa,
+                respAtDefesaCivil,
+                respAtExercito,
+                respAtParticular,
+                respAtPrefeitura,
+                respAtOutros,
                 outrObs,
                 nomeAgente,
                 cpfAgente,
@@ -87,6 +97,7 @@ export function useCadastroDb() {
                 $localiza,
                 $cpf,
                 $dtNasc,
+                $tel,
                 $cadUnico,
                 $qtdPessoa,
                 $renda,
@@ -104,7 +115,11 @@ export function useCadastroDb() {
                 $testadaDispParteFogao,
                 $atendPipa,
                 $outroAtendPipa,
-                $respAtendPipa,
+                $respAtDefesaCivil,
+                $respAtExercito,
+                $respAtParticular,
+                $respAtPrefeitura,
+                $respAtOutros,
                 $outrObs,
                 $nomeAgente,
                 $cpfAgente,
@@ -121,6 +136,7 @@ export function useCadastroDb() {
                 $localiza: data.localiza,
                 $cpf: data.cpf,
                 $dtNasc: data.dtNasc,
+                $tel: data.tel,
                 $cadUnico: data.cadUnico,
                 $qtdPessoa: data.qtdPessoa,
                 $renda: data.renda,
@@ -138,7 +154,11 @@ export function useCadastroDb() {
                 $testadaDispParteFogao: data.testadaDispParteFogao,
                 $atendPipa: data.atendPipa,
                 $outroAtendPipa: data.outroAtendPipa,
-                $respAtendPipa: data.respAtendPipa,
+                $respAtDefesaCivil: data.respAtDefesaCivil,
+                $respAtExercito: data.respAtExercito,
+                $respAtParticular: data.respAtParticular,
+                $respAtPrefeitura: data.respAtPrefeitura,
+                $respAtOutros: data.respAtOutros,
                 $outrObs: data.outrObs,
                 $nomeAgente: data.nomeAgente,
                 $cpfAgente: data.cpfAgente,
@@ -197,6 +217,7 @@ export function useCadastroDb() {
                 localiza        =  $localiza,
                 cpf             =  $cpf,
                 dtNasc          =  $dtNasc,
+                tel          =  $tel,
                 cadUnico        =  $cadUnico,
                 qtdPessoa       =  $qtdPessoa,
                 renda           =  $renda,
@@ -214,7 +235,11 @@ export function useCadastroDb() {
                 testadaDispParteFogao =  $testadaDispParteFogao,
                 atendPipa       =  $atendPipa,
                 outroAtendPipa  =  $outroAtendPipa,
-                respAtendPipa   =  $respAtendPipa,
+                respAtDefesaCivil = $respAtDefesaCivil
+                respAtExercito = $respAtExercito
+                respAtParticular = $respAtParticular
+                respAtPrefeitura = $respAtPrefeitura
+                respAtOutros = $respAtOutros
                 outrObs         =  $outrObs,
                 nomeAgente      =  $nomeAgente,
                 cpfAgente       =  $cpfAgente,
@@ -233,6 +258,7 @@ export function useCadastroDb() {
                 $localiza: data.localiza,
                 $cpf: data.cpf,
                 $dtNasc: data.dtNasc,
+                $tel: data.tel,
                 $cadUnico: data.cadUnico,
                 $qtdPessoa: data.qtdPessoa,
                 $renda: data.renda,
@@ -250,7 +276,11 @@ export function useCadastroDb() {
                 $testadaDispParteFogao: data.testadaDispParteFogao,
                 $atendPipa: data.atendPipa,
                 $outroAtendPipa: data.outroAtendPipa,
-                $respAtendPipa: data.respAtendPipa,
+                $respAtDefesaCivil: data.respAtDefesaCivil,
+                $respAtExercito: data.respAtExercito,
+                $respAtParticular: data.respAtParticular,
+                $respAtPrefeitura: data.respAtPrefeitura,
+                $respAtOutros: data.respAtOutros,
                 $outrObs: data.outrObs,
                 $nomeAgente: data.nomeAgente,
                 $cpfAgente: data.cpfAgente,
