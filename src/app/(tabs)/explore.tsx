@@ -1,22 +1,17 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform, Text, View, TextInput, TouchableOpacity, FlatList, TextInputComponent, Alert, Pressable, Button} from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Alert, Button, Text } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { StatusBar } from 'expo-status-bar';
-import ImagePickerScreen from '@/components/Fotos';
-import * as ImagePicker from 'expo-image-picker';
 import MaskInput, { Masks } from 'react-native-mask-input';
-import { SQLiteProvider } from 'expo-sqlite';
-import { initializaDb } from '../db/db';
-import { CadatroDB, useCadastroDb } from '../db/useCadastroDb';
+import { useCadastroDb } from '../db/useCadastroDb';
 import RNPickerSelect from 'react-native-picker-select';
 import * as Location from 'expo-location';
-import { Tabs, useGlobalSearchParams, useLocalSearchParams } from 'expo-router';
+import { useGlobalSearchParams } from 'expo-router';
 
 import { useRouter } from 'expo-router';
-import { NativeStatement } from 'expo-sqlite/build/NativeStatement';
 import Checkbox from 'expo-checkbox';
 import Modal from 'react-native-modal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -112,12 +107,28 @@ export default function () {
   const [isChRespAtPipaOutros, setChRespAtPipaOutros] = useState(false);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [moradiaOutrosVisivel, setMoradiaOutrosVisivel] = useState(false);
+  const [tpCoberturaOutVisivel, setTpCoberturaOutVisivel] = useState(false);
+  const [existFogaoLenhaVisivel, setExistFogaoLenhaVisivel] = useState(false);
+  const [atendPipaOutroVisivel, setAtendPipaOutroVisivel] = useState(false);
 
   const cadastrodb = useCadastroDb()
 
-  console.log(getUserData());
 
   const [errorMsg, setErrorMsg] = useState(null);
+
+
+  /** pegar dados sessao usuario  */
+  const getDataUser = async () => {
+    try {
+      const value = await AsyncStorage.getItem('user');
+      return value;
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  //console.log(getDataUser);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -144,9 +155,47 @@ export default function () {
         return;
       }
       let localiza = await Location.getCurrentPositionAsync({});
-      setLocaliza("lat: "+localiza.coords.latitude+" Long: "+localiza.coords.longitude);
+      setLocaliza("lat: " + localiza.coords.latitude + " Long: " + localiza.coords.longitude);
     })();
-}
+  }
+
+
+  /* Outros moradia visivel */
+  function isMoradiaOutroVisivel(tp: string) {
+    if (tp === 'outros') {
+      setMoradiaOutrosVisivel(true);
+    } else {
+      setMoradiaOutrosVisivel(false)
+    }
+  }
+
+  /* Outros tipo cobertura visivel */
+  function isTpCoberturaOutroVisivel(tp: string) {
+    if (tp === 'outros') {
+      setTpCoberturaOutVisivel(true);
+    } else {
+      setTpCoberturaOutVisivel(false)
+    }
+  }
+
+  /* Outros Existe fogao a lenha visivel */
+  function isExistFogaoVisivel(tp: string) {
+    console.log(tp)
+    if (tp == '1') {
+      setExistFogaoLenhaVisivel(true);
+    } else {
+      setExistFogaoLenhaVisivel(false)
+    }
+  }
+
+  /* outro Atendimenti pipa */
+  function isAtendPipaOutroVisivel(tp: string) {
+    if (tp === '1') {
+      setAtendPipaOutroVisivel(true);
+    } else {
+      setAtendPipaOutroVisivel(false)
+    }
+  }
 
   // Get location 
   useEffect(() => {
@@ -244,6 +293,17 @@ export default function () {
     }
   }, [param_id]);
 
+  // getDataUser
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await getDataUser();
+      setNomeAgente(JSON.parse(user)[0])
+      setCpfAgente(JSON.parse(user)[1])
+      setNomeEng(JSON.parse(user)[2])
+      setCreaEng(JSON.parse(user)[3])
+    }
+    fetchData();
+  }, []);
 
   const navigateToSettings = (cpf2: String, id) => {
     const cpf1 = cpf2.replaceAll(`.`, '').replace(`-`, '')
@@ -472,14 +532,6 @@ export default function () {
     }
   }
 
-
-
-  // const onValueChange = (value) => {
-  //   setSelectedComunidade(value);
-
-  // };
-
-  //console.log(LocationComponent.toString())
   return (
 
     <ParallaxScrollView
@@ -506,7 +558,7 @@ export default function () {
                 setMunicipio(value)
                 setListComunidade(value)
               }
-            }
+              }
               value={municipio}
               items={dropMunicipio}
               placeholder={{ label: 'Select o Município..', value: '' }}
@@ -517,8 +569,8 @@ export default function () {
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
               onValueChange={(value) => {
-                  setComunidade(value)
-                }
+                setComunidade(value)
+              }
               }
               value={comunidade}
               items={comunidades}
@@ -531,7 +583,7 @@ export default function () {
             maxLength={50} value={endereco} />
 
           <Text style={styles1.label}>Localização :</Text>
-          <TextInput style={styles1.inputRo} value={localiza} onChangeText={setLocaliza}/>
+          <TextInput style={styles1.inputRo} value={localiza} onChangeText={setLocaliza} />
           <TouchableOpacity
             style={styles1.button}
             onPress={toggleModal}>
@@ -544,12 +596,12 @@ export default function () {
 
 
           <Text style={styles1.label}>Nome Morador : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
-          <TextInput style={styles1.input}  keyboardType={'default'} clearButtonMode="always"
+          <TextInput style={styles1.input} keyboardType={'default'} clearButtonMode="always"
             onChangeText={setNome} value={nome} maxLength={40} />
 
           <Text style={styles1.label}>CPF - do Morador : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
-          style={styles1.input}
+            style={styles1.input}
             value={cpf}
             onChangeText={(masked, unmasked) => {
               setCpf(masked); // you can use the unmasked value as well
@@ -560,7 +612,7 @@ export default function () {
 
           <Text style={styles1.label}>Data Nascimento : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
-          style={styles1.input}
+            style={styles1.input}
             value={dtNasc}
             onChangeText={(masked, unmasked) => {
               setDtNasc(masked); // you can use the unmasked value as well
@@ -572,7 +624,7 @@ export default function () {
           {/* Telefone */}
           <Text style={styles1.label}>Telefone : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
-          style={styles1.input}
+            style={styles1.input}
             value={tel}
             onChangeText={(masked, unmasked) => {
               setTel(masked); // you can use the unmasked value as well
@@ -594,7 +646,7 @@ export default function () {
 
           <Text style={styles1.label} >Renda familiar : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
-          style={styles1.input}
+            style={styles1.input}
             value={String(renda)}
             onChangeText={(masked, unmasked) => {
               setRenda(masked); // you can use the unmasked value as well
@@ -606,18 +658,20 @@ export default function () {
           <Text style={styles1.label}>Tipo de Moradia <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
-              onValueChange={(value) => [setSelectedValue(value), setMoradia(value)]}
+              onValueChange={(value) => [setSelectedValue(value), setMoradia(value), isMoradiaOutroVisivel(value)]}
               value={moradia}
               items={data_moradia}
               placeholder={{ label: 'Tipo de Moradia..', value: '' }}
             />
           </View>
 
-          <Text style={styles1.label}>Outros Descrever :</Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
-            onChangeText={setOutroMoradia} value={outroMoradia} maxLength={120} />
-
-
+          {moradiaOutrosVisivel && (
+            <>
+              <Text style={styles1.label}>Outros Descrever :</Text>
+              <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
+                onChangeText={setOutroMoradia} value={outroMoradia} maxLength={120} />
+            </>
+          )}
           <Text style={styles1.title1}>Caracterização do imóvel</Text>
 
 
@@ -658,17 +712,22 @@ export default function () {
           <Text style={styles1.label}>Tipo de cobertura do imóvel:</Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
-              onValueChange={(value) => [setSelectedValue(value), setCoberturaTelhado(value)]}
+              onValueChange={(value) => [setSelectedValue(value), setCoberturaTelhado(value), isTpCoberturaOutroVisivel(value)]}
               value={coberturaTelhado}
               items={data_cobertura}
               placeholder={{ label: 'Tipo de Cobertura..', value: '' }}
             />
           </View>
 
-          <Text style={styles1.label}>Outros Descrever:</Text>
-          <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
-            onChangeText={setCobertOutros} maxLength={120}
-            value={coberturaOutros} />
+          {tpCoberturaOutVisivel && (
+            <>
+              <Text style={styles1.label}>Outros Descrever:</Text>
+              <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
+                onChangeText={setCobertOutros} maxLength={120}
+                value={coberturaOutros} />
+
+            </>
+          )}
 
 
           <Text style={styles1.title1}>Dados Complementares</Text>
@@ -677,7 +736,7 @@ export default function () {
           <Text style={styles1.label}>Existe fogão a lenha?  : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
-              onValueChange={(value) => [setSelectedValue(value), setExisteFogaoLenha(value)]}
+              onValueChange={(value) => [setSelectedValue(value), setExisteFogaoLenha(value), isExistFogaoVisivel(value)]}
               value={existeFogaoLenha}
               items={[{
                 "label": "Não",
@@ -691,6 +750,8 @@ export default function () {
             />
           </View>
 
+          {existFogaoLenhaVisivel && (
+          <>
           <Text style={styles1.label}>Medida do telhado desconsiderando a área do fogão à lenha(m2): <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'}
             clearButtonMode="always" onChangeText={setMedidaTelhadoAreaFogao} maxLength={5}
@@ -700,12 +761,14 @@ export default function () {
           <TextInput style={styles1.input} placeholder="" keyboardType={'decimal-pad'}
             clearButtonMode="always" onChangeText={setTestadaDispParteFogao} maxLength={5}
             value={testadaDispParteFogao} />
+          </>
+          )}
 
 
           <Text style={styles1.label}>Atendimento por caminhão Pipa ?: <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
             <RNPickerSelect
-              onValueChange={(value) => [setSelectedValue(value), setAtendPipa(value)]}
+              onValueChange={(value) => [setSelectedValue(value), setAtendPipa(value), isAtendPipaOutroVisivel(value)]}
               value={atendPipa}
               items={[{
                 "label": "Não",
@@ -719,6 +782,8 @@ export default function () {
             />
           </View>
 
+          {atendPipaOutroVisivel && (
+          <>
           <Text style={styles1.label}>Órgão responsável pelo atendimento com caminhão Pipa : *</Text>
           <View style={{ borderWidth: 1, borderColor: 'silver', borderRadius: 4 }}>
 
@@ -745,7 +810,7 @@ export default function () {
               <Text style={styles1.paragraph}>Prefeitura</Text>
             </View>
 
-            {/* Item CK Outros */}
+            {/* Item             } CK Outros */}
             <View style={styles1.section}>
               <Checkbox style={styles1.checkbox} value={isChRespAtPipaOutros} onValueChange={setChRespAtPipaOutros} />
               <Text style={styles1.paragraph}>Outros</Text>
@@ -756,20 +821,20 @@ export default function () {
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
             onChangeText={setOutroAtendPipa} maxLength={120}
             value={outroAtendPipa} />
+            </>
+            )}
 
           <Text style={styles1.label}>Identificação dos Agentes :</Text>
 
           <Text style={styles1.label}>Nome do Agente : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
             onChangeText={setNomeAgente} maxLength={50}
-            value={() => {
-              (nomeAgente) ? nomeAgente : getUserData1[0].length == 0}
-             }
-              />
+            value={nomeAgente}
+          />
 
           <Text style={styles1.label}>CPF do Agente : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <MaskInput
-          style={styles1.input}
+            style={styles1.input}
             value={cpfAgente}
             onChangeText={(masked, unmasked) => {
               setCpfAgente(masked); // you can use the unmasked value as well
@@ -798,20 +863,20 @@ export default function () {
             onPress={valida}>
             <Text style={styles1.buttonText}>{funcBotao}</Text>
           </TouchableOpacity>
-        
-        
+
+
         </View>
 
         <StatusBar style="light" />
 
-      {/* Modal renovar Lat Long */}
-      <Modal isVisible={isModalVisible}>
-        <View style={styles1.modalContent}>
-          <Text>Are you sure you want to proceed?</Text>
-          <Button title="Confirm" onPress={handleConfirm} />
-          <Button title="Cancel" onPress={handleCancel} />
-        </View>
-      </Modal>
+        {/* Modal renovar Lat Long */}
+        <Modal isVisible={isModalVisible}>
+          <View style={styles1.modalContent}>
+            <Text>Are you sure you want to proceed?</Text>
+            <Button title="Confirm" onPress={handleConfirm} />
+            <Button title="Cancel" onPress={handleCancel} />
+          </View>
+        </Modal>
 
 
       </View>
@@ -853,7 +918,7 @@ const styles = StyleSheet.create({
 const styles1 = StyleSheet.create({
   container: {
     margin: 0,
-    backgroundColor: {background},
+    backgroundColor: { background },
 
     // flex: 2,
     // backgroundColor: '#D93600',
@@ -878,6 +943,7 @@ const styles1 = StyleSheet.create({
   input: {
     marginTop: 10,
     height: 60,
+    paddingLeft: 5,
     backgroundColor: '#ADD8E6',
     borderRadius: 5,
     paddingHorizontal: 0,

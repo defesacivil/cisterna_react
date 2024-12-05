@@ -13,31 +13,33 @@ export default function HomeScreen() {
   const [cpfAgente, setCpfAgente] = useState("");
   const [nomeEng, setNomeEng] = useState("");
   const [creaEng, setCreaEng] = useState("");
+  const [btnEntrarVisivel, setBtnEntrarVisivel] = useState(true);
 
-  function salvarSession(data: []){
-      const storeData = async () => {
-        try {
-          await AsyncStorage.setItem('user',
-            JSON.stringify(data));
-        } catch (e) {
-          console.log(e)
-        }
-      };
-      return storeData;
+  function salvarSession(data: []) {
+    const storeData = async () => {
+      try {
+        await AsyncStorage.setItem('user',
+          JSON.stringify(data));
+      } catch (e) {
+        console.log(e)
+      }
+    };
+    return storeData;
   }
 
   const getDataUser = async () => {
     try {
-      const value = await AsyncStorage.getItem('user');
+      const value = await AsyncStorage.getItem('user')
       return value;
     } catch (e) {
-      // error reading value
+      console.error('error ao buscar ', e)
     }
   };
 
-  const dataUser = getDataUser();
 
-  
+
+
+
   useEffect(() => {
     const createDirectory = async () => {
       const directoryUri = FileSystem.documentDirectory + 'opseca';
@@ -56,10 +58,22 @@ export default function HomeScreen() {
   }, []);
 
   useEffect(() => {
-    console.log(getDataUser[0])
-    setNomeAgente(getDataUser[0])
-
+    const fetchData = async () => {
+      const user = await getDataUser();
+      if (user) {
+        setNomeAgente(JSON.parse(user)[0])
+        setCpfAgente(JSON.parse(user)[1])
+        setNomeEng(JSON.parse(user)[2])
+        setCreaEng(JSON.parse(user)[3])
+        setBtnEntrarVisivel(true)
+      } else {
+        setBtnEntrarVisivel(true)
+      }
+    }
+    fetchData();
   }, []);
+
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "", dark: "#1D3D47" }}
@@ -130,11 +144,12 @@ export default function HomeScreen() {
         <Text style={styles.label}>CREA</Text>
         <TextInput style={styles.input} value={creaEng} onChangeText={setCreaEng} />
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={salvarSession([nomeAgente, cpfAgente, nomeEng, creaEng])}>
-        <Text style={styles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
+      {btnEntrarVisivel && (
+        <TouchableOpacity
+          style={styles.button}
+          onPress={salvarSession([nomeAgente, cpfAgente, nomeEng, creaEng])}>
+          <Text style={styles.buttonText}>Entrar</Text>
+        </TouchableOpacity>)}
     </ParallaxScrollView>
   )
 }
@@ -162,8 +177,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20,
 
-  }, input: {
+  },
+  input: {
     margin: 5,
+    paddingLeft: 5,
     height: 50,
     backgroundColor: '#ADD8E6',
     borderRadius: 5,
