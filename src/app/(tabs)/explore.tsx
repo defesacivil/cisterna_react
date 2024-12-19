@@ -22,7 +22,7 @@ const dropComunidade = require('../assetdata/comunidade.json');
 const data_moradia = require('../assetdata/moradia.json');
 const data_cobertura = require('../assetdata/cobertura.json');
 
-let background = "";
+let background = "#ffffff";
 
 export default function () {
 
@@ -30,7 +30,7 @@ export default function () {
 
   var params = useGlobalSearchParams();
 
-  var param_id = (params.id) ? params.id : "";
+  var param_id = (params.id) ? params.id : null;
 
   const dat =
   {
@@ -68,14 +68,14 @@ export default function () {
   const [endereco, setEndereco] = useState("");
   const [localiza, setLocaliza] = useState("");
 
-  const [id, setId] = useState(param_id);
+  const [id, setId] = useState(Number(param_id));
   const [nome, setNome] = useState("");
-  const [cpf, setCpf] = useState(params.cpf);
+  const [cpf, setCpf] = useState(String(params.cpf));
   const [dtNasc, setDtNasc] = useState("");
   const [tel, setTel] = useState("");
   const [cadUnico, setCadUnico] = useState("");
   const [qtdPessoa, setQtdPessoa] = useState("");
-  const [renda, setRenda] = useState(0);
+  const [renda, setRenda] = useState("0");
   const [moradia, setMoradia] = useState("");
   const [outroMoradia, setOutroMoradia] = useState("");
 
@@ -88,8 +88,8 @@ export default function () {
   const [coberturaOutros, setCobertOutros] = useState("");
 
   const [existeFogaoLenha, setExisteFogaoLenha] = useState("0");
-  const [medidaTelhadoAreaFogao, setMedidaTelhadoAreaFogao] = useState("");
-  const [testadaDispParteFogao, setTestadaDispParteFogao] = useState("");
+  const [medidaTelhadoAreaFogao, setMedidaTelhadoAreaFogao] = useState("0");
+  const [testadaDispParteFogao, setTestadaDispParteFogao] = useState("0");
   const [atendPipa, setAtendPipa] = useState("0");
   const [outroAtendPipa, setOutroAtendPipa] = useState("");
   const [outrObs, setOutrObs] = useState("");
@@ -100,11 +100,11 @@ export default function () {
   const [creaEng, setCreaEng] = useState("");
   const [funcBotao, setFuncBotao] = useState("");
 
-  const [isChRespAtPipaDefesaCivil, setChRespAtPipaDefesaCivil] = useState(false);
-  const [isChRespAtPipaExercito, setChRespAtPipaExercito] = useState(false);
-  const [isChRespAtPipaParticular, setChRespAtPipaParticular] = useState(false);
-  const [isChRespAtPipaPrefeitura, setChRespAtPipaPrefeitura] = useState(false);
-  const [isChRespAtPipaOutros, setChRespAtPipaOutros] = useState(false);
+  const [respAtDefesaCivil, setRespAtDefesaCivil]= useState(false);
+  const [respAtExercito,    setRespAtExercito]   = useState(false);
+  const [respAtParticular,  setRespAtParticular] = useState(false);
+  const [respAtPrefeitura,  setRespAtPrefeitura] = useState(false);
+  const [respAtOutros,      setRespAtOutros]      = useState(false);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [moradiaOutrosVisivel, setMoradiaOutrosVisivel] = useState(false);
@@ -115,7 +115,7 @@ export default function () {
   const cadastrodb = useCadastroDb()
 
 
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
 
 
   /** pegar dados sessao usuario  */
@@ -124,11 +124,11 @@ export default function () {
       const value = await AsyncStorage.getItem('user');
       return value;
     } catch (e) {
-      // error reading value
+      console.log(e+"rror reading value")
     }
   };
 
-  //console.log(getDataUser);
+  //console.log(getDataUser());
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -180,7 +180,7 @@ export default function () {
 
   /* Outros Existe fogao a lenha visivel */
   function isExistFogaoVisivel(tp: string) {
-    console.log(tp)
+    //console.log(tp)
     if (tp == '1') {
       setExistFogaoLenhaVisivel(true);
     } else {
@@ -208,9 +208,7 @@ export default function () {
       background = "#87CEFA";
 
       searchById(Number(param_id)).then(async dados => {
-        //console.log(dados?.renda)
         if (dados != null) {
-          console.log(dados.localiza)
 
           setId(dados.id);
           setMunicipio(dados.municipio);
@@ -223,7 +221,7 @@ export default function () {
           setTel(dados.tel);
           setCadUnico(dados.cadUnico);
           setQtdPessoa(dados.qtdPessoa.toString()),
-            setRenda(dados.renda.toString());
+          setRenda(dados.renda),
           setMoradia(dados.moradia);
           setOutroMoradia(dados.outroMoradia);
           setCompTelhado(dados.compTelhado.toString());
@@ -234,15 +232,15 @@ export default function () {
           setCoberturaTelhado(dados.coberturaTelhado);
           setCobertOutros(dados.coberturaOutros);
           setExisteFogaoLenha(dados.existeFogaoLenha);
-          setMedidaTelhadoAreaFogao(String(dados.medidaTelhadoAreaFogao));
+          setMedidaTelhadoAreaFogao(dados.medidaTelhadoAreaFogao);
           setTestadaDispParteFogao(dados.testadaDispParteFogao.toString());
           setAtendPipa(dados.atendPipa);
           setOutroAtendPipa(dados.outroAtendPipa);
-          setChRespAtPipaDefesaCivil(Boolean(dados.respAtDefesaCivil));
-          setChRespAtPipaExercito(Boolean(dados.respAtExercito));
-          setChRespAtPipaParticular(Boolean(dados.respAtParticular));
-          setChRespAtPipaPrefeitura(Boolean(dados.respAtPrefeitura));
-          setChRespAtPipaOutros(Boolean(dados.respAtOutros));
+          setRespAtDefesaCivil(Boolean(dados.respAtDefesaCivil));
+          setRespAtExercito(Boolean(dados.respAtExercito));
+          setRespAtParticular(Boolean(dados.respAtParticular));
+          setRespAtPrefeitura(Boolean(dados.respAtPrefeitura));
+          setRespAtOutros(Boolean(dados.respAtOutros));
           setNomeAgente(dados.nomeAgente);
           setCpfAgente(dados.cpfAgente);
           setNomeEng(dados.nomeEng);
@@ -252,7 +250,7 @@ export default function () {
       });
 
     } else {
-      setId("");
+      setId(0);
       setMunicipio("");
       setComunidade("");
       setEndereco("");
@@ -262,7 +260,7 @@ export default function () {
       setTel("");
       setCadUnico("");
       setQtdPessoa(""),
-        setRenda(0);
+      setRenda("0");
       setMoradia("");
       setOutroMoradia("");
       setCompTelhado("");
@@ -273,15 +271,15 @@ export default function () {
       setCoberturaTelhado("");
       setCobertOutros("");
       setExisteFogaoLenha("0");
-      setMedidaTelhadoAreaFogao("");
-      setTestadaDispParteFogao("");
+      setMedidaTelhadoAreaFogao("0");
+      setTestadaDispParteFogao("0");
       setAtendPipa("0");
-      setChRespAtPipaDefesaCivil(false)
-      setChRespAtPipaExercito(false)
-      setChRespAtPipaParticular(false)
-      setChRespAtPipaPrefeitura(false)
-      setChRespAtPipaOutros(false)
       setOutroAtendPipa("");
+      setRespAtDefesaCivil(false)
+      setRespAtExercito(false)
+      setRespAtParticular(false)
+      setRespAtPrefeitura(false)
+      setRespAtOutros(false)
       setNomeAgente("");
       setCpfAgente("");
       setNomeEng("");
@@ -296,16 +294,19 @@ export default function () {
   // getDataUser
   useEffect(() => {
     const fetchData = async () => {
-      const user = await getDataUser();
-      setNomeAgente(JSON.parse(user)[0])
-      setCpfAgente(JSON.parse(user)[1])
-      setNomeEng(JSON.parse(user)[2])
-      setCreaEng(JSON.parse(user)[3])
+      const user = await getDataUser()
+      .then(response => {
+        
+        setNomeAgente(JSON.parse(response)[0])
+        setCpfAgente(JSON.parse(response)[1])
+        setNomeEng(JSON.parse(response)[2])
+        setCreaEng(JSON.parse(response)[3])
+      })
     }
     fetchData();
   }, []);
 
-  const navigateToSettings = (cpf2: String, id) => {
+  const navigateToSettings = (cpf2: String, id:number) => {
     const cpf1 = cpf2.replaceAll(`.`, '').replace(`-`, '')
     // Navega para a aba de configurações
     //router.push('/(tabs)/fotos');
@@ -345,11 +346,11 @@ export default function () {
         testadaDispParteFogao,
         atendPipa,
         outroAtendPipa,
-        isChRespAtPipaDefesaCivil,
-        isChRespAtPipaExercito,
-        isChRespAtPipaParticular,
-        isChRespAtPipaPrefeitura,
-        isChRespAtPipaOutros,
+        respAtDefesaCivil,
+        respAtExercito,
+        respAtParticular,
+        respAtPrefeitura,
+        respAtOutros,
         outrObs,
         nomeAgente,
         cpfAgente,
@@ -365,7 +366,7 @@ export default function () {
       navigateToSettings(cpf, id_last)
 
     } catch (error) {
-      console.log(error)
+      console.log(error+ " erro cadastro")
 
     }
   }
@@ -374,7 +375,12 @@ export default function () {
   async function atualiza() {
     try {
 
-      console.log(id)
+      // console.log(id+" id_atualiza")
+      // console.log(respAtDefesaCivil);
+      // console.log(respAtExercito);
+      // console.log(respAtParticular);
+      // console.log(respAtPrefeitura);
+      // console.log(respAtOutros);
       const response = await cadastrodb.update({
         id: id,
         municipio,
@@ -402,11 +408,11 @@ export default function () {
         testadaDispParteFogao,
         atendPipa,
         outroAtendPipa,
-        isChRespAtPipaDefesaCivil,
-        isChRespAtPipaExercito,
-        isChRespAtPipaParticular,
-        isChRespAtPipaPrefeitura,
-        isChRespAtPipaOutros,
+        respAtDefesaCivil,
+        respAtExercito,
+        respAtParticular,
+        respAtPrefeitura,
+        respAtOutros,
         outrObs,
         nomeAgente,
         cpfAgente,
@@ -418,13 +424,14 @@ export default function () {
       var id_last = Number(id)
       setId(id_last);
       setCpf(cpf);
+      //console.log(id_last+" id do registro atualizado")
+      //console.log(cpf+" cpf atualiza")
 
       Alert.alert("Cadastro Atualizado Com Sucesso ! " + id)
-      navigateToSettings(cpf, String(id))
+      navigateToSettings(cpf, id)
 
     } catch (error) {
-      console.log(error + " Atualizacao")
-
+      console.log(error + " erro update() - Atualizacao")
     } finally {
 
     }
@@ -453,72 +460,72 @@ export default function () {
 
   function valida() {
 
-    // if ((municipio === undefined) || (municipio =="") ) {
-    //   Alert.alert('O campo Municipio não pode ser vazio');
+    if ((municipio === undefined) || (municipio =="") ) {
+      Alert.alert('O campo Municipio não pode ser vazio');
 
-    // } else if ((comunidade === undefined) || (comunidade =="") ) {
-    //   Alert.alert("O campo Comunidade não pode ser vazio");
+    } else if ((comunidade === undefined) || (comunidade =="") ) {
+      Alert.alert("O campo Comunidade não pode ser vazio");
 
-    // } else if ((nome === undefined) || (nome =="") ) {
-    //   Alert.alert("O Campo Nome é Obrigatório !");
+    } else if ((nome === undefined) || (nome =="") ) {
+      Alert.alert("O Campo Nome é Obrigatório !");
 
-    // } else if ((cpf === undefined) || (cpf =="") ) {
-    //   Alert.alert("O Campo CPF é Obrigatório !");
+    } else if ((cpf === undefined) || (cpf =="") ) {
+      Alert.alert("O Campo CPF é Obrigatório !");
 
-    // } else if ((dtNasc === undefined) || (dtNasc =="") ) {
-    //   Alert.alert("O Campo Data Nasc. Obrigatório !");
+    } else if ((dtNasc === undefined) || (dtNasc =="") ) {
+      Alert.alert("O Campo Data Nasc. Obrigatório !");
 
-    // } else if ((tel === undefined) || (tel =="") ) {
-    //   Alert.alert("O Campo Data Telefone Obrigatório !");
+    } else if ((tel === undefined) || (tel =="") ) {
+      Alert.alert("O Campo Data Telefone Obrigatório !");
 
-    // } else if ((qtdPessoa === undefined) || (qtdPessoa =="") ) {
-    //   Alert.alert("O Campo Quant Pessoas é Obrigatório !");
+    } else if ((qtdPessoa === undefined) || (qtdPessoa =="") ) {
+      Alert.alert("O Campo Quant Pessoas é Obrigatório !");
 
-    // } else */
+    } else
     if ((renda === undefined) || (renda == "")) {
       Alert.alert("O Campo Renda é Obrigatório !");
 
-      // } else if ((moradia === undefined) || (moradia =="") ) {
-      //   Alert.alert("O Campo Moradia é Obrigatório !");
+      } else if ((moradia === undefined) || (moradia =="") ) {
+        Alert.alert("O Campo Moradia é Obrigatório !");
 
-      // } else if ((compTelhado === undefined) || (compTelhado =="") ) {
-      //   Alert.alert("O Campo Comprimento Telhado é Obrigatório !");
+      } else if ((compTelhado === undefined) || (compTelhado =="") ) {
+        Alert.alert("O Campo Comprimento Telhado é Obrigatório !");
 
-      // } else if ((larguracompTelhado === undefined) || (larguracompTelhado =="") ) {
-      //   Alert.alert("O Campo Largura Comp. Telhado é Obrigatório !");
+      } else if ((larguracompTelhado === undefined) || (larguracompTelhado =="") ) {
+        Alert.alert("O Campo Largura Comp. Telhado é Obrigatório !");
 
-      // } else if ((areaTotalTelhado === undefined) || (areaTotalTelhado =="") ) {
-      //   Alert.alert("O Campo Area Total Telhado é Obrigatório !");
+      } else if ((areaTotalTelhado === undefined) || (areaTotalTelhado =="") ) {
+        Alert.alert("O Campo Area Total Telhado é Obrigatório !");
 
-      // } else if ((compTestada === undefined) || (compTestada =="") ) {
-      //   Alert.alert("O Campo Comp. Testada é Obrigatório !");
+      } else if ((compTestada === undefined) || (compTestada =="") ) {
+        Alert.alert("O Campo Comp. Testada é Obrigatório !");
 
-      // } else if ((numCaidaTelhado === undefined) || (numCaidaTelhado =="") ) {
-      //   Alert.alert("O Campo Num Caida Telhado é Obrigatório !");
+      } else if ((numCaidaTelhado === undefined) || (numCaidaTelhado =="") ) {
+        Alert.alert("O Campo Num Caida Telhado é Obrigatório !");
 
-      // } else if ((existeFogaoLenha === undefined) || (existeFogaoLenha =="") ) {
-      //   Alert.alert("O Campo Existe Fogao Lenha é Obrigatório !");
+      } else if ((existeFogaoLenha === undefined) || (existeFogaoLenha =="") ) {
+        Alert.alert("O Campo Existe Fogao Lenha é Obrigatório !");
 
-      // } else if ((medidaTelhadoAreaFogao === undefined) || (medidaTelhadoAreaFogao =="") ) {
-      //   Alert.alert("O Campo Medida Telhado AreaFogao é Obrigatório !");
+      } else if ((medidaTelhadoAreaFogao === undefined) || (medidaTelhadoAreaFogao =="") ) {
+        Alert.alert("O Campo Medida Telhado AreaFogao é Obrigatório !");
 
-      // } else if ((testadaDispParteFogao === undefined) || (testadaDispParteFogao =="") ) {
-      //   Alert.alert("O Campo Testada Desconsiderando parte Fogão é Obrigatório !");
+      } else if ((testadaDispParteFogao === undefined) || (testadaDispParteFogao =="") ) {
+        Alert.alert("O Campo Testada Desconsiderando parte Fogão é Obrigatório !");
 
-      // } else if ((atendPipa === undefined) || (atendPipa =="") ) {
-      //   Alert.alert("O Campo AtendPipa é Obrigatório !");
+      } else if ((atendPipa === undefined) || (atendPipa =="") ) {
+        Alert.alert("O Campo AtendPipa é Obrigatório !");
 
-      // } else if ((nomeAgente === undefined) || (nomeAgente =="") ) {
-      //   Alert.alert("O Campo Nome Agente é Obrigatório !");
+      } else if ((nomeAgente === undefined) || (nomeAgente =="") ) {
+        Alert.alert("O Campo Nome Agente é Obrigatório !");
 
-      // } else if ((cpfAgente === undefined) || (cpfAgente =="") ) {
-      //   Alert.alert("O Campo Cpf Agente é Obrigatório !");
+      } else if ((cpfAgente === undefined) || (cpfAgente =="") ) {
+        Alert.alert("O Campo Cpf Agente é Obrigatório !");
 
-      // } else if ((nomeEng === undefined) || (nomeEng =="") ) {
-      //   Alert.alert("O Campo Nome Eng é Obrigatório !");
+      } else if ((nomeEng === undefined) || (nomeEng =="") ) {
+        Alert.alert("O Campo Nome Eng é Obrigatório !");
 
-      // } else if ((creaEng === undefined) || (creaEng == "")) {
-      //   Alert.alert("O Campo Crea Eng é Obrigatório !")
+      } else if ((creaEng === undefined) || (creaEng == "")) {
+        Alert.alert("O Campo Crea Eng é Obrigatório !")
 
     } else {
 
@@ -677,18 +684,17 @@ export default function () {
 
           <Text style={styles1.label}>Comprimento Total do Telhado (m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
-            onChangeText={(value) => { [, setCompTelhado(removerVirgula(value))] }}
+            onChangeText={(value) => { [setCompTelhado(removerVirgula(value)),
+              calcAreaTotal(value)
+            ] }}
             keyboardType={'decimal-pad'}
-            value={compTelhado} maxLength={5} />
+            value={String(compTelhado)} maxLength={5} />
 
           <Text style={styles1.label}>Largura do Telhado (m) : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
           <TextInput style={styles1.input} placeholder="" clearButtonMode="always"
-            onChangeText={(value) => {
-              [
-                setLarguraCompTelhado(removerVirgula(value)),
-                calcAreaTotal(value)]
-            }
-            }
+            onChangeText={(value) => {[setLarguraCompTelhado(removerVirgula(value)),
+                calcAreaTotal(value)
+              ] }}
             keyboardType={'decimal-pad'}
             value={String(larguracompTelhado)} maxLength={5} />
 
@@ -789,30 +795,30 @@ export default function () {
 
             {/* Item CK Defesa Civil */}
             <View style={styles1.section}>
-              <Checkbox style={styles1.checkbox} value={isChRespAtPipaDefesaCivil} onValueChange={setChRespAtPipaDefesaCivil} />
+              <Checkbox style={styles1.checkbox} value={respAtDefesaCivil} onValueChange={setRespAtDefesaCivil} />
               <Text style={styles1.paragraph}>Defesa Civil</Text>
             </View>
             {/* Item CK Exercito */}
             <View style={styles1.section}>
-              <Checkbox style={styles1.checkbox} value={isChRespAtPipaExercito} onValueChange={setChRespAtPipaExercito} />
+              <Checkbox style={styles1.checkbox} value={respAtExercito} onValueChange={setRespAtExercito} />
               <Text style={styles1.paragraph}>Exército</Text>
             </View>
 
             {/* Item CK Particular */}
             <View style={styles1.section}>
-              <Checkbox style={styles1.checkbox} value={isChRespAtPipaParticular} onValueChange={setChRespAtPipaParticular} />
+              <Checkbox style={styles1.checkbox} value={respAtParticular} onValueChange={setRespAtParticular} />
               <Text style={styles1.paragraph}>Particular</Text>
             </View>
 
             {/* Item CK Prefeitura */}
             <View style={styles1.section}>
-              <Checkbox style={styles1.checkbox} value={isChRespAtPipaPrefeitura} onValueChange={setChRespAtPipaPrefeitura} />
+              <Checkbox style={styles1.checkbox} value={respAtPrefeitura} onValueChange={setRespAtPrefeitura} />
               <Text style={styles1.paragraph}>Prefeitura</Text>
             </View>
 
             {/* Item             } CK Outros */}
             <View style={styles1.section}>
-              <Checkbox style={styles1.checkbox} value={isChRespAtPipaOutros} onValueChange={setChRespAtPipaOutros} />
+              <Checkbox style={styles1.checkbox} value={respAtOutros} onValueChange={setRespAtOutros} />
               <Text style={styles1.paragraph}>Outros</Text>
             </View>
           </View>
@@ -918,11 +924,8 @@ const styles = StyleSheet.create({
 const styles1 = StyleSheet.create({
   container: {
     margin: 0,
-    backgroundColor: { background },
+    backgroundColor: (background) ? background : "",
 
-    // flex: 2,
-    // backgroundColor: '#D93600',
-    // alignItems: 'center',
   },
   title: {
     color: '',

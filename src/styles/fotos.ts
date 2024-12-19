@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet } from "react-native"
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 24,
+    paddingVertical: 15,
   },
   card: {
     shadowColor: "#00000021",
@@ -13,27 +13,27 @@ export const styles = StyleSheet.create({
     marginVertical: 8,
     backgroundColor: "white",
     marginHorizontal: 5,
-    height: 300,
+    height: 350,
     width: 172,
     padding: 12,
     borderRadius: 4,
   },
   list: {
-    padding: 24,
+    padding: 5,
   },
   listContainer: {
     alignItems: "center",
-    gap: 24,
+    gap: 0,
   },
   cardHeader: {
     paddingVertical: 12,
-    paddingHorizontal: 6,
+    paddingHorizontal: 2,
     flexDirection: "column",
     justifyContent: "center",
-    gap: 12,
+    gap: 0,
   },
   cardTitle: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",
   },

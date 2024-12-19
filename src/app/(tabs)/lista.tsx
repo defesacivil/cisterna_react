@@ -1,14 +1,24 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { initializaDb } from '../db/db';
 import { CadatroDB, useCadastroDb } from '../db/useCadastroDb';
 import { router } from 'expo-router';
 import axios from 'axios';
 import * as FileSystem from "expo-file-system"
-import { Image, Text, TouchableOpacity, View, StyleSheet } from "react-native"
+import { Image, Text, TouchableOpacity, View, StyleSheet, Alert, Button, SafeAreaView } from "react-native"
 import * as Progress from 'react-native-progress';
+import Svg, { Circle } from 'react-native-svg';
+import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
+import Modal from 'react-native-modal';
+import { useRouter } from 'expo-router';
+import SvgCircle from '@/components/SvgCircle';
 
 export default function TabTwoScreen() {
+
+  const router = useRouter();
+
+  
+
 
   const cadastrodb = useCadastroDb()
   const [search, setSearch] = useState("");
@@ -16,41 +26,55 @@ export default function TabTwoScreen() {
   const [images, setImages] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
+  const [isModalEdit, setIsModalEdit] = useState(false);
+  const [id, setId] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [progress, setProgress] = useState(0);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [totalImages, setTotalImages] = useState(0);
+  const [totalImagesUpload, setTotalImagesUpload] = useState(0);
+  const [uploadAnimate, setUploadAnimate] = useState(false);
+  const [textUpload, setTextUpload] = useState("");
+  
   async function apiBusca() {
+
     litaFotos();
     //console.log(startUploads());
-    // try {
-    /* confere no sdc se existe o registro para não reenviar novamente * */
-    //   cadastros?.map(value => {
-    //     const response = axios.get('https://sdc.mg.gov.br/index.php/api/cisterna/busca/' + value.cpf).then((response1) => {
-    //       //console.log(response1.data['data'].length);
-    //       if (response1.data['data'].length == 0) {
-    //         /* envia o registro para o SDC */
-    //sinc(value);
-    //         //console.log(sinc(value));
-    //       } else {
+    try {
+      /* confere no sdc se existe o registro para não reenviar novamente * */
+      cadastros?.map(value => {
+        const response = axios.get('https://sdc.mg.gov.br/index.php/api/cisterna/busca/' + value.cpf).then((response1) => {
+          //console.log(response1.data['data'].length);
+          if (response1.data['data'].length == 0) {
+            /* envia o registro para o SDC */
+            sinc(value);
+            //console.log(sinc(value));
+          } else {
 
-    //       }
-    //       //return response1;
-    //     });
-    //   });
+          }
+          //return response1;
+        });
+      });
 
-    //   //Alert.alert("Sinc");
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    startUploads();
+      startUploads();
+      setProgress;
+    } catch (error) {
+      console.log(error);
+    }
   }
+
 
   /* Sincronizar dados para o sdc */
   async function sinc(data: CadatroDB) {
     await axios.post('https://sdc.mg.gov.br/index.php/api/cisterna/create', data, {
     })
       .then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
       })
       .catch(error => {
-        console.error("Error sending data: ", error);
+        console.error("Error enviando dados para sincronização data: ", error);
+        Alert.alert(error);
       });
   }
 
@@ -68,19 +92,34 @@ export default function TabTwoScreen() {
     }
   }
 
+  // useState(()=>{
+  //   console.log(progress)
+  // })
+
   useEffect(() => {
     list()
-
     //startUploads()
   }, [search]);
+
+  useEffect(() => {
+    
+    setTotalImages(0);
+    setTotalImagesUpload(0);
+  }, []);
+
 
   /**
    * filtra somente as imagens e carrega para upload
    */
+  /** 
+   * 
+   * busca os diretorios cpf
+   * return array imageUri<state>
+   * 
+   *   */
   const loadImages = async () => {
     try {
 
-      /** busca os diretorios cpf  */
       const cpfsDir = await FileSystem.readDirectoryAsync(FileSystem.documentDirectory + "opseca")
         .then(function (response) {
           return response.map((item, index) => ({
@@ -94,17 +133,18 @@ export default function TabTwoScreen() {
         cpfsDir.map(async (dir) => {
           //console.log(dir.name + ": cpfs")
           const files = await readDirector(dir)
-          const imageUri = [];
+          let imageUris = [];
           const imageFiles = await files.filter(file => file.endsWith('.jpeg') || file.endsWith('.png')); // Filtrar por imagens
           imageFiles.map((item_) => {
-            imageUri.push({uri: FileSystem.documentDirectory + "opseca/"+dir.name,
-                          fileName: item_,
-                          type: ".jpeg"
-                        })
-            //console.log(item_)
-            //console.log(imageUri)
+            imageUris.push({
+              uri: FileSystem.documentDirectory + "opseca/" + dir.name + "/" + item_,
+              fileName: item_,
+              type: "image/jpeg",
+              cpf: dir.name
+            })
           })
-          setImages(imageUri); // popula useState setImages
+          setImages(imageUris); // popula useState setImages
+          setTotalImages(totalImages + imageFiles.length);
         }
         )
       }
@@ -119,61 +159,90 @@ export default function TabTwoScreen() {
     return await FileSystem.readDirectoryAsync(FileSystem.documentDirectory + 'opseca/' + dir.name);
   }
 
-  /* */
+  /**
+   * Upload do array de imagens */
   const uploadImage1 = async (image) => {
-    //const uri = image;
-    // ... código para fazer o upload da imagem usando fetch ou XMLHttpRequest
-    // Atualizar o estado uploadProgress com o progresso do upload
 
-    //console.log(image)
+    //console.log(image.fileName + " name")
 
     const formData = new FormData();
+
     formData.append('image', {
       uri: image.uri,
-      name: image.fileName,
-      type: image.type,
-    });
+      type: 'image/jpeg',
+      name: image.fileName
 
-    //console.log(formData.getAll('image'));
+    });
+    formData.append('cpf', image.cpf);
+    formData.append('nome', image.fileName);
+
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'e8e5a2271db9bad091acdf501d35fac86aab444d5c8549eccc9c78c4f89fbd00',
       },
       onUploadProgress: (progressEvent) => {
-        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        console.log(`Progress:
-   ${progress}%`);
-        // Aqui você pode atualizar um estado para exibir o progresso na interface do usuário
+        //console.log(progressEvent)
+        setProgress(Math.round((progressEvent.loaded * 100) / progressEvent.total));
+        //console.log(`Progress:${progress}%`);
       },
     };
-  
+
     try {
       const response = await axios.post('https://sdc.mg.gov.br/index.php/api/cisterna/uploadFotos', formData, config)
-      
-      console.log('Upload completo:', response.data);
     } catch (error) {
       console.error('Erro no upload:', error);
     }
+    setProgress(0)
   };
 
 
-    // const xhr = new XMLHttpRequest();
-    // xhr.upload.addEventListener('progress', (event) => {
-    //   setUploadProgress((prevProgress) => ({
-    //     ...prevProgress,
-    //     [image.uri]: Math.round((event.loaded / event.total) * 100),
-    //   }));
+  /** fazer upload a cada 30 segundos */
+  useEffect(() => {
+
+    const intervalId = setInterval(() => {
+      const currentImage = images[currentIndex];
+      if (currentImage) {
+        uploadImage1(currentImage)
+          .then(() => {
+            //console.log('Upload realizado com sucesso!');
+            setUploadAnimate(true);
+            setTextUpload("Aguarde sincronizando os dados !");
+            setCurrentIndex((prevIndex) => prevIndex + 1);
+          })
+          .catch((error) => {
+            setTotalImagesUpload(totalImagesUpload - 1)
+            console.error('Erro ao fazer upload:', error);
+          });
+        setTotalImagesUpload(totalImagesUpload + 1)
+        if(totalImagesUpload == totalImages){
+          setUploadAnimate(false);
+          setTextUpload("");
+        }
+      }
+    }, 15000); // 15 segundos
+
+
+    return () => clearInterval(intervalId);
+  }, [images, currentIndex]);
+
+  /**
+   *  Inicio do upload com array de IMAGENS
+   */
+  const startUploads = () => {
+    loadImages(); // ler o diretorio de imagens do registro CPF popula o images[]
+
+    // const numItem = images.length;
+
+    // console.log(numItem);
+    // images.forEach((item, index) => {
+    //   if(index != numItem){
+    //     uploadImage1(item); // faz o upload de cada imagen 
+    //   }else {
+
+    //   }
     // });
 
-    // xhr.open('POST', 'https://sdc.mg.gov.br/index.php/api/cisterna/uploadFotos');
-    // xhr.send(formData);
-    // //console.log(xhr)
-  
-
-  /* inicio do upload */
-  const startUploads = () => {
-    loadImages();
-    images.forEach(image => uploadImage1(image));
   };
 
 
@@ -213,16 +282,43 @@ export default function TabTwoScreen() {
   //   [search])
 
 
+  function irCadastro() {
+    router.push({ pathname: '/(tabs)/explore', params: { cpf: cpf, id: id.toString() } })
+    setIsModalEdit(false)
+  }
+
+  function irFotos() {
+    router.push({ pathname: '/(tabs)/fotos', params: { cpf: cpf, id: id.toString() } })
+    setIsModalEdit(false)
+  }
+
+  const toggleModal = () => {
+    setIsModalEdit(!isModalEdit);
+  };
+  const openModalEdit = () => {
+    console.log(isModalEdit)
+    setIsModalEdit(true);
+  };
+
   function totalReg() {
     return cadastros?.length;
   }
 
+  function funcUploadAnimate(){
+    setUploadAnimate(true);
+
+  }
+
+  
+
   function listagem() {
     const data = list();
 
+    let viewRef;
     return (
-      <View key="0" style={styles.container}>
 
+      <View key="0" style={[styles.container, uploadAnimate && styles.loadind]}>
+      
         <View key="1">
           <Text style={styles.titulo}>Lista de Registros</Text>
           <TouchableOpacity
@@ -233,11 +329,18 @@ export default function TabTwoScreen() {
           </TouchableOpacity>
 
           <View style={styles.progress}>
-            <Text>Fixed Progress Value</Text>
-            <Progress.Bar progress={uploadProgress} width={200} />
+            <Progress.Bar progress={progress} width={null} height={20} color={"#FFC300"} />
           </View>
+          <View style={styles.progress}>
+            <Text>{textUpload}</Text>
+          </View>
+          <View style={styles.total}>
 
-          <Text style={styles.total} >Total Registros {totalReg()}</Text>
+            <Text style={{ alignItems: 'flex-start' }}>Total Registros {totalReg()}</Text>
+            <Text>    |    </Text>
+            <Text style={{ alignItems: 'flex-end' }}>Total Imagens {totalImages}/{totalImagesUpload}</Text>
+
+          </View>
         </View>
         {cadastros?.map((item, index) => (
           <View key={index} style={styles.list}>
@@ -252,7 +355,11 @@ export default function TabTwoScreen() {
                   activeOpacity={0.7}
                   onPress={() => {
                     const sanitCpf = item.cpf.replaceAll(`.`, '').replace(`-`, '')
-                    router.push({ pathname: '/(tabs)/explore', params: { id: item.id, cpf: sanitCpf } })
+
+                    // abrir modal
+                    toggleModal()
+                    setId(item.id)
+                    setCpf(sanitCpf)
                   }}
                 >
                   <Image
@@ -286,6 +393,21 @@ export default function TabTwoScreen() {
             </View>
           </View>
         ))}
+        {/* Modal acesso arquivo e fotos  */}
+        <Modal isVisible={isModalEdit}>
+          <View style={styles.modalContent}>
+            <Text style={{ padding: 10, fontSize: 20, textAlign: 'center' }}>Você quer editar qual parte do Registro ?</Text>
+            <View style={{ padding: 5 }}>
+              <Button title="Cadastro" onPress={irCadastro} />
+            </View>
+            <View style={{ padding: 5 }}>
+              <Button title="Fotos" onPress={irFotos} />
+            </View>
+            <View style={{ paddingTop: 30 }}>
+              <Button title="Cancelar" onPress={() => { setIsModalEdit(false) }} />
+            </View>
+          </View>
+        </Modal>
       </View>
 
     );
@@ -293,7 +415,6 @@ export default function TabTwoScreen() {
   };
 
   return (
-
     listagem()
   );
 }
@@ -329,7 +450,8 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   total: {
-    margin: 20,
+    margin: 5,
+    flexDirection: 'row'
   },
   op: {
 
@@ -356,13 +478,25 @@ const styles = StyleSheet.create({
     height: 128,
     width: 128,
   },
-
   button: {
     marginTop: 10,
     height: 60,
     backgroundColor: 'blue',
     borderRadius: 10,
-    paddingHorizontal: 24,
+    //padding: 24,
+    fontSize: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 20,
+    shadowOpacity: 20,
+    shadowColor: '#ccc',
+  },
+  button1: {
+    margin: 10,
+    height: 60,
+    backgroundColor: 'blue',
+    borderRadius: 10,
+    //padding: 24,
     fontSize: 16,
     alignItems: 'center',
     justifyContent: 'center',
@@ -376,6 +510,22 @@ const styles = StyleSheet.create({
   },
 
   progress: {
+    margin: 4
 
+
+  },
+  modalContent: {
+    height: 400,
+    backgroundColor: 'white',
+    padding: 0,
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadind :{
+    backgroundColor: "#FFC300",
+    
   }
 });

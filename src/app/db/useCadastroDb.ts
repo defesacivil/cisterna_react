@@ -29,11 +29,11 @@ export type CadatroDB = {
     testadaDispParteFogao: string
     atendPipa: string
     outroAtendPipa: string
-    respAtDefesaCivil:string
-    respAtExercito:string
-    respAtParticular:string
-    respAtPrefeitura:string
-    respAtOutros:string
+    respAtDefesaCivil:boolean
+    respAtExercito:boolean
+    respAtParticular:boolean
+    respAtPrefeitura:boolean
+    respAtOutros:boolean
     outrObs: string
     nomeAgente: string
     cpfAgente: string
@@ -154,11 +154,11 @@ export function useCadastroDb() {
                 $testadaDispParteFogao: data.testadaDispParteFogao,
                 $atendPipa: data.atendPipa,
                 $outroAtendPipa: data.outroAtendPipa,
-                $respAtDefesaCivil: data.respAtDefesaCivil,
-                $respAtExercito: data.respAtExercito,
-                $respAtParticular: data.respAtParticular,
-                $respAtPrefeitura: data.respAtPrefeitura,
-                $respAtOutros: data.respAtOutros,
+                $respAtDefesaCivil: (!data.respAtDefesaCivil) ? 0 : 1,
+                $respAtExercito: (!data.respAtExercito) ? 0 : 1,
+                $respAtParticular: (!data.respAtParticular) ? 0 : 1,
+                $respAtPrefeitura: (!data.respAtPrefeitura) ? 0 : 1,
+                $respAtOutros: (!data.respAtOutros) ? 0 : 1,
                 $outrObs: data.outrObs,
                 $nomeAgente: data.nomeAgente,
                 $cpfAgente: data.cpfAgente,
@@ -205,10 +205,32 @@ export function useCadastroDb() {
 
     }
 
+    async function searchObsImg(id: number) {
+        try {
+            const query = "SELECT img_frontal, img_lat_direito,"+
+                            "img_lat_esquerdo,img_fundo, img_local_ins_p1,"+
+                            "img_local_ins_p2,img_op1,img_op2,img_op3,img_op4 "+
+                            "from cadastro WHERE id = ?";
+
+            const response = await database.getFirstAsync(query, `${id}`)
+
+            console.log(response)
+            if(response) {
+                //const arr = Object.entries(response);
+                //return arr;
+            }
+            return response;
+            //console.log(response);
+        } catch (error) {
+
+        }
+
+    }
+
     // update
     async function update(data: CadatroDB) {
 
-
+        //console.log((!data.respAtExercito) ? 0 : 1)
         const statement = await database.prepareAsync(
             `UPDATE cadastro SET nome = $nome ,
                 municipio       =  $municipio,
@@ -233,23 +255,25 @@ export function useCadastroDb() {
                 existeFogaoLenha=  $existeFogaoLenha,
                 medidaTelhadoAreaFogao =  $medidaTelhadoAreaFogao,
                 testadaDispParteFogao =  $testadaDispParteFogao,
-                atendPipa       =  $atendPipa,
-                outroAtendPipa  =  $outroAtendPipa,
-                respAtDefesaCivil = $respAtDefesaCivil
-                respAtExercito = $respAtExercito
-                respAtParticular = $respAtParticular
-                respAtPrefeitura = $respAtPrefeitura
-                respAtOutros = $respAtOutros
-                outrObs         =  $outrObs,
-                nomeAgente      =  $nomeAgente,
-                cpfAgente       =  $cpfAgente,
-                nomeEng         =  $nomeEng,
-                creaEng         =  $creaEng
-                WHERE id        = $id`
+                atendPipa         =  $atendPipa,
+                outroAtendPipa    =  $outroAtendPipa,
+                respAtDefesaCivil = $respAtDefesaCivil,
+                respAtExercito    = $respAtExercito,
+                respAtParticular  = $respAtParticular,
+                respAtPrefeitura  = $respAtPrefeitura,
+                respAtOutros      = $respAtOutros,
+                outrObs           =  $outrObs,
+                nomeAgente        =  $nomeAgente,
+                cpfAgente         =  $cpfAgente,
+                nomeEng           =  $nomeEng,
+                creaEng           =  $creaEng
+                WHERE id          = $id`
         )
 
         try {
+            
             await statement.executeAsync({
+                
                 $id: data.id,
                 $nome: data.nome,
                 $municipio: data.municipio,
@@ -276,11 +300,11 @@ export function useCadastroDb() {
                 $testadaDispParteFogao: data.testadaDispParteFogao,
                 $atendPipa: data.atendPipa,
                 $outroAtendPipa: data.outroAtendPipa,
-                $respAtDefesaCivil: data.respAtDefesaCivil,
-                $respAtExercito: data.respAtExercito,
-                $respAtParticular: data.respAtParticular,
-                $respAtPrefeitura: data.respAtPrefeitura,
-                $respAtOutros: data.respAtOutros,
+                $respAtDefesaCivil: (!data.respAtDefesaCivil) ? 0 : 1,
+                $respAtExercito: (!data.respAtExercito) ? 0 : 1,
+                $respAtParticular: (!data.respAtParticular) ? 0 : 1,
+                $respAtPrefeitura: (!data.respAtPrefeitura) ? 0 : 1,
+                $respAtOutros: (!data.respAtOutros) ? 0 : 1,
                 $outrObs: data.outrObs,
                 $nomeAgente: data.nomeAgente,
                 $cpfAgente: data.cpfAgente,
@@ -318,6 +342,8 @@ export function useCadastroDb() {
 
     }
 
+
+
     // update Obs
     async function deletar(id: number) {
 
@@ -339,5 +365,5 @@ export function useCadastroDb() {
 
     }
 
-    return { create, searchByName, searchById, update, updateObs, deletar }
+    return { create, searchByName, searchById, update, updateObs, deletar, searchObsImg}
 }
