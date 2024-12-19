@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, View, Text, TextInput, TouchableOpacity } from "react-native"
+import { Image, StyleSheet, Platform, View, Text, TextInput, TouchableOpacity, Alert } from "react-native"
 import ParallaxScrollView from "@/components/ParallaxScrollView"
 import { ThemedText } from "@/components/ThemedText"
 import { ThemedView } from "@/components/ThemedView"
@@ -6,6 +6,7 @@ import * as FileSystem from "expo-file-system"
 import { useEffect, useState } from "react"
 import MaskInput, { Masks } from "react-native-mask-input"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { router } from 'expo-router';
 
 export default function HomeScreen() {
 
@@ -15,17 +16,16 @@ export default function HomeScreen() {
   const [creaEng, setCreaEng] = useState("");
   const [btnEntrarVisivel, setBtnEntrarVisivel] = useState(true);
 
-  function salvarSession(data: []) {
-    const storeData = async () => {
+
+  function salvarSession(data: [string, string, string, string]) {
+      
       try {
-        await AsyncStorage.setItem('user',
-          JSON.stringify(data));
+        AsyncStorage.setItem('user',
+          JSON.stringify(data))
       } catch (e) {
-        console.log(e)
+        console.log(e+" error salvarSession")
       }
-    };
-    return storeData;
-  }
+  };
 
   const getDataUser = async () => {
     try {
@@ -35,9 +35,6 @@ export default function HomeScreen() {
       console.error('error ao buscar ', e)
     }
   };
-
-
-
 
 
   useEffect(() => {
@@ -59,7 +56,8 @@ export default function HomeScreen() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const user = await getDataUser();
+      const user = await getDataUser()
+      
       if (user) {
         setNomeAgente(JSON.parse(user)[0])
         setCpfAgente(JSON.parse(user)[1])
@@ -67,7 +65,7 @@ export default function HomeScreen() {
         setCreaEng(JSON.parse(user)[3])
         setBtnEntrarVisivel(true)
       } else {
-        setBtnEntrarVisivel(true)
+        //setBtnEntrarVisivel(true)
       }
     }
     fetchData();
@@ -85,11 +83,15 @@ export default function HomeScreen() {
       }
     >
       <ThemedView>
-        <ThemedText type="title" style={{ color: "red" }}>Aplicativo Teste</ThemedText>
+        {/* <ThemedText type="title" style={{ color: "red" }}>Aplicativo Teste</ThemedText> */}
         {/* <HelloWave /> */}
 
       </ThemedView>
 
+      <ThemedView style={styles.titleContainer}>
+        <ThemedText type="subtitle">Gabinete Militar do Governador e Coordenadoria Estadual de Defesa Civil de MG</ThemedText>
+        {/* <HelloWave /> */}
+      </ThemedView>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="subtitle">Projeto Convivência com a Seca</ThemedText>
         {/* <HelloWave /> */}
@@ -125,10 +127,10 @@ export default function HomeScreen() {
       </ThemedView> */}
       <View>
 
-        <Text style={styles.label}>Nome do Agente</Text>
+        <Text style={styles.label}>Nome do Agente : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
         <TextInput style={styles.input} value={nomeAgente} onChangeText={setNomeAgente} />
 
-        <Text style={styles.label}>CPF do Agente</Text>
+        <Text style={styles.label}>CPF do Agente<Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
         <MaskInput
           style={styles.input}
           value={cpfAgente}
@@ -138,16 +140,28 @@ export default function HomeScreen() {
           mask={Masks.BRL_CPF}
         />
 
-        <Text style={styles.label}>Nome do Engenheiro</Text>
+        <Text style={styles.label}>Nome do Engenheiro :<Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
         <TextInput style={styles.input} value={nomeEng} onChangeText={setNomeEng} />
 
-        <Text style={styles.label}>CREA</Text>
+        <Text style={styles.label}>CREA : <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 20 }}>*</Text></Text>
         <TextInput style={styles.input} value={creaEng} onChangeText={setCreaEng} />
       </View>
       {btnEntrarVisivel && (
         <TouchableOpacity
           style={styles.button}
-          onPress={salvarSession([nomeAgente, cpfAgente, nomeEng, creaEng])}>
+          onPress={() => {
+            if (nomeAgente.length > 0 &&
+              cpfAgente.length > 0 &&
+              nomeEng.length > 0 &&
+              creaEng.length > 0) {            
+
+              salvarSession([nomeAgente, cpfAgente, nomeEng, creaEng])
+                router.push({ pathname: '/(tabs)/explore' })
+            }else {
+              Alert.alert("Os Campos não podem ficar em branco");
+            }
+          }
+          }>
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>)}
     </ParallaxScrollView>

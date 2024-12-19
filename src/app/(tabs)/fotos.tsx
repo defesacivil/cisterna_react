@@ -21,60 +21,70 @@ const data: Product[] = [
     title: "Foto 1",
     price: "Frontal",
     nome: "frontal",
+    source: "",
   },
   {
     id: 2,
     title: "Foto 2",
     price: "Lateral direita",
     nome: "lat_direito",
+    source: "",
   },
   {
     id: 3,
     title: "Foto 3",
     price: "Lateral Esquerda",
     nome: "lat_esquerdo",
+    source: "",
   },
   {
     id: 4,
     title: "Foto 4",
     price: "Fundo",
     nome: "fundo",
+    source: "",
   },
   {
     id: 5,
     title: "Foto 5",
     price: "Local de instalação 1",
     nome: "local_ins_p1",
+    source: "",
   },
   {
     id: 6,
     title: "Foto 6",
     price: "Local de instalação 2",
     nome: "local_ins_p2",
+    source: "",
   },
   {
     id: 7,
     title: "Foto 7",
     price: "Opcional 1",
     nome: "op1",
+    source: "",
   },
   {
     id: 8,
     title: "Foto 8",
     price: "Opcional 2",
     nome: "op2",
+    source: "",
   },
   {
     id: 9,
     title: "Foto 9",
     price: "Opcional 3",
     nome: "op3",
+    source: "",
   },
   {
     id: 10,
     title: "Foto 10",
     price: "Opcional 4",
     nome: "op4",
+    source: "",
   },
 ]
 
@@ -83,11 +93,13 @@ export default function Fotos() {
 
   const params = useGlobalSearchParams();
 
-  var param_id = (params.id) ? params.id : "";
-  var param_cpf = (params.cpf) ? params.cpf : "";
+  console.log(params.cpf)
+
+  var param_id = (params.id) ? params.id.toString() : "";
+  var param_cpf = (params.cpf) ? params.cpf.toString() : "";
 
 
-  //console.log("param" + params.id)
+  //console.log("param-" + params.id)
   const router = useRouter();
   const useUpdateObs = useCadastroDb();
 
@@ -96,18 +108,53 @@ export default function Fotos() {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [modalVisible, setModalVisible] = useState(false)
   const [modalObs, setModalObs] = useState(false)
+
   const [obs, setObs] = useState("")
   const [id, setId] = useState(param_id)
   const [foto, setFoto] = useState("")
   const [cpf, setCpf] = useState(param_cpf)
 
+
   useEffect(() => {
     //setCpf(params.cpf)
     checaDirCpf();
-    isImageExists()
-  }, [param_id, param_cpf])
 
-  //console.log(setCpf)
+
+    /* Verifica imagem do disco e visualiza */
+  const isImageExists = async() => {
+    
+    //console.log(param_cpf + " - ")
+    const dirCPFexist = await FileSystem.getInfoAsync(FileSystem.documentDirectory + "opseca/" + param_cpf)
+    await FileSystem.readDirectoryAsync(FileSystem.documentDirectory + "opseca/" + param_cpf)
+      .then(function (response) {
+        const data1 = response;
+        data.map((dado12) => {
+          dado12.source = ""
+          //console.log(dado12.source + " source Data")
+        });
+
+        const newData = [...data];
+        newData.forEach((file, index) => {
+          //console.log(file.source + " uri ja gravada");
+          data1.forEach((dado) => { //diretorio cpf
+            if (dado.indexOf(file.nome.toString()) != -1) {
+              //console.log(file.nome.toString()+" file.nome\n")
+              newData[index].source = "file:///data/data/host.exp.exponent/files/opseca/" + param_cpf + "/" + dado
+            }else {
+              //newData[index].source = "";
+            }
+          })
+        });
+
+        setProducts(newData)
+        //console.log(newData);
+      })
+  };
+
+    isImageExists();
+
+  }, [param_id])
+
   /* Atualizar obse da foto */
   async function updateObs() {
     try {
@@ -116,10 +163,21 @@ export default function Fotos() {
         foto,
         obs
       }).then(response => {
-        //console.log(response);
       })
     } catch (error) {
-      console.log(error)
+      console.log(error + " funcao updateObs")
+    }
+  }
+
+  /** buscar observação imagem pelo nome */
+  async function searchObsImg(foto1: string) {
+    try {
+      //console.log(id+foto)
+      const result = await useUpdateObs.searchObsImg(id).then(response => {
+        setObs(response[foto1]);
+      })
+    } catch (error) {
+      console.log(error + " error searchObsImg() ")
     }
   }
 
@@ -128,13 +186,13 @@ export default function Fotos() {
     try {
       const dir = await FileSystem.getInfoAsync(FileSystem.documentDirectory + "opseca/" + cpf)
         .then(function (response) {
-          console.log(response.isDirectory + "Não Remover checagem dir Cpf");
+          //console.log(response.isDirectory + "Não Remover checagem dir Cpf");
           if (!response.exists) {
             criaDirCpf(cpf);
           }
         })
     } catch (error) {
-      console.log(error + " erro ao checar dir cpf !")
+      console.log(error + " checaDirCpf() erro ao checar existencia diretorio cpf !")
     }
   }
 
@@ -145,30 +203,13 @@ export default function Fotos() {
     try {
       await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + "opseca/" + fdcpf, { intermediates: true })
     } catch (error) {
-      console.log(error + " erro ao criar dir cpf ")
+      console.log(error + " criaDirCpf() erro ao criar dir cpf ")
     }
-  }
-
-  /* Verifica imagem do disco e visualiza */
-  async function isImageExists() {
-    const dirCPFexist = await FileSystem.getInfoAsync(FileSystem.documentDirectory + "opseca/" + param_cpf)
-    await FileSystem.readDirectoryAsync(FileSystem.documentDirectory + "opseca/" + param_cpf)
-      .then(function (response) {
-        const data1 = response;
-        data.forEach((file, index) => {
-          data1.forEach((dado) => { //diretorio cpf
-            if (dado.indexOf(file.nome.toString()) != -1) {
-              data[index].source = "file:///data/data/host.exp.exponent/files/opseca/"+param_cpf+"/"+dado
-            }
-          })
-        });
-
-        setProducts(data)
-      })
   }
 
 
   const setImage = (item: Product) => {
+
     if (item.source) {
       setModalVisible(true)
     } else {
@@ -197,20 +238,22 @@ export default function Fotos() {
       const result = await ImagePicker.launchCameraAsync()
       if (result.assets) {
         //console.log(FileSystem.documentDirectory);
+
+
         setProducts((prevProducts) => {
           const newProducts = [...prevProducts]
           const index = newProducts.indexOf(item)
           /* mover fotos */
           criaDirCpf
           const sourceUri = result.assets[0].uri;
-          const destinationUri = FileSystem.documentDirectory + "opseca/" + param_cpf + '/' + param_cpf + foto + '.jpeg';
+          const destinationUri = FileSystem.documentDirectory + "opseca/" + param_cpf + '/' + param_cpf + item.nome + '.jpeg';
 
-          console.log("foto_state :" + foto)
-          console.log("sourceUri :" + sourceUri)
-          console.log("destinationUri : " + destinationUri)
+          // console.log("foto_state :" + foto)
+          // console.log("sourceUri :" + sourceUri)
+          // console.log("destinationUri : " + destinationUri)
 
           moveFile(sourceUri, destinationUri)
-            .then(() => console.log('File moved successfully!'))
+            .then(() => console.log(sourceUri+' File moved successfully! '+ destinationUri))
             .catch(error => console.error('Error moving file:', error));
 
           newProducts[index].source = destinationUri;
@@ -264,7 +307,7 @@ export default function Fotos() {
         data={products}
         horizontal={false}
         numColumns={2}
-        columnWrapperStyle={{ gap: 24 }}
+        columnWrapperStyle={{ gap: 15 }}
         renderItem={({ item, index }) => (
           <View style={styles.card} key={item.id}>
             <View style={styles.cardHeader}>
@@ -276,9 +319,10 @@ export default function Fotos() {
                 activeOpacity={0.7}
                 onPress={() => {
                   setSelectedIndex(index)
+                  console.log(item.nome+" item_flat")
                   setImage(item)
                   setFoto(item.nome.toString())
-                  console.log(item.nome)
+                  //console.log(item.nome)
                 }}
               >
                 {item.source ? (
@@ -290,10 +334,10 @@ export default function Fotos() {
                     }
                   />
                 )}
-                {/* debug
+
                 <View>
                   <Text>{item.source}</Text>
-                </View> */}
+                </View>
               </TouchableOpacity>
             </View>
 
@@ -301,10 +345,14 @@ export default function Fotos() {
               <TouchableOpacity
                 style={styles.button1}
                 onPress={() => {
-                  openModalObs()
                   setId(String(params.id))
                   setFoto("img_" + item.nome)
-                  setObs
+                  searchObsImg("img_" + item.nome)
+                  //searchObsImg()
+                  //console.log(img+"-")
+                  openModalObs()
+                  //setObs(img)
+
                 }}
               >
                 <Text style={styles.buttonText}>Observações</Text>
@@ -314,7 +362,7 @@ export default function Fotos() {
         )}
       />
 
-      {/* Foto */}
+      {/* deletar e ou tirar Foto */}
       <Modal
         visible={modalVisible}
         transparent
@@ -338,6 +386,7 @@ export default function Fotos() {
 
       {/* Obs: */}
       <Modal
+      onShow={()=> {searchObsImg(foto)}}
         visible={modalObs}
         transparent
         statusBarTranslucent
@@ -355,7 +404,8 @@ export default function Fotos() {
                   backgroundColor: "#ffffff",
                   borderRadius: 5,
                 }}
-                clearButtonMode="always" onChangeText={setObs} maxLength={255} />
+                clearButtonMode="always" onChangeText={setObs} maxLength={255}
+                value={obs} />
             </View>
             <View style={styles.wrapperButtons}>
               <Pressable style={styles.button} onPress={salvarObs}>
