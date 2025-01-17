@@ -5,10 +5,11 @@
   "scripts": {
     "start": "expo start --port 19001",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
+    "android": "expo run:android",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "ios": "expo run:ios"
   },
   "jest": {
     "preset": "jest-expo"
@@ -25,6 +26,7 @@
     "expo-camera": "~15.0.16",
     "expo-checkbox": "~3.0.0",
     "expo-constants": "~16.0.2",
+    "expo-document-picker": "^13.0.1",
     "expo-file-system": "~17.0.1",
     "expo-font": "~12.0.10",
     "expo-image": "~1.13.0",
@@ -42,6 +44,7 @@
     "react-native": "0.74.5",
     "react-native-animatable": "^1.4.0",
     "react-native-axios": "^0.17.1",
+    "react-native-device-info": "^14.0.2",
     "react-native-document-picker": "^9.3.1",
     "react-native-fs": "^2.20.0",
     "react-native-geolocation-service": "^5.3.1",

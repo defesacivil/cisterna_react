@@ -160,6 +160,10 @@
             {
                 "label": "SAO PEDRO",
                 "value": "SAO PEDRO"
+            },
+            {
+                "label": "SAO JOSE",
+                "value": "SAO JOSE"
             }
         ]
     },
@@ -218,6 +222,14 @@
             {
                 "label": "ASSOCIAÇAO SANTA MARIA 2",
                 "value": "ASSOCIAÇAO SANTA MARIA 2"
+            },
+            {
+                "label": "FAZENDA MENINO",
+                "value": "FAZENDA MENINO"
+            },
+            {
+                "label": "VALE DO SANTA MARIA",
+                "value": "VALE DO SANTA MARIA"
             }
         ]
     },
@@ -807,6 +819,10 @@
             {
                 "label": "SANTA CRUZ",
                 "value": "SANTA CRUZ"
+            },
+            {
+                "label": "SAO MIGUEL",
+                "value": "SAO MIGUEL"
             }
         ]
     },
@@ -817,6 +833,34 @@
             {
                 "label": "LARANJAO",
                 "value": "LARANJAO"
+            },
+            {
+                "label": "ILHA GRANDE",
+                "value": "ILHA GRANDE"
+            },
+            {
+                "label": "BOA SORTE",
+                "value": "BOA SORTE"
+            },
+            {
+                "label": "LAGOA DE JABOTICABA",
+                "value": "LAGOA DE JABOTICABA"
+            },
+            {
+                "label": "GAMELEIRA",
+                "value": "GAMELEIRA"
+            },
+            {
+                "label": "GENTIL",
+                "value": "GENTIL"
+            },
+            {
+                "label": "MACUCO",
+                "value": "MACUCO"
+            },
+            {
+                "label": "ITABERABA",
+                "value": "ITABERABA"
             }
         ]
     },
@@ -827,6 +871,22 @@
             {
                 "label": "ASSENTAMENTO TERRA PROMETIDA",
                 "value": "ASSENTAMENTO TERRA PROMETIDA"
+            },
+            {
+                "label": "PRATES",
+                "value": "PRATES"
+            },
+            {
+                "label": "TANQUE III",
+                "value": "TANQUE III"
+            },
+            {
+                "label": "VENTANIA",
+                "value": "VENTANIA"
+            },
+            {
+                "label": "CORREGO AZUL",
+                "value": "CORREGO AZUL"
             }
         ]
     },
@@ -1341,7 +1401,52 @@
             {
                 "label": "BARROQUINHA",
                 "value": "BARROQUINHA"
+            },
+            {
+                "label": "TERRA NOVA",
+                "value": "TERRA NOVA"
+            },
+            {
+                "label": "TABOQUINHA",
+                "value": "TABOQUINHA"
+            },
+            {
+                "label": "TERRA BRANCA",
+                "value": "TERRA BRANCA"
+            },
+            {
+                "label": "CRUZ DAS ALMAS",
+                "value": "CRUZ DAS ALMAS"
+            },
+            {
+                "label": "BREJINHO",
+                "value": "BREJINHO"
+            },
+            {
+                "label": "FLORESTA",
+                "value": "FLORESTA"
+            },
+            {
+                "label": "MANICO",
+                "value": "MANICO"
+            },
+            {
+                "label": "CAIÇARA",
+                "value": "CAIÇARA"
+            },
+            {
+                "label": "POÇAO VELHO",
+                "value": "POÇAO VELHO"
+            },
+            {
+                "label": "POÇAO SANTA CRUZ",
+                "value": "POÇAO SANTA CRUZ"
+            },
+            {
+                "label": "LAJEDINHO",
+                "value": "LAJEDINHO"
             }
+
         ]
     },
     {
@@ -1363,7 +1468,24 @@
             {
                 "label": "VARZEA DA CRUZ",
                 "value": "VARZEA DA CRUZ"
+            },
+            {
+                "label": "CABECEIRA DE MOCAMBINHO",
+                "value": "CABECEIRA DE MOCAMBINHO"
+            },
+            {
+                "label": "ESTIVA",
+                "value": "ESTIVA"
+            },
+            {
+                "label": "COCOS",
+                "value": "COCOS"
+            },
+            {
+                "label": "BURITIZINHO",
+                "value": "BURITIZINHO"
             }
+            
         ]
     },
     {
@@ -1405,6 +1527,26 @@
             {
                 "label": "PAU DE FRUTA",
                 "value": "PAU DE FRUTA"
+            },
+            {
+                "label": "PITOMBEIRA",
+                "value": "PITOMBEIRA"
+            },
+            {
+                "label": "REPARTIMENTO",
+                "value": "REPARTIMENTO"
+            },
+            {
+                "label": "ESPINHO",
+                "value": "ESPINHO"
+            },
+            {
+                "label": "LAGOAO",
+                "value": "LAGOAO"
+            },
+            {
+                "label": "LAVANDERIA",
+                "value": "LAVANDERIA"
             }
         ]
     },
@@ -1735,6 +1877,30 @@
             {
                 "label": "CANOAS I E II",
                 "value": "CANOAS I E II"
+            },
+            {
+                "label": "GERGELIM",
+                "value": "GERGELIM"
+            },
+            {
+                "label": "SAO JOSE",
+                "value": "SAO JOSE"
+            },
+            {
+                "label": "COMUNIDADE DE BURITIZINHO",
+                "value": "COMUNIDADE DE BURITIZINHO"
+            },
+            {
+                "label": "AGUA BRANCA I",
+                "value": "AGUA BRANCA I"
+            },
+            {
+                "label": "ESPIRITO SANTOS",
+                "value": "ESPIRITO SANTOS"
+            },
+            {
+                "label": "FLECHEIRA",
+                "value": "FLECHEIRA"
             }
         ]
     },
@@ -2333,6 +2499,10 @@
             {
                 "label": "ALDEIA PRATA",
                 "value": "ALDEIA PRATA"
+            },
+            {
+                "label": "ALDEIAS PEDRINHAS",
+                "value": "ALDEIAS PEDRINHAS"
             }
         ]
     },
@@ -2379,6 +2549,22 @@
             {
                 "label": "MATRONA",
                 "value": "MATRONA"
+            },
+            {
+                "label": "MATRONA",
+                "value": "MATRONA"
+            },
+            {
+                "label": "LAJEDO",
+                "value": "LAJEDO"
+            },
+            {
+                "label": "GAMELEIRA",
+                "value": "GAMELEIRA"
+            },
+            {
+                "label": "RIBEIRAO",
+                "value": "RIBEIRAO"
             }
         ]
     },
@@ -2445,6 +2631,10 @@
             {
                 "label": "AGROVILA",
                 "value": "AGROVILA"
+            },
+            {
+                "label": "EXTREMA",
+                "value": "EXTREMA"
             }
         ]
     },

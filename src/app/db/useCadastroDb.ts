@@ -239,7 +239,7 @@ export function useCadastroDb() {
                 localiza        =  $localiza,
                 cpf             =  $cpf,
                 dtNasc          =  $dtNasc,
-                tel          =  $tel,
+                tel             =  $tel,
                 cadUnico        =  $cadUnico,
                 qtdPessoa       =  $qtdPessoa,
                 renda           =  $renda,

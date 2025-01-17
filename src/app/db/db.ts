@@ -5,7 +5,6 @@ export async function initializaDb(database: SQLiteDatabase) {
   try {
 
     
-
     //DROP TABLE CADASTRO;
     await database.execAsync(`
     CREATE TABLE IF NOT EXISTS cadastro (
@@ -67,8 +66,8 @@ export async function initializaDb(database: SQLiteDatabase) {
       img_op4 TEXT DEFAULT NULL,
       PRIMARY KEY (id AUTOINCREMENT)
       );    
-        
-    `)
+        `);
+
   } catch (error) {
     console.log(error)
   } finally {

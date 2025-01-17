@@ -20,7 +20,19 @@
         "package": "com.yourcompany.yourappname",
         "versionCode": 1
       },
-      "package": "com.cisterna.app"
+      "package": "com.cisterna.app",
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -28,7 +40,9 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      ["@react-native-google-signin/google-signin"],
+      [
+        "@react-native-google-signin/google-signin"
+      ],
       "expo-router",
       [
         "expo-location",
@@ -59,7 +73,6 @@
           "photosPermission": "Permite que o aplicativo acesse sua galeria de fotos?."
         }
       ],
-
       "expo-font"
     ],
     "experiments": {
@@ -70,6 +83,9 @@
         "projectId": "9193ba82-2be6-46c0-8af8-4eee534b71da"
       }
     },
-    "owner": "cedecmg"
+    "owner": "cedecmg",
+    "ios": {
+      "bundleIdentifier": "n"
+    }
   }
 }
