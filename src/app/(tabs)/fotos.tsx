@@ -93,7 +93,7 @@ export default function Fotos() {
 
   const params = useGlobalSearchParams();
 
-  console.log(params.cpf)
+  console.log(params.cpf+" cpf")
 
   var param_id = (params.id) ? params.id.toString() : "";
   var param_cpf = (params.cpf) ? params.cpf.toString() : "";
@@ -125,6 +125,7 @@ export default function Fotos() {
     
     //console.log(param_cpf + " - ")
     const dirCPFexist = await FileSystem.getInfoAsync(FileSystem.documentDirectory + "opseca/" + param_cpf)
+    
     await FileSystem.readDirectoryAsync(FileSystem.documentDirectory + "opseca/" + param_cpf)
       .then(function (response) {
         const data1 = response;

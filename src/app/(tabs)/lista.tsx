@@ -5,13 +5,14 @@ import { CadatroDB, useCadastroDb } from '../db/useCadastroDb';
 import { router } from 'expo-router';
 import axios from 'axios';
 import * as FileSystem from "expo-file-system"
-import { Image, Text, TouchableOpacity, View, StyleSheet, Alert, Button, SafeAreaView } from "react-native"
+import { Image, Text, TouchableOpacity, View, StyleSheet, Alert, Button, SafeAreaView, ScrollView, RefreshControl } from "react-native"
 import * as Progress from 'react-native-progress';
 import Svg, { Circle } from 'react-native-svg';
 import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 import Modal from 'react-native-modal';
 import { useRouter } from 'expo-router';
 import SvgCircle from '@/components/SvgCircle';
+import ParallaxScrollView from '@/components/ParallaxScrollView';
 
 export default function TabTwoScreen() {
 
@@ -60,7 +61,7 @@ export default function TabTwoScreen() {
       startUploads();
       setProgress;
     } catch (error) {
-      console.log(error);
+      console.log(error+" api_busca");
     }
   }
 
@@ -250,7 +251,7 @@ export default function TabTwoScreen() {
   async function listAll() {
     axios.get('https://sdc.mg.gov.br/index.php/api/cisterna/listall')
       .then(response => {
-        console.log(response.data);
+        console.log(response.data+"-");
       })
       .catch(error => {
         console.error("Error fetching data: ", error);
@@ -296,7 +297,7 @@ export default function TabTwoScreen() {
     setIsModalEdit(!isModalEdit);
   };
   const openModalEdit = () => {
-    console.log(isModalEdit)
+    console.log(isModalEdit+"openModal")
     setIsModalEdit(true);
   };
 
@@ -317,6 +318,7 @@ export default function TabTwoScreen() {
     let viewRef;
     return (
 
+      <ScrollView>
       <View key="0" style={[styles.container, uploadAnimate && styles.loadind]}>
       
         <View key="1">
@@ -342,6 +344,10 @@ export default function TabTwoScreen() {
 
           </View>
         </View>
+        
+
+        <View style={{ height: 1000 }}> 
+
         {cadastros?.map((item, index) => (
           <View key={index} style={styles.list}>
             <View>
@@ -393,6 +399,9 @@ export default function TabTwoScreen() {
             </View>
           </View>
         ))}
+
+        </View>
+
         {/* Modal acesso arquivo e fotos  */}
         <Modal isVisible={isModalEdit}>
           <View style={styles.modalContent}>
@@ -409,6 +418,7 @@ export default function TabTwoScreen() {
           </View>
         </Modal>
       </View>
+      </ScrollView>
 
     );
 
